@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user/user.service";
 import {User} from "../models/user";
+import {Address} from "../models/address";
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,8 @@ export class RegisterComponent implements OnInit {
     userName: new FormControl(""),
     password: new FormControl(""),
     confirm: new FormControl(""),
+    city: new FormControl(""),
+    zipcode: new FormControl(""),
   });
 
   constructor(private userService: UserService, private router: Router) { }
@@ -25,10 +28,17 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
 
     if (this.addUser.value.password == this.addUser.value.confirm) {
+
+      const userAddress: Address = {
+        city: this.addUser.value.zipcode!,
+        zipcode: this.addUser.value.zipcode!
+      }
+
       const newUser: User = {
         email: this.addUser.value.userEmail!,
         userName: this.addUser.value.userName!,
-        password: this.addUser.value.password!
+        password: this.addUser.value.password!,
+        address: userAddress,
       }
 
       this.userService.save(newUser).subscribe({
