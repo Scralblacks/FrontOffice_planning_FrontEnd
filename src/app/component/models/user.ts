@@ -1,3 +1,5 @@
+import {Address} from "./address";
+
 export interface User {
 
   id?: number
@@ -9,4 +11,6 @@ export interface User {
   password:string
 
   photo?: any
+
+  address: Address
 }
