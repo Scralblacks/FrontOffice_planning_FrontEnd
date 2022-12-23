@@ -16,9 +16,6 @@ export class MeteoComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-  }
-
-
+  ngOnInit(): void {  }
 
 }

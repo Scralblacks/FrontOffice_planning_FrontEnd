@@ -17,7 +17,7 @@ export class MeteoService {
     this.http.get('http://api.positionstack.com/v1/forward', {params}).subscribe({
       next: ((response: any) => {
         console.log(response.data);
-        return [response.data[0].latitude, response.data[0].longitude];
+        return [Math.round(response.data[0].latitude * 10000)/10000, Math.round(response.data[0].longitude * 10000)/10000];
       }),
       error: ((error: any) => {
         console.log(error);
