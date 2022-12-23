@@ -1,22 +1,16 @@
 <form [formGroup]="addUser" (ngSubmit)="onSubmit()">
 
-  <input id="userEmail" type="text" formControlName="userEmail" placeholder="Email">
+  <label for="userEmail">User's name : </label>
+  <input id="userEmail" type="text" formControlName="userEmail">
 
-  <input id="userName" type="text" formControlName="userName" placeholder="Pseudo">
+  <label for="userName">User's name : </label>
+  <input id="userName" type="text" formControlName="userName">
 
-  <input id="password" type="password" formControlName="password" placeholder="Mot de passe">
+  <label for="password">Password : </label>
+  <input id="password" type="password" formControlName="password">
 
-  <input id="confirm" type="password" formControlName="confirm" placeholder="Confirmation du mot de passe">
-
-  <div>
-
-    Nous avons besoin de ces coordonnées pour vous donner la météo de votre ville
-
-    <input id="city" type="text" formControlName="city" placeholder="Ville">
-
-    <input id="zip-code" type="text" formControlName="zipcode" placeholder="Code postal">
-
-  </div>
+  <label for="confirm">Confirm Password : </label>
+  <input id="confirm" type="password" formControlName="confirm">
 
   <button type="submit">Register</button>
 
