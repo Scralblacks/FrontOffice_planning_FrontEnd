@@ -1,11 +1,31 @@
-<form [formGroup]="formLogin" (ngSubmit)="signin()">
+<main>
+  <div class="login__title">
+    <span>Bienvenue sur notre agenda en ligne Agendo</span>
+    <img src="assets/light_undraw_online_organizer_re_156n.png"/>
+  </div>
 
-  <label for="userEmail">User's name : </label>
-  <input id="userEmail" type="text" formControlName="userEmail">
+  <div class="login__content">
+    <h2>Log in</h2>
+    <img src="assets/dark_undraw_online_organizer_re_156n.png"/>
+    <form autocomplete="off" class="login__form" [formGroup]="formLogin" (ngSubmit)="signin()">
+      <div>
+        <app-input formControlName="userEmail" id="input-email" label="Email" type="text"
+                   name="userEmail"></app-input>
+        <app-input formControlName="password" id="input-password" label="Password" type="password"
+                   name="password"></app-input>
+      </div>
 
-  <label for="password">Password : </label>
-  <input id="password" type="password" formControlName="password">
 
-  <button type="submit">Login</button>
+      <div>
+        <app-submit-button text="Login"></app-submit-button>
+        <div class="register__swap">
+          <span>Don't have an account ? </span> <a [routerLink]="['/register']">Sign up</a>
+        </div>
+      </div>
 
-</form>
+    </form>
+  </div>
+
+</main>
+
+

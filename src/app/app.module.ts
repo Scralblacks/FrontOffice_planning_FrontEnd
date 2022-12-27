@@ -6,12 +6,13 @@ import {LoginComponent} from "./component/login/login.component";
 import {RegisterComponent} from "./component/register/register.component";
 
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {InputComponent} from './shared/ui/input/input.component';
 import {HttpClientModule} from "@angular/common/http";
 import {SubmitButtonComponent} from './shared/ui/submit-button/submit-button.component';
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthInterceptorProviders} from "./helpers/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
       progressAnimation: "decreasing",
     })
   ],
-  providers: [],
+  providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

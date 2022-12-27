@@ -1,1 +1,145 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
+main .login__title {
+  display: flex;
+  align-items: center;
+  margin: 1em 3em 1em 1em;
+  font-size: var(--3xl-font-size);
+  color: var(--secondary-bg-color);
+  letter-spacing: 2px;
+}
+
+main .login__title img {
+  display: none;
+}
+
+main .login__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  margin: 0.75em;
+  padding: 20px 35px;
+  background-color: var(--secondary-bg-color);
+  border-radius: var(--xl-radius);
+  max-width: 500px;
+}
+
+main .login__content img {
+  max-width: 350px;
+  margin: auto;
+  width: 100%;
+}
+
+main .login__content h2 {
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--main-bg-color);
+}
+
+main .login__content > div > div:first-child {
+  padding: 0 1.5em 0.75em 1.5em;
+}
+
+main .login__form > div:first-child {
+  /*margin: 0.5em 0;*/
+  margin-bottom: 4em;
+}
+
+main .register__swap {
+  text-align: center;
+  color: var(--accent-text-color);
+  margin: 1em auto;
+}
+
+main .register__swap span {
+  color: var(--normal-text-color);
+}
+
+@media screen and (min-width: 483px) {
+  main .login__content {
+    margin: 0.75em auto;
+  }
+
+}
+
+
+@media screen and (min-width: 769px) {
+
+
+  main .login__title {
+    margin: 1em 14em 1em 1em;
+  }
+
+
+  main .login__content h2 {
+    padding-left: 1.5em;
+    text-align: start;
+  }
+
+  main .login__form > div > div {
+    flex: 1;
+  }
+
+  main .login__form > div:nth-child(2) {
+    width: 100%;
+  }
+
+  app-input {
+    display: block;
+    margin: auto;
+  }
+
+}
+
+@media screen and (min-width: 1025px) {
+
+  main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  main .login__title {
+    flex-direction: column;
+    height: 70%;
+    justify-content: space-around;
+    margin: auto 1em;
+    flex: 0.5
+  }
+
+  main .login__title span {
+    line-height: 48px;
+    letter-spacing: 0.08em;
+    font-size: var(--4xl-font-size);
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  main .login__content h2 {
+    padding: 0;
+  }
+
+  main .login__content img {
+    display: none;
+  }
+
+  main .login__title img {
+    display: block;
+  }
+
+  main .login__content {
+    height: 50%;
+    margin: auto 4em;
+    padding: 0 35px;
+    flex: 0.5;
+  }
+
+  app-input {
+    width: 100%;
+  }
+}
