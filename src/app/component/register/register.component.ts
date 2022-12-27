@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {Router} from "@angular/router";
-import {UserService} from "../../services/user/user.service";
-import {User} from "../models/user";
-import {Address} from "../models/address";
+import {ToastrService} from "ngx-toastr";
+import {SignupRequest} from "../models/signupRequest";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -11,39 +19,47 @@ import {Address} from "../models/address";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  addUser = new FormGroup({
-    userEmail: new FormControl(""),
-    userName: new FormControl(""),
-    password: new FormControl(""),
-    confirm: new FormControl(""),
-    city: new FormControl(""),
-    zipcode: new FormControl(""),
-  });
+  formAddUser!: FormGroup;
 
-  constructor(private userService: UserService, private router: Router) { }
+  checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let pass = group.get('password')!.value;
+    let confirmPass = group.get('confirm')!.value
+    return pass === confirmPass ? null : {notSame: true}
+  }
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
+    this.formAddUser = this.formBuilder.group({
+      userEmail: new FormControl("", [Validators.required, Validators.email]),
+      userName: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required, Validators.minLength(8)]),
+      confirm: new FormControl("", [Validators.required]),
+      city: new FormControl(""),
+      zipcode: new FormControl(""),
+    }, {validators: this.checkPasswords});
+
   }
 
   onSubmit() {
+    if (this.formAddUser.valid) {
+      // if (this.formAddUser.value.password == this.formAddUser.value.confirm) {
 
-    if (this.addUser.value.password == this.addUser.value.confirm) {
-
-      const userAddress: Address = {
-        city: this.addUser.value.zipcode!,
-        zipcode: this.addUser.value.zipcode!
+      const signupRequest: SignupRequest = {
+        email: this.formAddUser.value.userEmail,
+        username: this.formAddUser.value.userName!,
+        password: this.formAddUser.value.password!,
+        city: this.formAddUser.value.city,
+        postalCode: this.formAddUser.value.zipcode
       }
 
-      const newUser: User = {
-        email: this.addUser.value.userEmail!,
-        userName: this.addUser.value.userName!,
-        password: this.addUser.value.password!,
-        address: userAddress,
-      }
+      console.log(signupRequest);
 
-      this.userService.save(newUser).subscribe({
+      this.authService.register(signupRequest).subscribe({
         next: () => {
-          this.router.navigate(["/login", newUser])
+          this.toastr.success("Successfully registered !");
+          this.router.navigate(["/login"])
         },
         error: (err) => {
           console.log(err)
@@ -51,9 +67,9 @@ export class RegisterComponent implements OnInit {
         complete: () => {
           console.log('Complete')
         }
-      })
+      });
     } else {
-      alert("The password and its confirmation do not match")
+      this.toastr.error("Something happened... Try again !");
     }
   }
 }

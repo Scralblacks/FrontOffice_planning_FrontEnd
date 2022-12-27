@@ -2,15 +2,15 @@ import {Address} from "./address";
 
 export interface User {
 
-  id?: number
+  id?: number;
 
-  userName?: string
+  userName?: string;
 
-  email: string
+  email: string;
 
-  password:string
+  password: string;
 
-  photo?: any
+  photo?: string;
 
-  address: Address
+  address: Address;
 }

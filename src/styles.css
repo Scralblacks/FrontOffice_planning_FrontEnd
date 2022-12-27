@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+  --main-bg-color: #2A303D;
+  --secondary-bg-color: #FFFFFF;
+  --third-bg-color: #919D9E;
+  --fourth-bg-color: #F58B85;
+  --input-bg-color: #F1F5F9;
+  --input-border-color: #E5E5E5;
+  --normal-text-color: #9D9D9D;
+  --accent-text-color: #5A5A5A;
+  --btn-delete-color: #DC143C;
+  --sm-margin: 1em;
+  --md-margin: 2em;
+  --lg-margin: 3em;
+  --sm-padding: 1em;
+  --md-padding: 2em;
+  --lg-padding: 3em;
+  --sm-radius: 8px;
+  --md-radius: 12px;
+  --lg-radius: 20px;
+  --xl-radius: 36px;
+  --rounded-radius: 50%;
+  --sm-font-size: 10px;
+  --md-font-size: 12px;
+  --lg-font-size: 14px;
+  --xl-font-size: 16px;
+  --2xl-font-size: 18px;
+  --3xl-font-size: 24px;
+  --4xl-font-size: 36px;
+  --sm-border-thickness: 1px;
+  --md-border-thickness: 2px;
+  --lg-border-thickness: 3px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Inter', serif;
+  scroll-behavior: smooth;
+  user-select: none
+}
+
+body {
+  background: no-repeat linear-gradient(187.16deg, #2A303D 5.58%, rgba(42, 48, 61, 0) 152.83%);
+  height: 100vh;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+

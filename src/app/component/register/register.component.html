@@ -1,19 +1,49 @@
-<form [formGroup]="addUser" (ngSubmit)="onSubmit()">
+<main>
+  <div class="register__title">
+    <span>Bienvenue sur notre agenda en ligne Agendo</span>
+    <img src="assets/light_undraw_online_organizer_re_156n.png"/>
+  </div>
 
-  <label for="userEmail">User's name : </label>
-  <input id="userEmail" type="text" formControlName="userEmail">
+  <div class="register__content">
+    <h2>Create Account</h2>
+    <form autocomplete="off" class="register__form" [formGroup]="formAddUser" (ngSubmit)="onSubmit()">
+      <div>
+        <div>
+          <!--      <div>-->
+          <!--        <label for="userName">User's name : </label>-->
+          <!--        <input id="userName" type="text" formControlName="userName">-->
+          <!--      </div>-->
+          <app-input formControlName="userName" id="input-username" label="Username" type="text"
+                     name="userName"></app-input>
+          <app-input formControlName="userEmail" id="input-email" label="Email" type="text"
+                     name="userEmail"></app-input>
+          <app-input formControlName="password" id="input-password" label="Password" type="password"
+                     name="password"></app-input>
+          <app-input formControlName="confirm" id="input-confirm" label="Confirm Password" type="password"
+                     name="confirm"></app-input>
+        </div>
 
-  <label for="userName">User's name : </label>
-  <input id="userName" type="text" formControlName="userName">
+        <div class="register__location">
+          <div>
+            <span>Nous avons besoin de ces coordonnées pour vous donner la météo de votre ville</span>
+            <div>
+              <app-input formControlName="zipcode" id="input-zipcode" label="Zip Code" type="text"
+                         name="zipcode"></app-input>
+              <app-input formControlName="city" id="input-city" label="City" type="text"
+                         name="city"></app-input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <app-submit-button text="Register"></app-submit-button>
+        <div class="register__swap">
+          <span>Already have an account ? </span> <a [routerLink]="['/login']">Log in</a>
+        </div>
+      </div>
 
-  <label for="password">Password : </label>
-  <input id="password" type="password" formControlName="password">
+    </form>
+  </div>
+</main>
 
-  <label for="confirm">Confirm Password : </label>
-  <input id="confirm" type="password" formControlName="confirm">
 
-  <button type="submit">Register</button>
-
-  <!-- TODO : Register via GOOGLE and FACEBOOK -->
-
-</form>
