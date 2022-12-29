@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-import {SignupRequest} from "../models/signupRequest";
+import {SignupRequest} from "../../models/signupRequest";
 import {AuthService} from "../../services/auth/auth.service";
 
 @Component({

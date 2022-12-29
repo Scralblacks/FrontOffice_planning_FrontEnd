@@ -1,0 +1,54 @@
+<div class="calendar">
+  <div class="calendar__header">
+    <div (click)="onPreviousMonth()">
+      <i class="fa-solid fa-chevron-left fa-lg"></i>
+    </div>
+    <span> {{ calendarCreator.getMonthName(monthNumber) }} &nbsp; {{ year }} </span>
+    <div (click)="onNextMonth()">
+      <i class="fa-solid fa-chevron-right fa-lg"></i>
+    </div>
+  </div>
+  <div class="calendar__body">
+    <div *ngFor='let weekDay of weekDaysName'>
+      {{ weekDay }}
+    </div>
+    <div *ngIf="!(isReadyToRender|async); else boxes">
+      Loading...
+    </div>
+    <ng-template #boxes>
+      <div *ngFor='let day of monthDays'>
+        <app-day-box [day]="day"
+                     (select)="changeSelectedDay($event)"
+                     [isSelectedDay]="selectedDay.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"
+                     [isCurrentDay]="currentDate.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"
+                     [taskDTOList]="taskMapOfMonth.has(day.number) ? taskMapOfMonth.get(day.number) : []"
+                     [numberOfTask]="taskMapOfMonth.has(day.number) ? taskMapOfMonth.get(day.number)!.length : 0"
+                     (click)="sendTasksToDisplay(taskMapOfMonth.has(day.number) ? taskMapOfMonth.get(day.number) : [])"
+        ></app-day-box>
+      </div>
+    </ng-template>
+
+
+  </div>
+
+
+</div>
+
+
+<!--<div>-->
+<!--  <button (click)="onPreviousMonth()"> Previous </button>-->
+<!--  <span> {{ calendarCreator.getMonthName(monthNumber) }} &nbsp; {{ year }} </span>-->
+<!--  <button (click)="onNextMonth()"> Next </button>-->
+<!--</div>-->
+
+<!--<br>-->
+
+<!--<div class="calendar">-->
+<!--  <span *ngFor='let weekDay of weekDaysName' class="day">-->
+<!--    {{ weekDay }}-->
+<!--  </span>-->
+
+<!--  <span *ngFor='let day of monthDays' class="day">-->
+<!--    {{ day.number }}-->
+<!--  </span>-->
+<!--</div>-->

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {userDTO} from "../../models/userDTO";
+import {UserService} from "../../services/user/user.service";
+import {planningDTO} from "../../models/planningDTO";
+import {PlanningService} from "../../services/planning/planning.service";
 
 @Component({
   selector: 'app-planning',
@@ -7,9 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanningComponent implements OnInit {
 
-  constructor() { }
+  user$: Observable<userDTO | null> = this.userService.user;
+  planning$: Observable<planningDTO | null> = this.planningService.planning;
+
+  currentUser!: userDTO | null;
+  currentPlanning!: planningDTO | null;
+
+  isPlanningLoading: boolean = true;
+
+  constructor(private userService: UserService, private planningService: PlanningService) {
+  }
 
   ngOnInit(): void {
+    this.user$.subscribe({
+      next: (data) => {
+        this.currentUser = data;
+      },
+    });
+    this.planning$.subscribe({
+      next: (data) => {
+        this.currentPlanning = data;
+       /* this.currentPlanning?.taskList.map((taskDTO) => {
+          taskDTO.dateTaskStart = new Date(taskDTO.dateTaskStart);
+          taskDTO.dateCreated = new Date(taskDTO.dateCreated);
+          taskDTO.dateTaskEnd = new Date(taskDTO.dateTaskEnd);
+        });*/
+        this.isPlanningLoading = false;
+      }
+    })
   }
 
 }

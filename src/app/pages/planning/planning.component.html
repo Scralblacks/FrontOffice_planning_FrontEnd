@@ -1,1 +1,61 @@
-<p>planning works!</p>
+<main>
+  <div class="planning__header">
+    <div class="planning__agendaSelector">
+      <div>
+        <i class="fa-solid fa-chevron-left fa-lg"></i>
+      </div>
+      <div>
+        <span style="color: white; font-size: 16px; margin-left: 2em; margin-right: 2em">Agenda n°1</span>
+      </div>
+      <div>
+        <i class="fa-solid fa-chevron-right fa-lg"></i>
+      </div>
+    </div>
+    <div class="planning__switchEvents">
+      <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+        <span class="labels" data-off="EVENTS" data-on="EVENTS"></span>
+      </label>
+    </div>
+  </div>
+  <div class="planning__social">
+    <div class="planning__peopleOwner">
+      <img height="40px" width="40px" src="/assets/profilePicture/35.jpg"/>
+    </div>
+    <div>
+      <div>
+        <img height="32px" width="32px" style="border: 2px solid red" src="/assets/profilePicture/35.jpg"/>
+      </div>
+      <div>
+        <img height="32px" width="32px" style="border: 2px solid yellow" src="/assets/profilePicture/35.jpg"/>
+      </div>
+      <div>
+        <img height="32px" width="32px" style="border: 2px solid white" src="/assets/profilePicture/35.jpg"/>
+      </div>
+      <div>
+        <span style="background: none;">+2</span>
+      </div>
+    </div>
+    <div class="planning__shareInput">
+      <div>
+        <span>
+              <i class="fa-solid fa-share-nodes" style="background:none"></i>
+        </span>
+      </div>
+      <input type="text" placeholder="Type a username..."/>
+    </div>
+  </div>
+
+  <div *ngIf="isPlanningLoading; else calendar">
+    Loading...
+  </div>
+
+  <ng-template #calendar>
+    <div class="planning__calendar">
+      <app-calendar></app-calendar>
+    </div>
+  </ng-template>
+
+
+</main>

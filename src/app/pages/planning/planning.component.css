@@ -1,0 +1,227 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1em;
+  overflow: hidden;
+}
+
+main .planning__header {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+}
+
+main .planning__header .planning__agendaSelector {
+  display: flex;
+  align-items: center;
+}
+
+main .planning__header .planning__agendaSelector i {
+  color: var(--secondary-bg-color)
+}
+
+main .planning__header .planning__agendaSelector > div:nth-child(2n+1) {
+  cursor: pointer;
+}
+
+main .planning__header .planning__agendaSelector span {
+  color: var(--secondary-bg-color);
+  font-size: var(--xl-font-size);
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+main .planning__switchEvents {
+  display: flex
+}
+
+/* SWITCH EVENTS  */
+main .planning__switchEvents .toggle {
+  position: relative;
+  display: inline-block;
+  width: 77px;
+  height: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+main .planning__switchEvents .toggle input {
+  display: none;
+}
+
+main .planning__switchEvents .toggle .slider {
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  transition: all 0.4s ease-in-out;
+  border: 1px solid var(--secondary-bg-color);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, #B8B8B8 0%, #DCDCDC 100%);
+}
+
+main .planning__switchEvents .toggle .slider::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--rounded-radius);
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease-in-out;
+}
+
+main .planning__switchEvents .toggle input:checked + .slider {
+  color: var(--secondary-bg-color);
+  background: linear-gradient(180deg, var(--main-bg-color) 0%, #686868 100%);
+}
+
+
+main .planning__switchEvents .toggle input:checked + .slider::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(54px);
+  transform: translateX(53px);
+}
+
+main .planning__switchEvents .toggle .labels {
+  position: absolute;
+  background: none;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: var(--md-font-size);
+  transition: all 0.3s ease-in-out;
+}
+
+main .planning__switchEvents .toggle .labels::after {
+  content: attr(data-off);
+  position: absolute;
+  right: 5px;
+  color: var(--normal-text-color);
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  font-size: var(--md-font-size);
+
+}
+
+main .planning__switchEvents .toggle .labels::before {
+  content: attr(data-on);
+  position: absolute;
+  left: 5px;
+  opacity: 0;
+  color: var(--secondary-bg-color);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease-in-out;
+
+}
+
+main .planning__switchEvents .toggle input:checked ~ .labels::after {
+  opacity: 0;
+}
+
+main .planning__switchEvents .toggle input:checked ~ .labels::before {
+  opacity: 1;
+}
+
+main .planning__social {
+  display: flex;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+main .planning__social img {
+  border-radius: var(--rounded-radius);
+}
+
+main .planning__social > div:nth-child(2) {
+  display: flex;
+}
+
+main .planning__social > div:nth-child(2) > div {
+  background: none;
+}
+
+main .planning__social > div:nth-child(2) > div:not(:first-child) {
+  margin-left: -15px
+}
+
+main .planning__social > div:nth-child(2) > div:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  background: var(--normal-text-color);
+  opacity: 0.5;
+  border-radius: var(--rounded-radius);
+  outline: 2px solid transparent;
+}
+
+main .planning__social .planning__shareInput {
+  position: relative;
+  display: flex;
+  background-color: rgba(145, 157, 158, 0.3);
+  border-radius: var(--lg-radius);
+  height: 32px;
+  max-width: 150px;
+}
+
+main .planning__social .planning__shareInput > div {
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3E4347;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rounded-radius)
+}
+
+main .planning__social .planning__shareInput > span {
+  color: var(--secondary-bg-color);
+  background: none;
+}
+
+main .planning__social .planning__shareInput i {
+  background: none;
+  color: var(--secondary-bg-color);
+}
+
+main .planning__social .planning__shareInput input {
+  appearance: none;
+  border: 0;
+  line-height: 32px;
+  padding: 0 0 0 2.5em;
+  width: 150px;
+  background: none;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+main .planning__calendar {
+  position: relative;
+  background-color: var(--secondary-bg-color);
+  border-radius: var(--xl-radius);
+  height: 100%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: scroll;
+}
+
+
+
+
+
+

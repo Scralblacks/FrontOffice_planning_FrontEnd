@@ -1,0 +1,10 @@
+<div (click)="selectListener()" class="dayBox" [ngClass]="{'selectedDay':isSelectedDay}">
+  <div [ngClass]="{'currentDay': isCurrentDay}">
+  <span>
+    {{ day.number }}
+  </span>
+  </div>
+  <div *ngIf="numberOfTask > 0">
+    <span *ngFor="let _ of [].constructor(numberOfTask)" class="dot"></span>
+  </div>
+</div>
