@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map} from "rxjs";
 import {AuthStorageService} from "../auth-storage/auth-storage.service";
-import {UserDTO} from "../../component/models/userDTO";
-import {SignupRequest} from "../../component/models/signupRequest";
-import {SigninRequest} from "../../component/models/signinRequest";
+import {SignupRequest} from "../../models/signupRequest";
+import {SigninRequest} from "../../models/signinRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,7 @@ export class AuthService {
       .pipe(
         map((jwtResponse: any) => {
           this.authStorage.saveToken(jwtResponse.token);
-          this.authStorage.saveEmail(jwtResponse.userName);
+          this.authStorage.saveEmail(jwtResponse.email);
           this.loggedIn.next(true);
           return true;
         }),

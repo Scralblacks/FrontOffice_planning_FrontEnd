@@ -1,12 +1,12 @@
 <main>
   <div class="login__title">
     <span>Bienvenue sur notre agenda en ligne Agendo</span>
-    <img src="assets/light_undraw_online_organizer_re_156n.png"/>
+    <img src="../../../assets/light_undraw_online_organizer_re_156n.png"/>
   </div>
 
   <div class="login__content">
     <h2>Log in</h2>
-    <img src="assets/dark_undraw_online_organizer_re_156n.png"/>
+    <img src="../../../assets/dark_undraw_online_organizer_re_156n.png"/>
     <form autocomplete="off" class="login__form" [formGroup]="formLogin" (ngSubmit)="signin()">
       <div>
         <app-input formControlName="userEmail" id="input-email" label="Email" type="text"

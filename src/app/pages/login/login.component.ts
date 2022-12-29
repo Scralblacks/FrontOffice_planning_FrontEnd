@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {SigninRequest} from "../models/signinRequest";
+import {SigninRequest} from "../../models/signinRequest";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
