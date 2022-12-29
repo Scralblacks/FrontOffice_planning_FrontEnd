@@ -43,6 +43,20 @@
   user-select: none
 }
 
+app-root {
+  display: block;
+  height: 100%;
+}
+
+app-planning {
+  flex: 1;
+  overflow:auto;
+}
+
+app-calendar {
+  z-index:0;
+}
+
 body {
   background: no-repeat linear-gradient(187.16deg, #2A303D 5.58%, rgba(42, 48, 61, 0) 152.83%);
   height: 100vh;

@@ -11,12 +11,18 @@ export class PlanningService {
 
   BASE_URL: string = "http://localhost:8080/api/planning";
 
-  changeDateSelected = new EventEmitter();
-
+  // changeDateSelected = new EventEmitter();
+  changeDateSelected = new BehaviorSubject<any>(null);
   private currentPlanning = new BehaviorSubject<planningDTO | null>(null);
+
+  // private currentTasks = new BehaviorSubject<taskDTO[] | null>(null);
 
   get planning() {
     return this.currentPlanning.asObservable();
+  }
+
+  get newDailyTasks() {
+    return this.changeDateSelected.asObservable();
   }
 
   constructor(private http: HttpClient) {
@@ -35,6 +41,7 @@ export class PlanningService {
 
     return this.http.get<any>(`${this.BASE_URL}`, body).pipe(
       map((planning: any) => {
+        console.log(planning)
         this.currentPlanning.next(planning);
         return planning;
       }),

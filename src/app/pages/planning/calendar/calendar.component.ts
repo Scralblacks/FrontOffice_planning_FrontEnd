@@ -101,8 +101,6 @@ export class CalendarComponent implements OnInit {
         (taskDTO.dateTaskStart.getFullYear() == this.year || taskDTO.dateTaskEnd.getFullYear() == this.year) && (taskDTO.dateTaskStart.getMonth() == this.monthNumber || taskDTO.dateTaskEnd.getMonth() == this.monthNumber)
       );
 
-      console.log(this.taskList)
-
       tempTaskListOfMonth.forEach((taskDTO) => {
         let startDate: Date;
         let endDate: Date;
@@ -133,20 +131,18 @@ export class CalendarComponent implements OnInit {
           }
         }
       })
-      console.log('loooooooool');
-      console.log(this.taskMapOfMonth)
-      console.log('Ready to render : true')
+      // console.log(this.taskMapOfMonth)
       this.isReadyToRender = Promise.resolve(true);
+      this.sendTasksToDisplay(this.taskMapOfMonth.has(this.currentDate.getUTCDate()) ? this.taskMapOfMonth.get(this.currentDate.getUTCDate()) : []);
     }
   }
 
   sendTasksToDisplay(taskDTOList: taskDTO[] | undefined) {
-    // ENVOYER LES TACHES DEPUIS ICI VERS LE COMPOSANT LIST TACHES
-    //  this.planningService.changeDateSelected.emit(taskDTOList);
+    this.planningService.changeDateSelected.next({dateSelected:this.selectedDay, taskDTOList});
   }
 
-  changeSelectedDay(day:Day) {
-    this.selectedDay = new Date(day.year,day.monthIndex, day.number)
+  changeSelectedDay(day: Day) {
+    this.selectedDay = new Date(day.year, day.monthIndex, day.number)
     this.selectedDay.setHours(1);
     console.log(this.selectedDay);
   }

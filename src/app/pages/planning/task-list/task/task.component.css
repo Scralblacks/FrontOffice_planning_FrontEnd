@@ -1,0 +1,70 @@
+.task {
+  margin: 0.5em 1em;
+  height: 60px;
+  border-radius: var(--md-radius);
+  display: flex;
+  cursor: pointer;
+}
+
+.task:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.task .task__icon {
+  display: flex;
+  margin: auto;
+  background: var(--third-bg-color);
+  border-radius: var(--md-radius);
+  min-width: 40px;
+  min-height: 40px;
+  text-align: center;
+  margin-left: 0.5em;
+}
+
+.task .task__icon i {
+  margin: auto;
+  color: var(--secondary-bg-color);
+}
+
+.task .task__body {
+  width: 100%;
+  margin-right: 1em;
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.task .task__body div:nth-child(1) span {
+  font-size: var(--md-font-size);
+  color: var(--main-bg-color);
+}
+
+.task .task__body div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task .task__body div:nth-child(2) > span {
+  font-size: var(--md-font-size);
+  color: var(--third-bg-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px
+}
+
+.task .task__body div:nth-child(2) > div {
+  display: flex;
+  align-items: center;
+}
+
+.task .task__body div:nth-child(2) > div > i {
+  color: var(--main-bg-color);
+  margin-right: 0.5em;
+}
+
+.task .task__body div:nth-child(2) > div > span {
+  font-size: var(--md-font-size);
+  color: var(--main-bg-color)
+}

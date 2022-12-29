@@ -5,15 +5,15 @@
   cursor: pointer;
 }
 
-.dayBox:hover {
+.dayBox:hover > div:first-child {
   background-color: var(--third-bg-color);
   border-radius: 6px;
   color: var(--secondary-bg-color);
 }
-
+/*
 .dayBox:hover .dot {
   background-color: var(--secondary-bg-color);
-}
+}*/
 
 .dayBox > div:nth-child(2) {
   display: flex;

@@ -1,1 +1,17 @@
-<p>task works!</p>
+<div class="task">
+  <div class="task__icon">
+    <i class="fa-regular fa-calendar fa-lg" style="color: white"></i>
+  </div>
+  <div class="task__body">
+    <div>
+      <span>{{task.nameTask}}</span>
+    </div>
+    <div>
+      <span>{{task.description}}</span>
+      <div style="display: flex; align-items: center;">
+        <i class="fa-regular fa-clock"></i>
+        <span>{{dateToDisplay}}</span>
+      </div>
+    </div>
+  </div>
+</div>

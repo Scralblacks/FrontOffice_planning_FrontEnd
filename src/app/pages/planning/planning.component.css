@@ -2,7 +2,7 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1em;
+  gap: 1em;
   overflow: hidden;
 }
 
@@ -11,7 +11,7 @@ main .planning__header {
   height: fit-content;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1em;
+  padding: 1em;
 }
 
 main .planning__header .planning__agendaSelector {
@@ -134,8 +134,6 @@ main .planning__switchEvents .toggle input:checked ~ .labels::before {
 
 main .planning__social {
   display: flex;
-  margin-top: 1em;
-  margin-bottom: 1em;
   justify-content: space-between;
   align-items: center;
   padding: 0.5em 1em;
@@ -212,12 +210,19 @@ main .planning__social .planning__shareInput input {
 }
 
 main .planning__calendar {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
   position: relative;
   background-color: var(--secondary-bg-color);
   border-radius: var(--xl-radius);
   height: 100%;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: scroll;
+  margin: 0.5em 1em;
+}
+
+main .planning__calendar > app-task-list:nth-child(2) {
+  overflow-y: auto
 }
 
 

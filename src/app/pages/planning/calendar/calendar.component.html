@@ -17,9 +17,10 @@
     </div>
     <ng-template #boxes>
       <div *ngFor='let day of monthDays'>
+        <!--                     [isSelectedDay]="selectedDay.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"-->
         <app-day-box [day]="day"
                      (select)="changeSelectedDay($event)"
-                     [isSelectedDay]="selectedDay.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"
+                     [isSelectedDay]="selectedDay.getUTCDate() == day.number"
                      [isCurrentDay]="currentDate.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"
                      [taskDTOList]="taskMapOfMonth.has(day.number) ? taskMapOfMonth.get(day.number) : []"
                      [numberOfTask]="taskMapOfMonth.has(day.number) ? taskMapOfMonth.get(day.number)!.length : 0"

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PlanningService} from "../../../services/planning/planning.service";
+import {taskDTO} from "../../../models/taskDTO";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-task-list',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() { }
+  public taskList: taskDTO[] = [];
+
+  public dateSelected!: Date;
+
+  changeDateSelected$: Observable<any> = this.planningService.newDailyTasks;
+
+  constructor(private planningService: PlanningService) {
+  }
 
   ngOnInit(): void {
+    this.changeDateSelected$.subscribe({
+      next: (data: any) => {
+        //this.dateSelected = new Date();
+        if (data) {
+          this.taskList = [...data.taskDTOList];
+          this.dateSelected = new Date(data.dateSelected);
+        }
+      }
+    })
   }
 
 }
