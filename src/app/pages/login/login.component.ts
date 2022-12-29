@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         console.log("Connected : " + connected);
         if (connected) {
           this.toastr.success("Successfully logged in !");
-          this.router.navigate(['/planning/email/$'])
+          this.router.navigate(['/planning'])
         } else {
           this.toastr.error("Wrong credentials !")
         }
