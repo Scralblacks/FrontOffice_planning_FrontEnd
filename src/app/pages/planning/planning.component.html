@@ -52,10 +52,14 @@
   </div>
 
   <ng-template #calendar>
-    <div class="planning__calendar">
+    <div *ngIf="!(isManagingTask$|async); else task" class="planning__calendar">
       <app-calendar></app-calendar>
       <app-task-list></app-task-list>
     </div>
+    <ng-template #task>
+      <app-task-manager></app-task-manager>
+    </ng-template>
+
   </ng-template>
 
 

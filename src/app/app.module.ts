@@ -20,6 +20,7 @@ import { CalendarComponent } from './pages/planning/calendar/calendar.component'
 import { DayBoxComponent } from './pages/planning/calendar/day-box/day-box.component';
 import { TaskListComponent } from './pages/planning/task-list/task-list.component';
 import { TaskComponent } from './pages/planning/task-list/task/task.component';
+import { TaskManagerComponent } from './pages/planning/task-manager/task-manager.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TaskComponent } from './pages/planning/task-list/task/task.component';
     CalendarComponent,
     DayBoxComponent,
     TaskListComponent,
-    TaskComponent
+    TaskComponent,
+    TaskManagerComponent
   ],
   imports: [
     BrowserModule,

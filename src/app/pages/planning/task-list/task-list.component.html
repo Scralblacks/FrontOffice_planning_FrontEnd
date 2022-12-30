@@ -1,9 +1,9 @@
 <div class="taskList">
-  <div class="taskList__addButton">
+  <div (click)="setManageTask(null)" class="taskList__addButton">
     <i class="fa-regular fa-square-plus fa-2xl"></i>
   </div>
   <div *ngFor="let task of taskList; let i = index" class="taskList__tasks">
-    <app-task [task]="task" [dateSelected]="dateSelected"></app-task>
+    <app-task (click)="setManageTask(task.idTask!)" [task]="task" [dateSelected]="dateSelected"></app-task>
     <hr *ngIf="i != taskList.length-1"/>
   </div>
 </div>
