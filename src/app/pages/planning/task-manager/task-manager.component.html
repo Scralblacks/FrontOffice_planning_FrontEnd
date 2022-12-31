@@ -1,1 +1,41 @@
-<p>{{task?.idTask}}</p>
+<div class="taskManager">
+  <form autocomplete="off" class="taskManager__form" [formGroup]="formTask" (ngSubmit)="submitTask()">
+    <div style="display: flex;">
+      <app-input formControlName="taskName" id="input-taskName" label="Task name" type="text"
+                 name="taskName"></app-input>
+      <div *ngIf="task" (click)="deleteTask()" class="taskManager__deleteBtn">
+        <i class="fa-solid fa-trash-can fa-xl"></i>
+      </div>
+    </div>
+    <div class="taskManager__dates">
+      <div class="taskManager__start">
+        <p>Select start date and time</p>
+        <div class="taskManager__taskStart">
+          <input type="date" formControlName="taskDateStart" value="{{ task?.dateTaskStart | date:'dd-MM-yyyy' }}">
+          <input type="time" formControlName="taskTimeStart"/>
+        </div>
+      </div>
+      <div class="taskManager__arrowTransition">
+        <i class="fa-solid fa-chevron-down fa-lg"></i>
+      </div>
+      <div class="taskManager__start">
+        <p>Select end date and time</p>
+        <div class="taskManager__taskStart">
+          <input type="date" formControlName="taskDateEnd" value="{{ task?.dateTaskStart | date:'dd-MM-yyyy' }}">
+          <input type="time" formControlName="taskTimeEnd"/>
+        </div>
+      </div>
+    </div>
+    <div class="taskManager__notes">
+      <p>Note</p>
+      <textarea formControlName="taskDescription" rows="4" placeholder="Type something..."></textarea>
+    </div>
+    <div class="taskManager__actions">
+      <div (click)="closeManager()">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>Retour</span>
+      </div>
+      <app-submit-button [styles]="saveBtnStyle" [text]="this.task ? 'Update': 'Save'"></app-submit-button>
+    </div>
+  </form>
+</div>

@@ -35,7 +35,41 @@ export class TaskService {
       }));
   }
 
-  openEmptyTask() {
-    this.managingTask.next(true);
+  switchTaskDetailsDisplay(open: boolean) {
+    this.managingTask.next(open);
+  }
+
+  addTask(task: taskDTO): Observable<taskDTO> {
+    return this.http.post<taskDTO>(`${this.BASE_URL}`, task).pipe(
+      map(res => {
+        this.taskBeingManaged.next(null);
+        this.managingTask.next(false);
+        return res;
+      })
+    )
+  };
+
+  closeTask() {
+    this.taskBeingManaged.next(null);
+    this.managingTask.next(false);
+  }
+
+  updateTask(task: taskDTO): Observable<taskDTO> {
+    return this.http.put<taskDTO>(`${this.BASE_URL}/edit`, task).pipe(
+      map(res => {
+        this.taskBeingManaged.next(null);
+        this.managingTask.next(false);
+        return res;
+      })
+    )
+  }
+
+  deleteTask(id: number) {
+    return this.http.delete<any>(`${this.BASE_URL}/delete/${id}`).pipe(
+      map(res => {
+        this.taskBeingManaged.next(null);
+        this.managingTask.next(false);
+      })
+    )
   }
 }

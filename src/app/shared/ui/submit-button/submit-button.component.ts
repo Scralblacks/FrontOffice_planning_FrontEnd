@@ -10,6 +10,9 @@ export class SubmitButtonComponent implements OnInit {
   @Input()
   text!:string;
 
+  @Input()
+  styles: any = {}
+
   constructor() { }
 
   ngOnInit(): void {

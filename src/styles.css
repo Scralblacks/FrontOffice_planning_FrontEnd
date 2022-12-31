@@ -50,11 +50,16 @@ app-root {
 
 app-planning {
   flex: 1;
-  overflow:auto;
+  overflow: auto;
 }
 
 app-calendar {
-  z-index:0;
+  z-index: 0;
+}
+
+app-task-manager {
+  height: 100%;
+  margin: 0.5em 1em;
 }
 
 body {
@@ -62,9 +67,18 @@ body {
   height: 100vh;
 }
 
-button {
+button, textarea, input {
+  outline: none;
   border: none;
   background: none;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type="time"]::-webkit-clear-button {
+  display: none;
 }
 
 

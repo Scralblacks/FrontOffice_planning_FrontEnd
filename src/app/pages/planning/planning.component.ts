@@ -40,6 +40,7 @@ export class PlanningComponent implements OnInit {
            taskDTO.dateCreated = new Date(taskDTO.dateCreated);
            taskDTO.dateTaskEnd = new Date(taskDTO.dateTaskEnd);
          });*/
+        console.log(this.currentPlanning)
         this.isPlanningLoading = false;
       }
     })

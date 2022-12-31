@@ -11,7 +11,8 @@ export class PlanningService {
 
   BASE_URL: string = "http://localhost:8080/api/planning";
 
-  // changeDateSelected = new EventEmitter();
+  planningStorage!: planningDTO;
+
   changeDateSelected = new BehaviorSubject<any>(null);
   private currentPlanning = new BehaviorSubject<planningDTO | null>(null);
 
@@ -41,13 +42,28 @@ export class PlanningService {
 
     return this.http.get<any>(`${this.BASE_URL}`, body).pipe(
       map((planning: any) => {
-        console.log(planning)
-        this.currentPlanning.next(planning);
+        this.planningStorage = planning;
+        this.currentPlanning.next(this.planningStorage);
         return planning;
       }),
       catchError((err) => {
         return of(null);
       })
     )
+  }
+
+  addNewTaskLocally(taskDto: taskDTO) {
+    this.planningStorage.taskList.push(taskDto);
+    this.currentPlanning.next(this.planningStorage)
+  }
+
+  updateTaskLocally(taskDto: taskDTO) {
+    let itemToUpdate = this.planningStorage.taskList.find(item => item.idTask == taskDto.idTask)!;
+    let index = this.planningStorage.taskList.indexOf(itemToUpdate);
+    this.planningStorage.taskList[index] = taskDto;
+  }
+
+  deleteTaskLocally(id: number) {
+    this.planningStorage.taskList.filter(task => task.idTask != id);
   }
 }

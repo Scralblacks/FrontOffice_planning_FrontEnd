@@ -53,7 +53,7 @@ export class CalendarComponent implements OnInit {
         this.taskList = data?.taskList ? data?.taskList : [];
         this.taskList.map((taskDTO) => {
           taskDTO.dateTaskStart = new Date(taskDTO.dateTaskStart);
-          taskDTO.dateCreated = new Date(taskDTO.dateCreated);
+          taskDTO.dateCreated = new Date(taskDTO.dateCreated!);
           taskDTO.dateTaskEnd = new Date(taskDTO.dateTaskEnd);
         });
         this.setTasksOfMonth();
@@ -72,6 +72,8 @@ export class CalendarComponent implements OnInit {
     }
 
     this.setMonthDays(this.calendarCreator.getMonth(this.monthNumber, this.year));
+    this.selectedDay.setMonth(this.monthNumber);
+    this.selectedDay.setFullYear(this.year);
     this.setTasksOfMonth();
   }
 
@@ -85,6 +87,8 @@ export class CalendarComponent implements OnInit {
     }
 
     this.setMonthDays(this.calendarCreator.getMonth(this.monthNumber, this.year));
+    this.selectedDay.setMonth(this.monthNumber);
+    this.selectedDay.setFullYear(this.year);
     this.setTasksOfMonth();
   }
 
@@ -133,12 +137,12 @@ export class CalendarComponent implements OnInit {
       })
       // console.log(this.taskMapOfMonth)
       this.isReadyToRender = Promise.resolve(true);
-      this.sendTasksToDisplay(this.taskMapOfMonth.has(this.currentDate.getUTCDate()) ? this.taskMapOfMonth.get(this.currentDate.getUTCDate()) : []);
+      this.sendTasksToDisplay(this.taskMapOfMonth.has(this.selectedDay.getUTCDate()) ? this.taskMapOfMonth.get(this.selectedDay.getUTCDate()) : []);
     }
   }
 
   sendTasksToDisplay(taskDTOList: taskDTO[] | undefined) {
-    this.planningService.changeDateSelected.next({dateSelected:this.selectedDay, taskDTOList});
+    this.planningService.changeDateSelected.next({dateSelected: this.selectedDay, taskDTOList});
   }
 
   changeSelectedDay(day: Day) {
