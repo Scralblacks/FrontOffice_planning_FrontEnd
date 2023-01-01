@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
+import {GetSharedUsers} from "../../models/GetSharedUsers";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,14 @@ export class UserService {
   BASE_URL: string = "http://localhost:8080/api/users";
 
   private connectedUser = new BehaviorSubject<userDTO | null>(null);
+  private sharedUser = new BehaviorSubject<userDTO[] | null>(null);
 
   get user() {
     return this.connectedUser.asObservable();
+  }
+
+  get usersShared() {
+    return this.sharedUser.asObservable();
   }
 
   constructor(private http: HttpClient) {
@@ -37,7 +43,11 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    return this.http.get(`http://localhost:8080/api/users/id/${id}`)
+    return this.http.get(`${this.BASE_URL}/id/${id}`)
+  }
+
+  getSharedUsers(sharedUsers: GetSharedUsers) {
+    return this.http.post<userDTO[]>(`${this.BASE_URL}/shared`, sharedUsers);
   }
 
 

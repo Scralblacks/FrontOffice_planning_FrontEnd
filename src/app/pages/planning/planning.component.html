@@ -1,13 +1,14 @@
 <main>
   <div class="planning__header">
     <div class="planning__agendaSelector">
-      <div>
+      <div *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
         <i class="fa-solid fa-chevron-left fa-lg"></i>
       </div>
       <div>
-        <span style="color: white; font-size: 16px; margin-left: 2em; margin-right: 2em">Agenda n°1</span>
+        <span
+          style="color: white; font-size: 16px; margin-left: 2em; margin-right: 2em">{{currentPlanning?.namePlanning}}</span>
       </div>
-      <div>
+      <div *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
         <i class="fa-solid fa-chevron-right fa-lg"></i>
       </div>
     </div>
@@ -21,29 +22,41 @@
   </div>
   <div class="planning__social">
     <div class="planning__peopleOwner">
-      <img height="40px" width="40px" src="/assets/profilePicture/35.jpg"/>
+      <img height="40px" width="40px"
+           [src]="currentUser?.photo != null ? '/assets/profilePicture/'+currentUser?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
     </div>
-    <div>
-      <div>
-        <img height="32px" width="32px" style="border: 2px solid red" src="/assets/profilePicture/35.jpg"/>
+    <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare">
+      <div *ngIf="currentSharedUsers.length >= 1">
+        <img height="32px" width="32px" style="border: 2px solid red"
+             [src]="currentSharedUsers![0].photo != null ? '/assets/profilePicture/'+currentSharedUsers![0].photo : '/assets/profilePicture/neutral_avatar.png'"/>
       </div>
-      <div>
-        <img height="32px" width="32px" style="border: 2px solid yellow" src="/assets/profilePicture/35.jpg"/>
+      <div *ngIf="currentSharedUsers.length >=2">
+        <img height="32px" width="32px" style="border: 2px solid yellow"
+             [src]="currentSharedUsers![1].photo != null ? '/assets/profilePicture/'+currentSharedUsers![1].photo : '/assets/profilePicture/neutral_avatar.png'"/>
       </div>
-      <div>
-        <img height="32px" width="32px" style="border: 2px solid white" src="/assets/profilePicture/35.jpg"/>
+      <div *ngIf="currentSharedUsers.length >=3">
+        <img height="32px" width="32px" style="border: 2px solid white"
+             [src]="currentSharedUsers![2].photo != null ? '/assets/profilePicture/'+currentSharedUsers![2].photo : '/assets/profilePicture/neutral_avatar.png'"/>
       </div>
-      <div>
-        <span style="background: none;">+2</span>
+      <div *ngIf="currentSharedUsers.length >3">
+        <span style="background: none;">+{{currentSharedUsers.length - 3}}</span>
       </div>
     </div>
+    <ng-template #noShare>
+      <div>
+        No Share...
+      </div>
+    </ng-template>
     <div class="planning__shareInput">
+
       <div>
         <span>
               <i class="fa-solid fa-share-nodes" style="background:none"></i>
         </span>
       </div>
-      <input type="text" placeholder="Type a username..."/>
+      <form autocomplete="off" [formGroup]="formAddShare">
+        <input type="text" placeholder="Type a username..." formControlName="emailShare" (keyup.enter)="submitNewShare()"/>
+      </form>
     </div>
   </div>
 
