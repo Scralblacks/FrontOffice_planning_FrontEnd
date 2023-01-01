@@ -1,5 +1,5 @@
 export interface shareDTO {
   planningId: number;
-  email: string;
+  userId: number;
   isReadOnly: boolean;
 }
