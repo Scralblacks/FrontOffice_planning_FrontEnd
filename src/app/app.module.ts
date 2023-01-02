@@ -16,12 +16,13 @@ import {AuthInterceptorProviders} from "./helpers/auth.interceptor";
 import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {PlanningComponent} from "./pages/planning/planning.component";
-import { CalendarComponent } from './pages/planning/calendar/calendar.component';
-import { DayBoxComponent } from './pages/planning/calendar/day-box/day-box.component';
-import { TaskListComponent } from './pages/planning/task-list/task-list.component';
-import { TaskComponent } from './pages/planning/task-list/task/task.component';
-import { TaskManagerComponent } from './pages/planning/task-manager/task-manager.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import {CalendarComponent} from './pages/planning/calendar/calendar.component';
+import {DayBoxComponent} from './pages/planning/calendar/day-box/day-box.component';
+import {TaskListComponent} from './pages/planning/task-list/task-list.component';
+import {TaskComponent} from './pages/planning/task-list/task/task.component';
+import {TaskManagerComponent} from './pages/planning/task-manager/task-manager.component';
+import {ProfileComponent} from './pages/profile/profile.component';
+import {ModalComponent} from './layout/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     TaskListComponent,
     TaskComponent,
     TaskManagerComponent,
-    ProfileComponent
+    ProfileComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     })
   ],
   providers: [AuthInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent],
 })
 export class AppModule {
 }
