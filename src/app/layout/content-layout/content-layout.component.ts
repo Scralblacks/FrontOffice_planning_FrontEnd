@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 import {PlanningService} from "../../services/planning/planning.service";
 import {switchMap} from "rxjs";
@@ -9,6 +9,9 @@ import {switchMap} from "rxjs";
   styleUrls: ['./content-layout.component.css']
 })
 export class ContentLayoutComponent implements OnInit {
+
+  @ViewChild("sidebar", {static: false})
+  sidebarEl!: ElementRef;
 
   constructor(private userService: UserService, private planningService: PlanningService) {
   }
@@ -22,5 +25,12 @@ export class ContentLayoutComponent implements OnInit {
     ).subscribe();
     console.log(this.userService.user);
   }
+
+  triggerSidenav() {
+    this.sidebarEl.nativeElement.classList.contains("is-active") ?
+      this.sidebarEl.nativeElement.classList.remove("is-active") :
+      this.sidebarEl.nativeElement.classList.add("is-active")
+  }
+
 
 }

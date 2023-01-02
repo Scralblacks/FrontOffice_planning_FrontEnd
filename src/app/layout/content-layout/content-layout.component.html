@@ -1,4 +1,23 @@
 <div style="height: 100%; display: flex; flex-direction: column; max-height: 100%">
-  <app-header></app-header>
+  <app-header (onTriggerSidenav)="triggerSidenav()"></app-header>
+  <aside class="sidebar" #sidebar>
+
+    <div (click)="triggerSidenav()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h3>Menu</h3>
+
+    <nav class="menu">
+      <div class="menu-item">
+        <a routerLink="planning" (click)="triggerSidenav()">Planning</a>
+      </div>
+      <div class="menu-item">
+        <a routerLink="profile" (click)="triggerSidenav()">Profile</a>
+      </div>
+    </nav>
+
+
+  </aside>
   <router-outlet></router-outlet>
 </div>
