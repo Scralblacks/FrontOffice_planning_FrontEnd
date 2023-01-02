@@ -15,6 +15,12 @@ export class AuthInterceptor implements HttpInterceptor {
     let currentRequest = req;
 
     const token = this.authStorageService.getToken();
+
+    if(req.headers.has("X-Skip-Interceptor")){
+      const headers = req.headers.delete("X-Skip-Interceptor");
+      return next.handle(req.clone({ headers }));
+    }
+
     if (token) {
       currentRequest = req.clone({headers: req.headers.set("Authorization", 'Bearer ' + token)})
     }
