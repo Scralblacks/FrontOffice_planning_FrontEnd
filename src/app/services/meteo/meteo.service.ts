@@ -3,64 +3,26 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import { Coordinate } from 'src/app/models/coordinate';
 import {AddressDTO} from "../../models/addressDTO";
+import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeteoService {
 
-  coordinate = new BehaviorSubject<Coordinate | null>(null);
+  temperature$ = new BehaviorSubject<number | null>(null);
+  maxTemperature$ = new BehaviorSubject<number | null>(null);
+  minTemperature$ = new BehaviorSubject<number | null>(null);
+  humidity$ = new BehaviorSubject<number | null>(null);
+  weatherCode$ = new BehaviorSubject<string | null>(null);
+  precipitation$ = new BehaviorSubject<unknown>(null);
 
-  get coordinateValue(){
-    return this.coordinate.asObservable()
-  }
-
-  constructor(private http: HttpClient) { }
-
-  /**
-   * Get the coordinate of a city thanks to its name and postal code
-   *
-   * @param address An AddressDTO containing both city name and its postal code
-   *
-   * @return An array containing the coordinates of the city [latitude, longitude] with 4 decimals
-   */
-  getCoordonate(address: AddressDTO) {
-
-      const params = {
-        access_key: 'fa25535501b2750dec452e5bbece1ab0',
-        query: /*`${address.city}, ${address.postalCode}`*/ "Paris, 75001"
-      }
-
-      const header = new HttpHeaders()
-
-      header.append("X-Skip-Interceptor", "")
-      header.append("Access-Control-Allow-Headers", "*")
-      header.append("Access-Control-Allow-Private-Network", "true")
-      header.append("Access-Control-Allow-Origin", 'http://localhost:4200')
-
-      let latitude!: number
-      let longitude!: number
-
-      this.http.get('http://api.positionstack.com/v1/forward', {params}).subscribe({
-        next: ((response: any) => {
-          console.log(response.data);
-          latitude = Math.round(response.data[0].latitude * 10000) / 10000;
-          console.log("getCoordonate lat : " + latitude)
-          console.log(typeof latitude)
-          longitude = Math.round(response.data[0].longitude * 10000) / 10000;
-          console.log("getCoordonate lon : " + longitude)
-          const result: Coordinate = {
-            latitude: latitude,
-            longitude: longitude
-          }
-          this.coordinate.next(result);
-        }),
-        error: ((error: any) => {
-          console.log(error);
-        })
-      })
-
-  }
+  get temperature(){return this.temperature$.asObservable()}
+  get maxTemperature(){return this.maxTemperature$.asObservable()}
+  get minTemperature(){return this.maxTemperature$.asObservable()}
+  get hum(){return this.humidity$.asObservable()}
+  get weatherCode(){return this.weatherCode$.asObservable()}
+  get precipitation(){return this.precipitation$.asObservable()}
 
 
   /**
@@ -68,22 +30,30 @@ export class MeteoService {
    *
    * @param coordinate A Coordinate
    */
-  getWeather(coordinate: Coordinate): Observable<any> {
-
-    const params: any = {
-      latitude: coordinate.latitude,
-      longitude: coordinate.longitude,
-      hourly: "temperature_2m,relativehumidity_2m,precipitation,windspeed_10m"
-    }
+  getWeather(zipcode: string){
 
     let meteoData: any
 
-    return this.http.get("https://api.open-meteo.com/v1/forecast", {params})/*.subscribe({
-      next: (data) => {
-        console.log(data)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},FR&appid=abef135b647329e43c861ceaa35aaed9&units=metric`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.temperature$.next(data.list[0].main.temp);
+        console.log(data.list[0].main.temp);
+        this.maxTemperature$.next(data.list[0].main.temp_max);
+        console.log(data.list[0].main.temp_max);
+        this.minTemperature$.next(data.list[0].main.temp_min);
+        console.log(data.list[0].main.temp_min);
+        this.humidity$.next(data.list[0].main.humidity);
+        console.log(data.list[0].main.humidity);
+        this.precipitation$.next(Object.values(data.list[0].rain)[0]);
+        console.log(Object.values(data.list[0].rain)[0])
+        this.weatherCode$.next(data.list[0].weather[0].icon);
+        console.log(data.list[0].weather[0].icon);
+        console.log(typeof data.list[0].weather[0].icon);
         meteoData = data
-      }
-    })
-    return meteoData*/
+      })
+
+    return meteoData
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Coordinate} from "../../models/coordinate";
 import {Observable} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UserService} from "../../services/user/user.service";
@@ -12,29 +11,26 @@ import {MeteoService} from "../../services/meteo/meteo.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  latitude!: number;
-  longitude!: number;
-  weatherCode!: number;
-  temperature!: number
-  humidityPercent!: number
-  coordinate$: Observable<Coordinate | null> = this.meteoService.coordinateValue
+
   user$: Observable<userDTO | null> = this.userService.user
 
 
-  constructor(private http: HttpClient, private meteoService: MeteoService, private userService: UserService) { }
+  constructor(private http: HttpClient, protected meteoService: MeteoService, private userService: UserService) { }
 
   ngOnInit() {
 
+    let meteoData!: any
+
     // Version with address from user
-    // this.user$.subscribe({
-    //   next: (user) => {
-    //     if (user) {
-    //       if (user.addressDTO != undefined) {
-    //         this.meteoService.getCoordonate(user.addressDTO);
-    //       }
-    //     }
-    //   }
-    // })
+    this.user$.subscribe({
+      next: (user) => {
+        if (user) {
+          if (user.addressDTO != undefined) {
+            meteoData = this.meteoService.getWeather(user.addressDTO.postalCode);
+          }
+        }
+      }
+    })
 
     // this.meteoService.getCoordonate({city: "Tavaux", postalCode: "39500"})
     // this.coordinate$.subscribe({
@@ -50,14 +46,12 @@ export class HeaderComponent implements OnInit {
     //   }
     // })
 
-    let meteoData = this.meteoService.getWeather({latitude: 47.0405, longitude: 5.4008}).subscribe({
+   /* let meteoData = this.meteoService.getWeather({latitude: 47.0405, longitude: 5.4008}).subscribe({
       next: (data) => {
         console.log(data)
         meteoData = data
       }
-    })
-
-    console.log(meteoData)
+    })*/
 
   }
 }
