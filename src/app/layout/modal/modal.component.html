@@ -1,1 +1,39 @@
-<p>modal works!</p>
+<h1 mat-dialog-title>Manage your share users</h1>
+<div class="modal__content">
+  <table class="modal__table">
+    <thead>
+    <tr>
+      <th colspan="2">User</th>
+      <th>Read-Only</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let user of usersShared; let i = index">
+      <td><img height="32px" width="32px"
+               [src]="user.photo != null ? '/assets/profilePicture/'+user.photo : '/assets/profilePicture/neutral_avatar.png'"/>
+      </td>
+      <td>
+        <div style="display: flex; flex-direction: column">
+          <span>{{user.username}}</span>
+          <span>{{user.email}}</span>
+        </div>
+      </td>
+      <td>
+        <label class="toggler-wrapper style-1">
+          <input type="checkbox" [ngModel]="user.readOnly" (change)="updateShare(user)">
+          <div class="toggler-slider">
+            <div class="toggler-knob">
+            </div>
+          </div>
+        </label>
+      </td>
+      <td>
+        <div (click)="deleteShare(user)" class="modal__deleteBtn">
+          <i class="fa-solid fa-trash-can fa-xl"></i>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</div>
+<button mat-dialog-close>Close</button>

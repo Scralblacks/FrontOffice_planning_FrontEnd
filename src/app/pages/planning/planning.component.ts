@@ -11,6 +11,9 @@ import {shareDTO} from "../../models/shareDTO";
 import {setNewShareDTO} from "../../models/setNewShareDTO";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ModalComponent} from "../../layout/modal/modal.component";
+import {sharedUsersDTO} from "../../models/sharedUsersDTO";
 
 @Component({
   selector: 'app-planning',
@@ -25,13 +28,13 @@ export class PlanningComponent implements OnInit {
 
   currentUser!: userDTO | null;
   currentPlanning!: planningDTO | null;
-  currentSharedUsers!: userDTO[] | null;
+  currentSharedUsers!: sharedUsersDTO[] | null;
 
   formAddShare!: FormGroup;
 
   isPlanningLoading: boolean = true;
 
-  constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -52,7 +55,7 @@ export class PlanningComponent implements OnInit {
           sharedIdList: this.currentPlanning?.shareList.map(value => value.userId)!
 
         }
-        this.userService.getSharedUsers(shared).subscribe({
+        this.currentPlanning?.idPlanning && this.userService.getSharedUsers(shared).subscribe({
           next: (people) => {
             this.currentSharedUsers = people;
             this.isPlanningLoading = false;
@@ -89,4 +92,17 @@ export class PlanningComponent implements OnInit {
     }
 
   }
+
+  openListSharedDetailed() {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: this.currentSharedUsers,
+      width: "500px",
+      maxHeight: "500px",
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }

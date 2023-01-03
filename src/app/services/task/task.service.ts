@@ -67,6 +67,8 @@ export class TaskService {
   deleteTask(id: number) {
     return this.http.delete<any>(`${this.BASE_URL}/delete/${id}`).pipe(
       map(res => {
+        console.log('looooooooool');
+        console.log(res);
         this.taskBeingManaged.next(null);
         this.managingTask.next(false);
       })

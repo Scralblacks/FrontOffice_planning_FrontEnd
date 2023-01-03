@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
+import {sharedUsersDTO} from "../../models/sharedUsersDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class UserService {
   }
 
   getSharedUsers(sharedUsers: GetSharedUsers) {
-    return this.http.post<userDTO[]>(`${this.BASE_URL}/shared`, sharedUsers);
+    return this.http.post<sharedUsersDTO[]>(`${this.BASE_URL}/shared`, sharedUsers);
   }
 
 

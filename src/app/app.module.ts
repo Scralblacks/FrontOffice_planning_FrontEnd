@@ -6,7 +6,7 @@ import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 
 import {AppRoutingModule} from './app-routing.module';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputComponent} from './shared/ui/input/input.component';
 import {HttpClientModule} from "@angular/common/http";
 import {SubmitButtonComponent} from './shared/ui/submit-button/submit-button.component';
@@ -23,6 +23,8 @@ import {TaskComponent} from './pages/planning/task-list/task/task.component';
 import {TaskManagerComponent} from './pages/planning/task-manager/task-manager.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {ModalComponent} from './layout/modal/modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -42,22 +44,25 @@ import {ModalComponent} from './layout/modal/modal.component';
     ProfileComponent,
     ModalComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      autoDismiss: true,
-      closeButton: true,
-      progressBar: true,
-      progressAnimation: "decreasing",
-    })
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+            autoDismiss: true,
+            closeButton: true,
+            progressBar: true,
+            progressAnimation: "decreasing",
+        }),
+        MatButtonModule,
+        FormsModule
+    ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent],

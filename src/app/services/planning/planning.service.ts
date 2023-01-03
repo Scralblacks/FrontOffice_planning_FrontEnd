@@ -85,7 +85,7 @@ export class PlanningService {
   }
 
   updateShare(shareDto: shareDTO) {
-    return this.http.put<shareDTO>(`${this.BASE_URL}/share`, shareDto).pipe(
+    return this.http.put<shareDTO>(`${this.BASE_URL_SHARE}`, shareDto).pipe(
       map((shareDto: shareDTO) => {
         let itemToUpdate = this.planningStorage.shareList.find(item => item.userId == shareDto.userId)!;
         let index = this.planningStorage.shareList.indexOf(itemToUpdate);
@@ -97,7 +97,7 @@ export class PlanningService {
   }
 
   deleteShare(shareDto: shareDTO) {
-    return this.http.delete<shareDTO>(`${this.BASE_URL}/share?id=${shareDto.planningId}&idUser=${shareDto.userId}`).pipe(
+    return this.http.delete<shareDTO>(`${this.BASE_URL_SHARE}?id=${shareDto.planningId}&idUser=${shareDto.userId}`).pipe(
       map((shareDto: shareDTO) => {
         this.planningStorage.shareList.filter(item => item.userId != shareDto.userId);
         this.currentPlanning.next(this.planningStorage);

@@ -169,9 +169,19 @@ export class TaskManagerComponent implements OnInit {
   }
 
   deleteTask() {
-    this.taskService.deleteTask(this.task?.idTask!);
-    this.planningService.deleteTaskLocally(this.task?.idTask!);
+    this.formTask.clearValidators();
     this.formTask.reset();
+    Object.keys(this.formTask.controls).forEach((key) => {
+      const control = this.formTask.controls[key];
+      control.markAsPristine();
+      control.markAsUntouched();
+    });
+    this.taskService.deleteTask(this.task?.idTask!).subscribe({
+      next: () => {
+        this.planningService.deleteTaskLocally(this.task?.idTask!);
+      }
+    })
+
   }
 
   closeManager() {

@@ -25,7 +25,8 @@
       <img height="40px" width="40px"
            [src]="currentUser?.photo != null ? '/assets/profilePicture/'+currentUser?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
     </div>
-    <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare">
+    <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
+         (click)="openListSharedDetailed()">
       <div *ngIf="currentSharedUsers.length >= 1">
         <img height="32px" width="32px" style="border: 2px solid red"
              [src]="currentSharedUsers![0].photo != null ? '/assets/profilePicture/'+currentSharedUsers![0].photo : '/assets/profilePicture/neutral_avatar.png'"/>
@@ -55,7 +56,8 @@
         </span>
       </div>
       <form autocomplete="off" [formGroup]="formAddShare">
-        <input type="text" placeholder="Type a username..." formControlName="emailShare" (keyup.enter)="submitNewShare()"/>
+        <input type="text" placeholder="Type a username..." formControlName="emailShare"
+               (keyup.enter)="submitNewShare()"/>
       </form>
     </div>
   </div>
