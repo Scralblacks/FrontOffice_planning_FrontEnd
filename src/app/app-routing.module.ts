@@ -5,6 +5,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {AuthGuardService} from "./helpers/auth-guard.service";
 import {PlanningComponent} from "./pages/planning/planning.component";
 import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
+import {MeteoComponent} from "./pages/meteo/meteo.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'register', pathMatch: 'full'},
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: "planning",
         component: PlanningComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: "meteo",
+        component: MeteoComponent,
         canActivate: [AuthGuardService],
       }
     ]

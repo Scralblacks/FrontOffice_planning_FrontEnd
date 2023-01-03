@@ -21,6 +21,7 @@ import { DayBoxComponent } from './pages/planning/calendar/day-box/day-box.compo
 import { TaskListComponent } from './pages/planning/task-list/task-list.component';
 import { TaskComponent } from './pages/planning/task-list/task/task.component';
 import { TaskManagerComponent } from './pages/planning/task-manager/task-manager.component';
+import { MeteoComponent } from './pages/meteo/meteo.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TaskManagerComponent } from './pages/planning/task-manager/task-manager
     DayBoxComponent,
     TaskListComponent,
     TaskComponent,
-    TaskManagerComponent
+    TaskManagerComponent,
+    MeteoComponent
   ],
   imports: [
     BrowserModule,

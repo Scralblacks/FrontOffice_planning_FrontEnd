@@ -3,8 +3,8 @@
     <i class="fa-solid fa-bars fa-xl"></i>
   </div>
   <div>
-    <span>{{meteoService.temperature$ | async}}°C</span>
-    <ng-container [ngSwitch]="meteoService.weatherCode$ | async">
+    <span>{{(meteoData$ | async).list[0].main.temp}}°C</span>
+    <ng-container [ngSwitch]="(meteoData$ | async).list[0].weather[0].icon">
 <!--    <ng-container [ngSwitch]="'50d'">-->
 
       <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>

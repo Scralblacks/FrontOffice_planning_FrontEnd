@@ -169,6 +169,7 @@ export class TaskManagerComponent implements OnInit {
   }
 
   deleteTask() {
+    this.formTask.clearValidators()
     this.taskService.deleteTask(this.task?.idTask!);
     this.planningService.deleteTaskLocally(this.task?.idTask!);
     this.formTask.reset();

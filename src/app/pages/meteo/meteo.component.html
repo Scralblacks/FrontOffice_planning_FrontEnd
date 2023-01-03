@@ -1,0 +1,673 @@
+<header class="mobile_meteo">
+  <!-- TODO : Finish search for town -->
+<!--  <form autocomplete="off" [formGroup]="formChangeTown">-->
+    <input type="text" placeholder="Type a town..." /><!--formControlName="emailShare" (keyup.enter)="submitNewShare()"-->
+<!--  </form>-->
+  <div>
+    {{address.city}} ({{address.postalCode}})
+  </div>
+</header>
+
+<div>
+  <ng-container [ngSwitch]="(meteoData$ | async).list[0].weather[0].icon">
+    <!--    <ng-container [ngSwitch]="'50d'">-->
+
+    <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+    <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+    <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+    <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+    <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+    <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+    <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+    <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+    <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+    <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+    <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+    <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+    <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+    <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+    <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+    <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+    <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+    <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+    <!-- TODO : ADD image for fog (50d & 50n) -->
+
+  </ng-container>
+  <div>
+    <span>{{(meteoData$ | async).list[0].main.temp}}°C</span>
+    <div *ngIf="(meteoData$ | async).list[0].rain != undefined; else noRain">
+      <span>Precipitation : {{(meteoData$ | async).list[0].rain}} mm</span>
+    </div>
+    <ng-template #noRain>
+      <span>Precipitation : 0 mm</span>
+    </ng-template>
+
+    <span>Temperature max : {{(meteoData$ | async).list[0].main.temp_max}}°C</span>
+    <span>Temperature min : {{(meteoData$ | async).list[0].main.temp_min}}°C</span>
+  </div>
+</div>
+
+<div>
+  <div>
+    <img src="" alt="rain probability">
+    <span>{{(meteoData$ | async).list[0].pop * 100}}%</span>
+  </div>
+  <div>
+    <img src="" alt="humidity percentage">
+    <span>{{(meteoData$ | async).list[0].main.humidity}}%</span>
+  </div>
+  <div>
+    <img src="" alt="wind speed">
+    <span>{{(meteoData$ | async).list[0].wind.speed}} m/s</span>
+  </div>
+</div>
+
+<div class="forcast_today">
+
+  <div class="meteo_h+3">
+    <div>{{(meteoData$ | async).list[1].main.temp}}°C</div>
+    <div>
+      <ng-container [ngSwitch]="(meteoData$ | async).list[1].weather[0].icon">
+        <!--    <ng-container [ngSwitch]="'50d'">-->
+
+        <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+        <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+        <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+        <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+        <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+        <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+        <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+        <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+        <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+        <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!-- TODO : ADD image for fog (50d & 50n) -->
+
+      </ng-container>
+    </div>
+    <div>{{(meteoData$ | async).list[1].dt_txt.substring(11, 16)}}</div>
+  </div>
+
+  <div class="meteo_h+6">
+    <div>{{(meteoData$ | async).list[2].main.temp}}°C</div>
+    <div>
+      <ng-container [ngSwitch]="(meteoData$ | async).list[2].weather[0].icon">
+        <!--    <ng-container [ngSwitch]="'50d'">-->
+
+        <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+        <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+        <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+        <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+        <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+        <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+        <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+        <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+        <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+        <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!-- TODO : ADD image for fog (50d & 50n) -->
+
+      </ng-container>
+    </div>
+    <div>{{(meteoData$ | async).list[2].dt_txt.substring(11, 16)}}</div>
+  </div>
+
+  <div class="meteo_h+9">
+    <div>{{(meteoData$ | async).list[3].main.temp}}°C</div>
+    <div>
+      <ng-container [ngSwitch]="(meteoData$ | async).list[3].weather[0].icon">
+        <!--    <ng-container [ngSwitch]="'50d'">-->
+
+        <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+        <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+        <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+        <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+        <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+        <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+        <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+        <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+        <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+        <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!-- TODO : ADD image for fog (50d & 50n) -->
+
+      </ng-container>
+    </div>
+    <div>{{(meteoData$ | async).list[3].dt_txt.substring(11, 16)}}</div>
+  </div>
+
+  <div class="meteo_h+12">
+    <div>{{(meteoData$ | async).list[4].main.temp}}°C</div>
+    <div>
+      <ng-container [ngSwitch]="(meteoData$ | async).list[4].weather[0].icon">
+        <!--    <ng-container [ngSwitch]="'50d'">-->
+
+        <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+        <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+        <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+        <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+        <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+        <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+        <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+        <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+        <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+        <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+        <!-- TODO : ADD image for fog (50d & 50n) -->
+
+      </ng-container>
+    </div>
+    <div>{{(meteoData$ | async).list[4].dt_txt.substring(11, 16)}}</div>
+  </div>
+
+</div>
+
+<div>
+  <div class="forcast-d+1">
+
+    <ng-container [ngSwitch]="(meteoData$ | async).list[0].dt_txt.substring(11,16)">
+
+      <div *ngSwitchCase="'00:00'">
+        <div>{{(meteoData$ | async).list[12].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[12].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'03:00'">
+        <div>{{(meteoData$ | async).list[11].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[11].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'06:00'">
+        <div>{{(meteoData$ | async).list[10].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[10].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'09:00'">
+        <div>{{(meteoData$ | async).list[9].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[9].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'12:00'">
+        <div>{{(meteoData$ | async).list[8].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[8].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'15:00'">
+        <div>{{(meteoData$ | async).list[7].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[7].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'18:00'">
+        <div>{{(meteoData$ | async).list[6].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[6].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'21:00'">
+        <div>{{(meteoData$ | async).list[5].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[5].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <div class="forcast-d+2">
+
+    <ng-container [ngSwitch]="(meteoData$ | async).list[0].dt_txt.substring(11,16)">
+
+      <div *ngSwitchCase="'00:00'">
+        <div>{{(meteoData$ | async).list[20].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[20].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'03:00'">
+        <div>{{(meteoData$ | async).list[19].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[19].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'06:00'">
+        <div>{{(meteoData$ | async).list[18].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[18].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'09:00'">
+        <div>{{(meteoData$ | async).list[17].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[17].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'12:00'">
+        <div>{{(meteoData$ | async).list[16].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[16].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'15:00'">
+        <div>{{(meteoData$ | async).list[15].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[15].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'18:00'">
+        <div>{{(meteoData$ | async).list[14].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[14].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+      <div *ngSwitchCase="'21:00'">
+        <div>{{(meteoData$ | async).list[13].main.temp}}°C</div>
+        <div>
+          <ng-container [ngSwitch]="(meteoData$ | async).list[13].weather[0].icon">
+            <!--    <ng-container [ngSwitch]="'50d'">-->
+
+            <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+            <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+            <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+            <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+            <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+            <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+            <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+            <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+            <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+            <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+            <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+            <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+            <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+            <!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
+            <!-- TODO : ADD image for fog (50d & 50n) -->
+
+          </ng-container>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>
