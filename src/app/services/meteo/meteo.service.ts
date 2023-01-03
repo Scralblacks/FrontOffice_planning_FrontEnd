@@ -15,7 +15,7 @@ export class MeteoService {
   minTemperature$ = new BehaviorSubject<number | null>(null);
   humidity$ = new BehaviorSubject<number | null>(null);
   weatherCode$ = new BehaviorSubject<string | null>(null);
-  precipitation$ = new BehaviorSubject<unknown>(null);
+  precipitation$ = new BehaviorSubject<any>(null);
 
   get temperature(){return this.temperature$.asObservable()}
   get maxTemperature(){return this.maxTemperature$.asObservable()}
@@ -46,14 +46,21 @@ export class MeteoService {
         console.log(data.list[0].main.temp_min);
         this.humidity$.next(data.list[0].main.humidity);
         console.log(data.list[0].main.humidity);
-        this.precipitation$.next(Object.values(data.list[0].rain)[0]);
-        console.log(Object.values(data.list[0].rain)[0])
+        if (data.list[0].rain){
+          this.precipitation$.next(Object.values(data.list[0].rain)[0]);
+          console.log(Object.values(data.list[0].rain)[0])
+        } else {
+          this.precipitation$.next(0)
+          console.log(0)
+        }
         this.weatherCode$.next(data.list[0].weather[0].icon);
         console.log(data.list[0].weather[0].icon);
         console.log(typeof data.list[0].weather[0].icon);
+        this.weatherCode$.subscribe({
+          next: data => console.log(data + ", nb char : " + data?.length)
+        })
         meteoData = data
       })
-
     return meteoData
   }
 }
