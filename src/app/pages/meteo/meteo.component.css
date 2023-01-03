@@ -1,0 +1,55 @@
+.mobile_meteo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.main-data-today{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.inner-main-data-today{
+  margin-inside: 1em;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  font-size: 1em;
+  text-align: center;
+}
+
+.current-temperature{
+  margin-bottom: 2em;
+  font-size: 1.4em;
+  font-weight: bolder;
+}
+
+.temperature-range{
+  display: flex;
+  flex-direction: row;
+  margin-inside: 1em;
+}
+
+.secondary-data{
+  display: flex;
+  flex-direction: row;
+}
+
+.inner-secondary-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.picture-main{
+  width: 12rem;
+}
+
+.picture-secondary{
+  width: 4rem;
+}
+
+
