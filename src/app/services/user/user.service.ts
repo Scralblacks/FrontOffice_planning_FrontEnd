@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
 import {sharedUsersDTO} from "../../models/sharedUsersDTO";
+import {UpdateUserDTO} from "../../models/updateUserDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,16 @@ export class UserService {
       map((sharedUsersDto) => {
         this.sharedUser.next(sharedUsersDto);
         return sharedUsersDto;
+      })
+    )
+  }
+
+  updateUser(updateUserDTO: UpdateUserDTO) {
+    return this.http.put<userDTO>(`${this.BASE_URL}`, updateUserDTO).pipe(
+      map((returnedUserDto) => {
+        console.log("returned user after update");
+        console.log(returnedUserDto);
+        this.connectedUser.next(returnedUserDto);
       })
     )
   }

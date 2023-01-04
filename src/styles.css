@@ -54,6 +54,10 @@ app-planning {
   overflow: auto;
 }
 
+app-profile {
+  height: 100%;
+}
+
 app-calendar {
   z-index: 0;
 }
