@@ -7,6 +7,7 @@ import {shareDTO} from "../../models/shareDTO";
 import {setNewShareDTO} from "../../models/setNewShareDTO";
 import {ErrorResponse} from "../../models/errorResponse";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 
 @Injectable({
   providedIn: 'root'
@@ -34,18 +35,23 @@ export class PlanningService {
   constructor(private http: HttpClient) {
   }
 
-  getCurrentPlanning(id: number): Observable<any> {
-    let url = this.BASE_URL;
-    let body = {};
-    if (id > 0) {
-      url += "/shared";
-      // body = ...
-      console.log("Get shared planning...");
-    } else {
-      console.log("Get owners planning...");
-    }
+  getOwnerPlanning(): Observable<any> {
+    console.log("Get owners planning...")
+    return this.http.get<planningDTO>(this.BASE_URL).pipe(
+      map((planning: planningDTO) => {
+        this.planningStorage = planning;
+        this.currentPlanning.next(this.planningStorage);
+        return planning;
+      }),
+      catchError((err) => {
+        return of(null);
+      })
+    )
+  }
 
-    return this.http.get<planningDTO>(`${this.BASE_URL}`, body).pipe(
+  getSharedPlanning(getPlanningShare: GetSharedPlanning): Observable<any> {
+    console.log("Get shared planning...")
+    return this.http.get<planningDTO>(`${this.BASE_URL}/shared?idUser=${getPlanningShare.userId}&idPlanning=${getPlanningShare.planningId}`).pipe(
       map((planning: planningDTO) => {
         this.planningStorage = planning;
         this.currentPlanning.next(this.planningStorage);

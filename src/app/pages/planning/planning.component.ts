@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, switchMap} from "rxjs";
+import {map, Observable, Subscription, switchMap} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UserService} from "../../services/user/user.service";
 import {planningDTO} from "../../models/planningDTO";
@@ -14,6 +14,7 @@ import {ToastrService} from "ngx-toastr";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ModalComponent} from "../../layout/modal/modal.component";
 import {sharedUsersDTO} from "../../models/sharedUsersDTO";
+import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 
 @Component({
   selector: 'app-planning',
@@ -25,6 +26,7 @@ export class PlanningComponent implements OnInit {
   user$: Observable<userDTO | null> = this.userService.user;
   planning$: Observable<planningDTO | null> = this.planningService.planning;
   isManagingTask$: Observable<boolean> = this.taskService.isManagingTask;
+  usersShared$: Observable<sharedUsersDTO[] | null> = this.userService.usersShared;
 
   currentUser!: userDTO | null;
   currentPlanning!: planningDTO | null;
@@ -33,6 +35,9 @@ export class PlanningComponent implements OnInit {
   formAddShare!: FormGroup;
 
   isPlanningLoading: boolean = true;
+
+  private _planningSubscription!: Subscription;
+  private _sharedUsersSubscription!: Subscription;
 
   constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog) {
   }
@@ -45,32 +50,102 @@ export class PlanningComponent implements OnInit {
     this.user$.subscribe({
       next: (data) => {
         this.currentUser = data;
+        console.log("Current User :")
+        console.log(this.currentUser);
       },
     });
+    this.usersShared$.subscribe({
+      next: (data) => {
+        console.log("Cool de nouveau partage !")
+        this.currentSharedUsers = data;
+        console.log(this.currentSharedUsers);
+        this.isPlanningLoading = false;
+      }
+    })
     this.planning$.pipe(
       switchMap((planning, index) => {
+        console.log("subscribing to new planning lol")
         this.currentPlanning = planning;
+        console.log(this.currentPlanning);
         const shared: GetSharedUsers = {
           idPlanning: this.currentPlanning?.idPlanning!,
           sharedIdList: this.currentPlanning?.shareList.map(value => value.userId)!
-
         }
-        this.currentPlanning?.idPlanning && this.userService.getSharedUsers(shared).subscribe({
-          next: (people) => {
-            this.currentSharedUsers = people;
-            this.isPlanningLoading = false;
-          }
-        });
+        if (this.currentPlanning?.idPlanning) {
+          this.userService.getSharedUsers(shared).subscribe();
+        }
         return new Observable();
       })
     ).subscribe();
-    /*this.planning$.subscribe({
-      next: (data) => {
-        this.currentPlanning = data;
-        console.log(this.currentPlanning)
-        this.isPlanningLoading = false;
+  }
+
+  onNextPlanning(): void {
+
+
+    if (this.currentUser?.sharedPlanningId?.length! == 0) {
+      return;
+    }
+
+    let indexShareDto = this.currentUser?.sharedPlanningId!.findIndex((planningId) => {
+      return planningId == this.currentPlanning?.idPlanning
+    })
+
+    indexShareDto!++;
+
+    if (indexShareDto == this.currentUser?.sharedPlanningId?.length!) {
+      this.planningService.getOwnerPlanning().subscribe();
+    } else {
+      const planningIdToGet = this.currentUser?.sharedPlanningId![indexShareDto!];
+      const getPlanningShare: GetSharedPlanning = {
+        userId: this.currentUser?.idUser!,
+        planningId: planningIdToGet!,
+
       }
-    })*/
+      this.planningService.getSharedPlanning(getPlanningShare).subscribe();
+    }
+  }
+
+  onPreviousPlanning(): void {
+
+    if (this.currentUser?.sharedPlanningId?.length! == 0) {
+      return;
+    }
+    let indexShareDto = this.currentUser?.sharedPlanningId!.findIndex((planningId) => {
+      return planningId == this.currentPlanning?.idPlanning
+    })
+    if (indexShareDto == -1) {
+      indexShareDto = this.currentUser?.sharedPlanningId?.length!
+
+    }
+    if (indexShareDto == 0) {
+      this.planningService.getOwnerPlanning().subscribe();
+      return;
+    }
+
+    indexShareDto!--;
+
+    const planningIdToGet = this.currentUser?.sharedPlanningId![indexShareDto!];
+    const getPlanningShare: GetSharedPlanning = {
+      userId: this.currentUser?.idUser!,
+      planningId: planningIdToGet!,
+    }
+
+
+    this.planningService.getSharedPlanning(getPlanningShare).subscribe();
+
+
+    /*  this.taskMapOfMonth.clear();
+      this.monthNumber--;
+
+      if (this.monthNumber < 1) {
+        this.monthNumber = 12;
+        this.year--;
+      }
+
+      this.setMonthDays(this.calendarCreator.getMonth(this.monthNumber, this.year));
+      this.selectedDay.setMonth(this.monthNumber);
+      this.selectedDay.setFullYear(this.year);
+      this.setTasksOfMonth();*/
   }
 
   submitNewShare() {

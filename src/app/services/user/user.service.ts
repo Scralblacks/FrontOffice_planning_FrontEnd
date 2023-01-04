@@ -13,7 +13,7 @@ export class UserService {
   BASE_URL: string = "http://localhost:8080/api/users";
 
   private connectedUser = new BehaviorSubject<userDTO | null>(null);
-  private sharedUser = new BehaviorSubject<userDTO[] | null>(null);
+  private sharedUser = new BehaviorSubject<sharedUsersDTO[] | null>(null);
 
   get user() {
     return this.connectedUser.asObservable();
@@ -26,10 +26,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getLoggedUser(): Observable<any> {
+  getLoggedUser(): Observable<userDTO | null> {
     console.log('getLoggedUser...');
-    return this.http.get<any>(`${this.BASE_URL}`).pipe(
-      map((user: any) => {
+    return this.http.get<userDTO>(`${this.BASE_URL}`).pipe(
+      map((user) => {
         console.log('Map getloggedUser');
         console.log(user);
         this.connectedUser.next(user);
@@ -48,7 +48,12 @@ export class UserService {
   }
 
   getSharedUsers(sharedUsers: GetSharedUsers) {
-    return this.http.post<sharedUsersDTO[]>(`${this.BASE_URL}/shared`, sharedUsers);
+    return this.http.post<sharedUsersDTO[]>(`${this.BASE_URL}/shared`, sharedUsers).pipe(
+      map((sharedUsersDto) => {
+        this.sharedUser.next(sharedUsersDto);
+        return sharedUsersDto;
+      })
+    )
   }
 
 

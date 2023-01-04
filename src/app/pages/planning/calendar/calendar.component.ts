@@ -50,6 +50,7 @@ export class CalendarComponent implements OnInit {
 
     this.planning$.subscribe({
       next: (data) => {
+        this.taskMapOfMonth.clear();
         this.taskList = data?.taskList ? data?.taskList : [];
         this.taskList.map((taskDTO) => {
           taskDTO.dateTaskStart = new Date(taskDTO.dateTaskStart);

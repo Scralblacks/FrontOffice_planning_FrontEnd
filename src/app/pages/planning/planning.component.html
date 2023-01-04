@@ -1,14 +1,16 @@
 <main>
   <div class="planning__header">
     <div class="planning__agendaSelector">
-      <div *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
+      <div (click)="onPreviousPlanning()"
+           *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
         <i class="fa-solid fa-chevron-left fa-lg"></i>
       </div>
       <div>
         <span
           style="color: white; font-size: 16px; margin-left: 2em; margin-right: 2em">{{currentPlanning?.namePlanning}}</span>
       </div>
-      <div *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
+      <div (click)="onNextPlanning()"
+           *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
         <i class="fa-solid fa-chevron-right fa-lg"></i>
       </div>
     </div>
@@ -23,13 +25,15 @@
   <div class="planning__social">
     <div class="planning__peopleOwner">
       <img height="40px" width="40px"
-           [src]="currentUser?.photo != null ? '/assets/profilePicture/'+currentUser?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
+           [src]="currentPlanning?.usersDTO?.photo != null ? '/assets/profilePicture/'+currentPlanning?.usersDTO?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
+      <span>{{currentPlanning?.usersDTO?.username!}}</span>
     </div>
     <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
          (click)="openListSharedDetailed()">
       <div *ngIf="currentSharedUsers.length >= 1">
         <img height="32px" width="32px" style="border: 2px solid red"
              [src]="currentSharedUsers![0].photo != null ? '/assets/profilePicture/'+currentSharedUsers![0].photo : '/assets/profilePicture/neutral_avatar.png'"/>
+        <span>{{currentSharedUsers![0].username!}}</span>
       </div>
       <div *ngIf="currentSharedUsers.length >=2">
         <img height="32px" width="32px" style="border: 2px solid yellow"
