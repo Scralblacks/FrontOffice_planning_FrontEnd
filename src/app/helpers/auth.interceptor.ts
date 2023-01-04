@@ -11,14 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     let currentRequest = req;
 
     const token = this.authStorageService.getToken();
 
-    if(req.headers.has("X-Skip-Interceptor")){
-      const headers = req.headers.delete("X-Skip-Interceptor");
-      return next.handle(req.clone({ headers }));
+    if(currentRequest.url.includes('openweather')){
+      return next.handle(currentRequest)
     }
 
     if (token) {
