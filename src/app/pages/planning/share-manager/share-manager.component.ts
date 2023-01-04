@@ -1,25 +1,24 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {sharedUsersDTO} from "../../../models/sharedUsersDTO";
+import {userDTO} from "../../../models/userDTO";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {userDTO} from "../../models/userDTO";
-import {PlanningService} from "../../services/planning/planning.service";
-import {shareDTO} from "../../models/shareDTO";
-import {sharedUsersDTO} from "../../models/sharedUsersDTO";
+import {PlanningService} from "../../../services/planning/planning.service";
 import {ToastrService} from "ngx-toastr";
-import {share} from "rxjs";
+import {shareDTO} from "../../../models/shareDTO";
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  selector: 'app-share-manager',
+  templateUrl: './share-manager.component.html',
+  styleUrls: ['./share-manager.component.css']
 })
-export class ModalComponent implements OnInit {
+export class ShareManagerComponent implements OnInit {
 
   localSharedUsers: sharedUsersDTO[] = [];
   localCurrentUser!: userDTO | null;
   localIdPlanning!: number;
   title: string = "Manage your share users";
 
-  constructor(public dialogRef: MatDialogRef<ModalComponent>,
+  constructor(public dialogRef: MatDialogRef<ShareManagerComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private planningService: PlanningService, private toastr: ToastrService) {
   }
 
