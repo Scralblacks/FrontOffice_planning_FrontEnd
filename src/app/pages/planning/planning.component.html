@@ -7,12 +7,22 @@
       </div>
       <div>
         <span
-          style="color: white; font-size: 16px; margin-left: 2em; margin-right: 2em">{{currentPlanning?.namePlanning}}</span>
+        >{{currentPlanning?.namePlanning}}</span>
       </div>
       <div (click)="onNextPlanning()"
            *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
         <i class="fa-solid fa-chevron-right fa-lg"></i>
       </div>
+    </div>
+    <div>
+      <div *ngIf="currentUser?.planningId == currentPlanning?.idPlanning; else shared">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <ng-template #shared>
+        <div (click)="removeCurrentUserFromShare()">
+          <i class="fa-solid fa-bookmark"></i>
+        </div>
+      </ng-template>
     </div>
     <div class="planning__switchEvents">
       <label class="toggle">
@@ -26,14 +36,12 @@
     <div class="planning__peopleOwner">
       <img height="40px" width="40px"
            [src]="currentPlanning?.usersDTO?.photo != null ? '/assets/profilePicture/'+currentPlanning?.usersDTO?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
-      <span>{{currentPlanning?.usersDTO?.username!}}</span>
     </div>
     <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
          (click)="openListSharedDetailed()">
       <div *ngIf="currentSharedUsers.length >= 1">
         <img height="32px" width="32px" style="border: 2px solid red"
              [src]="currentSharedUsers![0].photo != null ? '/assets/profilePicture/'+currentSharedUsers![0].photo : '/assets/profilePicture/neutral_avatar.png'"/>
-        <span>{{currentSharedUsers![0].username!}}</span>
       </div>
       <div *ngIf="currentSharedUsers.length >=2">
         <img height="32px" width="32px" style="border: 2px solid yellow"

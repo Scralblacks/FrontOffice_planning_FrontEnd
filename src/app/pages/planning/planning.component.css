@@ -30,8 +30,8 @@ main .planning__header .planning__agendaSelector > div:nth-child(2n+1) {
 main .planning__header .planning__agendaSelector span {
   color: var(--secondary-bg-color);
   font-size: var(--xl-font-size);
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 main .planning__switchEvents {
@@ -194,7 +194,7 @@ main .planning__social .planning__shareInput > span {
   background: none;
 }
 
-main .planning__social .planning__shareInput i {
+main i {
   background: none;
   color: var(--secondary-bg-color);
 }

@@ -25,6 +25,7 @@ import {ProfileComponent} from './pages/profile/profile.component';
 import {ModalComponent} from './layout/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import { ShareManagerComponent } from './pages/planning/share-manager/share-manager.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatButtonModule} from "@angular/material/button";
     TaskComponent,
     TaskManagerComponent,
     ProfileComponent,
-    ModalComponent
+    ModalComponent,
+    ShareManagerComponent
   ],
     imports: [
         BrowserModule,

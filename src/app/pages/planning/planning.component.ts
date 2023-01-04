@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {map, Observable, Subscription, switchMap} from "rxjs";
+import {Observable, Subscription, switchMap} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UserService} from "../../services/user/user.service";
 import {planningDTO} from "../../models/planningDTO";
 import {PlanningService} from "../../services/planning/planning.service";
 import {TaskService} from "../../services/task/task.service";
-import {taskDTO} from "../../models/taskDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
-import {shareDTO} from "../../models/shareDTO";
 import {setNewShareDTO} from "../../models/setNewShareDTO";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {ModalComponent} from "../../layout/modal/modal.component";
+import {MatDialog,} from '@angular/material/dialog';
 import {sharedUsersDTO} from "../../models/sharedUsersDTO";
 import {GetSharedPlanning} from "../../models/GetSharedPlanning";
+import {ShareManagerComponent} from "./share-manager/share-manager.component";
+import {shareDTO} from "../../models/shareDTO";
 
 @Component({
   selector: 'app-planning',
@@ -169,8 +168,12 @@ export class PlanningComponent implements OnInit {
   }
 
   openListSharedDetailed() {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      data: this.currentSharedUsers,
+    const dialogRef = this.dialog.open(ShareManagerComponent, {
+      data: {
+        localSharedUsers: this.currentSharedUsers,
+        localCurrentUser: this.currentUser,
+        localIdPlanning: this.currentPlanning?.idPlanning!
+      },
       width: "500px",
       maxHeight: "500px",
     });
@@ -178,6 +181,24 @@ export class PlanningComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  removeCurrentUserFromShare() {
+    const currentUserShareDto = this.currentSharedUsers?.find((sharedUserDto) => sharedUserDto.idUser = this.currentUser?.idUser!);
+    if (currentUserShareDto) {
+      const sharedto: shareDTO = {
+        userId: currentUserShareDto.idUser,
+        planningId: this.currentPlanning?.idPlanning!,
+        isReadOnly: currentUserShareDto.readOnly,
+      }
+      this.planningService.deleteShare(sharedto).subscribe({
+        next: () => {
+          this.toastr.success("You removed yourself from the planning ID " + sharedto.planningId);
+          this.currentUser!.sharedPlanningId = this.currentUser?.sharedPlanningId?.filter(idShare => idShare != this.currentPlanning?.idPlanning!);
+          this.planningService.getOwnerPlanning().subscribe();
+        }
+      })
+    }
   }
 
 }
