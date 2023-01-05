@@ -74,14 +74,13 @@ export class MeteoService {
     this.http.get<any>("https://api.openweathermap.org/data/2.5/forecast", {params: params}).subscribe({
       next: (data) => {
         console.log(data)
-        if (data.cod != "404"){
-          if (data.list[0].rain) {
-            console.log(Object.values(data.list[0].rain)[0]+", "+typeof Object.values(data.list[0].rain)[0]);
-            this.precipication$.next(Object.values(data.list[0].rain)[0])
-          }
-          this.tempMeteoData$.next(data)
-        }
+        this.tempMeteoData$.next(data)
+        },
+      error: err => {
+        console.log("err : " + err)
+        this.tempMeteoData$.next(err)
       }
-    })
+      }
+    )
   }
 }

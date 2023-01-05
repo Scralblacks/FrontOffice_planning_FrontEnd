@@ -4,6 +4,8 @@ import {UserService} from "../../services/user/user.service";
 import {AddressDTO} from "../../models/addressDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject, Observable} from "rxjs";
+import {flush} from "@angular/core/testing";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-meteo',
@@ -27,7 +29,7 @@ export class MeteoComponent implements OnInit {
     zipCode: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(5)])
   })
 
-  constructor(private meteoService: MeteoService, private userService: UserService) {
+  constructor(private meteoService: MeteoService, private userService: UserService, private toastr: ToastrService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -37,7 +39,7 @@ export class MeteoComponent implements OnInit {
     this.tomorrow = this.today.setDate(this.today.getDate() + 1)
     this.afterTomorrow = this.today.setDate(this.today.getDate() + 1)
     this.zipNotFound$.next(false)
-    // if (now >= this.nextTimeTS) {
+    if (now >= this.nextTimeTS) {
       this.user$.subscribe({
         next: (user) => {
           if (user && user.addressDTO) {
@@ -54,12 +56,17 @@ export class MeteoComponent implements OnInit {
           console.log(data.list[1].dt)
         }
       })
-    // }
+    }
     this.tempMeteoData$.subscribe({
       next: data => {
         console.log(data)
-        if (data.cod != null || data.cod == '404') {
-          this.zipNotFound$.next(true)
+        if (data){
+          if (data.cod == null || data.cod == '404') {
+            this.toastr.error("Invalid zipcode")
+            this.isTempMeteo = this.meteoService.notTempMeteo
+          } else {
+            this.isTempMeteo = this.meteoService.isTempMeteo
+          }
         }
       }
     })
@@ -71,7 +78,7 @@ export class MeteoComponent implements OnInit {
     if (zipcode){
       this.tempZipcode = zipcode
       this.meteoService.getTempWeather(zipcode);
-      this.isTempMeteo = this.meteoService.isTempMeteo;
+      // this.isTempMeteo = this.meteoService.isTempMeteo;
     }
   }
 
