@@ -25,13 +25,15 @@ export class CalendarCreatorService {
     let firstday = this.createDay(1, monthIndex, year);
 
     //create empty days
-    for (let i = 1; i < firstday.weekDayNumber; i++) {
-      days.push({
-        weekDayNumber: i,
-        monthIndex: monthIndex,
-        year: year,
-      } as Day);
-    }
+    for (let i = 0; i < firstday.weekDayNumber; i++) {
+
+        days.push({
+          weekDayNumber: i,
+          monthIndex: monthIndex,
+          year: year,
+        } as Day);
+      }
+
     days.push(firstday);
     //
 
@@ -45,6 +47,8 @@ export class CalendarCreatorService {
 
   public getMonthName(monthIndex: number): string {
     switch (monthIndex) {
+      case 0 :
+        return "Janvier"
       case 1:
         return "Février";
       case 2:
@@ -96,14 +100,27 @@ export class CalendarCreatorService {
   }
 
   private createDay(dayNumber: number, monthIndex: number, year: number) {
-    let day: Day = {
-      monthIndex: monthIndex,
-      month: this.getMonthName(monthIndex),
-      number: dayNumber,
-      year: year,
-      weekDayNumber: new Date(year, monthIndex, dayNumber).getDay(),
-      weekDayName: this.getWeekDayName(new Date(year, monthIndex, dayNumber).getDay()),
-    };
-    return day;
+
+    if (new Date(year, monthIndex, dayNumber).getDay() == 0){
+      let day: Day = {
+        monthIndex: monthIndex,
+        month: this.getMonthName(monthIndex),
+        number: dayNumber,
+        year: year,
+        weekDayNumber: new Date(year, monthIndex, dayNumber).getDay() + 6,
+        weekDayName: this.getWeekDayName(new Date(year, monthIndex, dayNumber).getDay()),
+      };
+      return day;
+    } else {
+      let day: Day = {
+        monthIndex: monthIndex,
+        month: this.getMonthName(monthIndex),
+        number: dayNumber,
+        year: year,
+        weekDayNumber: new Date(year, monthIndex, dayNumber).getDay() - 1,
+        weekDayName: this.getWeekDayName(new Date(year, monthIndex, dayNumber).getDay()),
+      };
+      return day;
+    }
   }
 }

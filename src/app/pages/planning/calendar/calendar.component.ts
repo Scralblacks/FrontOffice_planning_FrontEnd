@@ -67,8 +67,8 @@ export class CalendarComponent implements OnInit {
     this.taskMapOfMonth.clear();
     this.monthNumber++;
 
-    if (this.monthNumber == 13) {
-      this.monthNumber = 1;
+    if (this.monthNumber == 12) {
+      this.monthNumber = 0;
       this.year++;
     }
 
@@ -82,8 +82,8 @@ export class CalendarComponent implements OnInit {
     this.taskMapOfMonth.clear();
     this.monthNumber--;
 
-    if (this.monthNumber < 1) {
-      this.monthNumber = 12;
+    if (this.monthNumber < 0) {
+      this.monthNumber = 11;
       this.year--;
     }
 
