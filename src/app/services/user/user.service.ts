@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
 import {sharedUsersDTO} from "../../models/sharedUsersDTO";
+import {UpdateUserDTO} from "../../models/updateUserDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,33 @@ export class UserService {
         return sharedUsersDto;
       })
     )
+  }
+
+  updateUser(updateUserDTO: UpdateUserDTO) {
+    return this.http.put<userDTO>(`${this.BASE_URL}`, updateUserDTO).pipe(
+      map((returnedUserDto) => {
+        console.log("returned user after update");
+        console.log(returnedUserDto);
+        this.connectedUser.next(returnedUserDto);
+      })
+    )
+  }
+
+  upload(file: File) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.http.post(`http://localhost:8080/api/images/upload`, formData, {
+      reportProgress: true,
+      responseType: 'blob'
+    }).pipe(map((fileUploaded) => {
+      return fileUploaded
+    }))
+  }
+
+  getFile(filename: string): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/images/${filename}`, {responseType: 'blob'});
   }
 
 
