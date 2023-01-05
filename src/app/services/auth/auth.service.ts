@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, map} from "rxjs";
 import {AuthStorageService} from "../auth-storage/auth-storage.service";
 import {SignupRequest} from "../../models/signupRequest";
 import {SigninRequest} from "../../models/signinRequest";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  constructor(private http: HttpClient, private authStorage: AuthStorageService) {
+  constructor(private http: HttpClient, private authStorage: AuthStorageService, private router: Router) {
   }
 
   login(signinRequest: SigninRequest) {
@@ -47,6 +48,12 @@ export class AuthService {
           throw new Error(`error signup for ${signupRequest.email}`)
         })
       );
+  }
+
+  logout(){
+    this.loggedIn.next(false);
+    this.authStorage.clearSession();
+    this.router.navigate(["/login"])
   }
 
 
