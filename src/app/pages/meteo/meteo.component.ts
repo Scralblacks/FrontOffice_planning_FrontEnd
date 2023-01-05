@@ -22,7 +22,7 @@ export class MeteoComponent implements OnInit {
   tempMeteoData$ = this.meteoService.tempMeteoData
   isTempMeteo! : Observable<boolean | null>
   zipNotFound$ = new BehaviorSubject<boolean>(false)
-  tempZipcode! : string
+  tempZipcode$ = this.meteoService.zipcode
   user$ = this.userService.user
   address!: AddressDTO
   formChangeTown = new FormGroup({
@@ -76,7 +76,6 @@ export class MeteoComponent implements OnInit {
     const zipcode = this.formChangeTown.value.zipCode
 
     if (zipcode){
-      this.tempZipcode = zipcode
       this.meteoService.getTempWeather(zipcode);
       // this.isTempMeteo = this.meteoService.isTempMeteo;
     }

@@ -15,7 +15,7 @@ export class MeteoService {
   meteoData$ = new BehaviorSubject<any>(null)
   tempMeteoData$ = new BehaviorSubject<any>(null)
   isTempMeteo$ = new BehaviorSubject<boolean | null>(null);
-  precipication$ = new BehaviorSubject<unknown | number | null>(null)
+  zipcode$ = new BehaviorSubject<string | null>(null)
 
   get isTempMeteo(){
     this.isTempMeteo$.next(true)
@@ -28,7 +28,7 @@ export class MeteoService {
   }
 
   get meteoData(){return this.meteoData$.asObservable()}
-  get precipitation() {return this.precipication$.asObservable()}
+  get zipcode() {return this.zipcode$.asObservable()}
   get tempMeteoData(){return this.tempMeteoData$.asObservable()}
 
   /**
@@ -75,6 +75,7 @@ export class MeteoService {
       next: (data) => {
         console.log(data)
         this.tempMeteoData$.next(data)
+        this.zipcode$.next(params.zip.substring(0,5))
         },
       error: err => {
         console.log("err : " + err)

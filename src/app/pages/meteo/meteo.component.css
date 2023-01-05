@@ -1,10 +1,12 @@
+.meteo-main{
+  color: #ffffff;
+  overflow: hidden;
+}
+
 .mobile_meteo{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
-
-header{
   color: #ffffff;
 }
 
@@ -13,7 +15,6 @@ input{
   bottom: 0.66em;
   padding: 0.5em;
   width: 10em;
-  border: 1px solid var(--secondary-bg-color);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);
   background: linear-gradient(180deg, var(--main-bg-color) 0%, #686868 100%);
   border-radius: 12px;
@@ -25,14 +26,11 @@ input{
   flex-direction: row;
 }
 
-.meteo-main{
-  color: #ffffff;
-}
-
 .main-data{
   display: flex;
   flex-direction: row;
-  width: 95%;
+  justify-content: space-around;
+  width: 99%;
   margin-inside: 0.5em;
   margin: 4vh auto;
 }
@@ -41,14 +39,16 @@ input{
   margin-inside: 1em;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+
   font-size: 1em;
   text-align: center;
 }
 
 .current-temperature{
-  margin-bottom: 2em;
-  font-size: 1.4em;
+  margin-bottom: 1em;
+  font-size: 1.2em;
   font-weight: bolder;
 }
 
@@ -62,8 +62,8 @@ input{
   display: flex;
   flex-direction: row;
   width: 95%;
-  margin: 4vh auto;
-  border: 1px solid var(--secondary-bg-color);
+  height: 95%;
+  margin: 2vh auto;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);
   background: linear-gradient(180deg, var(--main-bg-color) 0%, #686868 100%);
   border-radius: 12px;
@@ -82,7 +82,6 @@ input{
 table{
   width: 95%;
   margin: auto;
-  border: 1px solid var(--secondary-bg-color);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);
   background: linear-gradient(180deg, var(--main-bg-color) 0%, #686868 100%);
   border-radius: 12px;
@@ -95,12 +94,12 @@ tr{
 }
 
 .picture-main{
-  width: 10rem;
+  max-width: 7rem;
 }
 
 .picture-secondary{
-  max-width: 3rem;
-  height: 3rem;
+  max-width: 2rem;
+  max-height: 2rem;
 }
 
 .reset_button{
@@ -109,4 +108,87 @@ tr{
   margin-left: 0.33em;
 }
 
+.scrollable-data{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 250px;
+}
 
+@media screen and (min-height: 620px) {
+
+  .current-temperature{
+    margin-bottom: 1.5em;
+    font-size: 1.4em;
+    font-weight: bolder;
+  }
+
+  .scrollable-data{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 300px;
+  }
+
+  .picture-main{
+    max-width: 8rem;
+  }
+
+  .picture-secondary{
+    max-width: 3rem;
+    max-height: 3rem;
+  }
+
+}
+
+@media screen and (min-height: 700px) {
+
+  .current-temperature{
+    margin-bottom: 2em;
+    font-size: 1.4em;
+    font-weight: bolder;
+  }
+
+  .scrollable-data{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 400px;
+  }
+
+  .picture-main{
+    width: 10rem;
+  }
+
+  .picture-secondary{
+    max-width: 3rem;
+    height: 3rem;
+  }
+
+}
+
+@media screen and (min-height: 820px) {
+
+  .current-temperature{
+    margin-bottom: 2em;
+    font-size: 1.4em;
+    font-weight: bolder;
+  }
+
+  .scrollable-data{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+  }
+
+  .picture-main{
+    width: 10rem;
+  }
+
+  .picture-secondary{
+    max-width: 3rem;
+    height: 3rem;
+  }
+
+}
