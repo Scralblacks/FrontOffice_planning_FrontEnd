@@ -26,6 +26,7 @@ import {ModalComponent} from './layout/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import { ShareManagerComponent } from './pages/planning/share-manager/share-manager.component';
+import { MeteoComponent } from './pages/meteo/meteo.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { ShareManagerComponent } from './pages/planning/share-manager/share-mana
     TaskManagerComponent,
     ProfileComponent,
     ModalComponent,
-    ShareManagerComponent
+    ShareManagerComponent,
+    TaskManagerComponent,
+    MeteoComponent,
   ],
     imports: [
         BrowserModule,
