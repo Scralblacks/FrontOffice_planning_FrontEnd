@@ -51,7 +51,7 @@
         <span class="current-temperature">{{(meteoData$ | async).list[0].main.temp}}°C</span>
 
         <div *ngIf="(meteoData$ | async).list[0].rain != undefined; else noRain">
-          <span>Precipitation : {{(tempMeteoData$ | async).list[0].rain['3h']}} mm</span>
+          <span>Precipitation : {{(meteoData$ | async).list[0].rain['3h']}} mm</span>
         </div>
         <ng-template #noRain>
           <span>Precipitation : 0 mm</span>

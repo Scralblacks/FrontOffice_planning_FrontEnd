@@ -17,7 +17,6 @@ export class MeteoComponent implements OnInit {
   afterTomorrow!: number;
   today!: Date
   meteoData$ = this.meteoService.meteoData
-  precipitation$ = this.meteoService.precipitation
   tempMeteoData$ = this.meteoService.tempMeteoData
   isTempMeteo! : Observable<boolean | null>
   zipNotFound$ = new BehaviorSubject<boolean>(false)
@@ -78,6 +77,5 @@ export class MeteoComponent implements OnInit {
 
   onClickResetTown(){
     this.isTempMeteo = this.meteoService.notTempMeteo;
-    location.reload()
   }
 }
