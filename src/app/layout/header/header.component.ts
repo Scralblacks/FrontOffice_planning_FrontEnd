@@ -1,5 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MeteoService} from "../../services/meteo/meteo.service";
+import {Observable} from "rxjs";
+import {userDTO} from "../../models/userDTO";
+import {HttpClient} from "@angular/common/http";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-header',
@@ -16,7 +20,6 @@ export class HeaderComponent implements OnInit {
   user$: Observable<userDTO | null> = this.userService.user
 
   meteoData$ = this.meteoService.meteoData
-
 
   ngOnInit() {
 

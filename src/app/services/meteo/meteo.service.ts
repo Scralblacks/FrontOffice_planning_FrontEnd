@@ -61,12 +61,6 @@ export class MeteoService {
         }
       }
     })
-
-    // fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},FR&appid=abef135b647329e43c861ceaa35aaed9&units=metric`)
-    //   .then(response => response.json())
-    //   .then((data) => {
-    //     this.meteoData$.next(data)
-    //   })
   }
 
   getTempWeather(zipcode: string){
@@ -76,13 +70,6 @@ export class MeteoService {
       zip: zipcode + ",FR",
       units: "metric"
     }
-
-    // fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},FR&appid=abef135b647329e43c861ceaa35aaed9&units=metric`)
-    //   .then(response => response.json())
-    //   .then((data) => {
-    //     console.log(data)
-    //     this.tempMeteoData$.next(data)
-    //   })
 
     this.http.get<any>("https://api.openweathermap.org/data/2.5/forecast", {params: params}).subscribe({
       next: (data) => {

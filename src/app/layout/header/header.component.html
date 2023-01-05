@@ -5,7 +5,6 @@
   <div>
     <span>{{(meteoData$ | async).list[0].main.temp}}°C</span>
     <ng-container [ngSwitch]="(meteoData$ | async).list[0].weather[0].icon">
-<!--    <ng-container [ngSwitch]="'50d'">-->
 
       <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
       <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
@@ -23,9 +22,8 @@
       <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
       <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
       <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
-<!--      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>-->
-<!--      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>-->
-      <!-- TODO : ADD image for fog (50d & 50n) -->
+      <img *ngSwitchCase="'50d'" src="/assets/weather/Fog.png" alt="fog"/>
+      <img *ngSwitchCase="'50n'" src="/assets/weather/Fog.png" alt="fog"/>
 
     </ng-container>
 
