@@ -4,6 +4,8 @@ import {UserService} from "../../services/user/user.service";
 import {Observable} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UpdateUserDTO} from "../../models/updateUserDTO";
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +18,11 @@ export class ProfileComponent implements OnInit {
   isVisible: boolean = false;
   user$: Observable<userDTO | null> = this.userService.user;
   currentUser!: userDTO | null;
+  currentFile?: File;
+  imageURL!:SafeUrl;
 
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
@@ -27,7 +31,6 @@ export class ProfileComponent implements OnInit {
       password: new FormControl("", [Validators.min(6)]),
       city: new FormControl("", [Validators.required]),
       zipcode: new FormControl("", [Validators.required, Validators.pattern("^[0-9]*$")]),
-      photo: new FormControl("")
     })
 
     this.user$.subscribe({
@@ -39,20 +42,45 @@ export class ProfileComponent implements OnInit {
             username: this.currentUser?.username,
             city: this.currentUser?.addressDTO?.city,
             zipcode: this.currentUser?.addressDTO?.postalCode,
-            photo: this.currentUser?.photo
           }
         )
-
+        if (this.currentUser?.photo) {
+          this.userService.getFile(this.currentUser?.photo).subscribe({
+            next: (blobImg: Blob) => {
+              this.imageURL =  this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+            }
+          })
+        }
       },
     });
 
   }
 
+  selectFile(event: any) {
+    this.currentFile = event.target.files[0];
+    this.upload();
+  }
+
+  upload(): void {
+    if (this.currentFile) {
+      this.userService.upload(this.currentFile).subscribe(
+        (blobImg) => {
+            this.imageURL =  this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+        },
+        (err: any) => {
+          console.log(err);
+          this.currentFile = undefined;
+        });
+
+
+    }
+  }
+
+
   submitUpdateProfile() {
     if (this.formUser.valid) {
       let updateUserDto: UpdateUserDTO = {
         idUser: this.currentUser?.idUser!,
-        photo: this.formUser.value.photo,
         email: this.currentUser?.email!,
         username: this.formUser.value.username,
         city: this.formUser.value.city,

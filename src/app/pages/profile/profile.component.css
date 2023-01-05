@@ -13,5 +13,66 @@ main .profile {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 4em 1em 1em 1em
+  margin: 5em 1em 1em 1em
 }
+
+.custom__form input {
+  height: 0;
+}
+
+.custom__image-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.custom__image-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+  background-color: var(--secondary-bg-color);
+}
+
+.custom__image-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.upload {
+  width: 112px;
+  position: relative;
+  margin: auto;
+}
+
+.upload img {
+  border-radius: var(--sm-radius);
+}
+
+.upload .round input[type = "file"] {
+  position: absolute;
+  transform: scale(6);
+  opacity: 0;
+  top:25%
+}
+
+.upload .round {
+  position: absolute;
+  bottom: 0;
+  width: 112px;
+  height: 112px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+

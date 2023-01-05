@@ -1,12 +1,33 @@
 <main>
   <div class="profile">
-    <form [formGroup]="formUser" (ngSubmit)="submitUpdateProfile()" id="inputGroup" style="width: 100%;">
-      <div style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));">
-        <img style="margin-top:-4em; border-radius: 8px" width="112" height="112" formControlName="photo"
-             [src]="currentUser?.photo != null ? currentUser?.photo: '/assets/profilePicture/neutral_avatar.png'">
+    <div id="inputGroup" style="width: 100%;">
+      <!--      <div-->
+      <!--        style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-4em; border-radius: 8px"-->
+      <!--        class="profile-pic-div">-->
+      <!--                <img width="112" height="112"-->
+      <!--                     [src]="currentUser?.photo != null ? currentUser?.photo: '/assets/profilePicture/neutral_avatar.png'"/>-->
+      <!--                <label id="uploadBtn" for="file">Choose Photo</label>-->
+      <!--                <input type="file" id="file" accept="image/jpeg" style="display: none"/>-->
+      <!--        -->
+
+      <!--      </div>-->
+
+      <div class="upload"
+           style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-4em; border-radius: 8px">
+        <img
+          [src]="this.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'"
+          width="112"
+          height="112" alt="">
+        <!--        <img-->
+        <!--          [src]="this.currentUser?.photo ? this.currentUser?.photo : '/assets/profilePicture/neutral_avatar.png'"-->
+        <!--          width="112"-->
+        <!--          height="112" alt="">-->
+        <div class="round">
+          <input (change)="selectFile($event)" type="file">
+        </div>
       </div>
 
-      <div style="padding:0.5em  2.5em ;">
+      <form [formGroup]="formUser" (ngSubmit)="submitUpdateProfile()" style="padding:0.5em  2.5em ;">
         <app-input formControlName="username" id="input-username" label="Username" type="text" name="username">
         </app-input>
         <app-input formControlName="password" id="input-password" label="Password" type="password" name="password">
@@ -15,11 +36,11 @@
         </app-input>
         <app-input formControlName="zipcode" id="input-zipcode" label="Zip Code" type="text" name="zipcode">
         </app-input>
-      </div>
+      </form>
       <div>
         <app-submit-button text="Update"></app-submit-button>
       </div>
-    </form>
+    </div>
   </div>
 
 </main>

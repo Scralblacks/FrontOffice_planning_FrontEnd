@@ -3,7 +3,6 @@ export interface UpdateUserDTO {
   username: string;
   password?: string;
   email: string,
-  photo?: string;
   city: string;
   postalCode: string;
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
@@ -65,6 +65,23 @@ export class UserService {
         this.connectedUser.next(returnedUserDto);
       })
     )
+  }
+
+  upload(file: File) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.http.post(`http://localhost:8080/api/images/upload`, formData, {
+      reportProgress: true,
+      responseType: 'blob'
+    }).pipe(map((fileUploaded) => {
+      return fileUploaded
+    }))
+  }
+
+  getFile(filename: string): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/images/${filename}`, {responseType: 'blob'});
   }
 
 
