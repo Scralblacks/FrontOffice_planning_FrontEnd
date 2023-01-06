@@ -3,7 +3,7 @@
     <div style="display: flex;">
       <app-input formControlName="taskName" id="input-taskName" label="Task name" type="text"
                  name="taskName"></app-input>
-      <div *ngIf="task" (click)="deleteTask()" class="taskManager__deleteBtn">
+      <div *ngIf="task && !(planning$ | async)?.readOnly" (click)="deleteTask()" class="taskManager__deleteBtn">
         <i class="fa-solid fa-trash-can fa-xl"></i>
       </div>
     </div>
@@ -35,7 +35,8 @@
         <i class="fa-solid fa-chevron-left"></i>
         <span>Retour</span>
       </div>
-      <app-submit-button [styles]="saveBtnStyle" [text]="this.task ? 'Update': 'Save'"></app-submit-button>
+      <app-submit-button *ngIf="!(planning$ | async)?.readOnly" [styles]="saveBtnStyle"
+                         [text]="this.task ? 'Update': 'Save'"></app-submit-button>
     </div>
   </form>
 </div>

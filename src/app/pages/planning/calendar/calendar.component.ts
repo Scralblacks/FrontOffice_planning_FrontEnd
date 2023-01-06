@@ -13,8 +13,6 @@ import {PlanningService} from "../../../services/planning/planning.service";
 })
 export class CalendarComponent implements OnInit {
 
-  /*@Input()
-  taskList!: taskDTO[] | undefined;*/
   planning$: Observable<planningDTO | null> = this.planningService.planning;
 
   taskList: taskDTO[] = [];

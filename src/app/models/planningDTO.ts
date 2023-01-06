@@ -3,11 +3,11 @@ import {taskDTO} from "./taskDTO";
 import {shareDTO} from "./shareDTO";
 
 export interface planningDTO {
-  idPlanning:number;
-  usersDTO:userDTO;
-  namePlanning:string;
-  dateCreated:Date;
-  isReadOnly:boolean;
+  idPlanning: number;
+  usersDTO: userDTO;
+  namePlanning: string;
+  dateCreated: Date;
+  readOnly: boolean;
   taskList: taskDTO[];
   shareList: shareDTO[];
 }

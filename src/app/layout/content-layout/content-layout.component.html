@@ -1,29 +1,35 @@
 <div style="height: 100%; display: flex; flex-direction: column; max-height: 100%">
   <app-header (onTriggerSidenav)="triggerSidenav()"></app-header>
   <aside class="sidebar" #sidebar>
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-evenly">
+        <h3>Menu</h3>
+        <div (click)="triggerSidenav()">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
 
-    <div (click)="triggerSidenav()">
-      <i class="fa-solid fa-xmark"></i>
+
+      </div>
+
+      <nav class="menu">
+        <div>
+          <div class="menu-item">
+            <a routerLink="planning" (click)="triggerSidenav()">Planning</a>
+          </div>
+          <div class="menu-item">
+            <a routerLink="profile" (click)="triggerSidenav()">Profile</a>
+          </div>
+          <div class="menu-item">
+            <a routerLink="meteo" (click)="triggerSidenav()">Meteo</a>
+          </div>
+        </div>
+        <div class="menu-item">
+          <a (click)="onLogout()">Logout</a>
+        </div>
+      </nav>
+
+
     </div>
-
-    <h3>Menu</h3>
-
-    <nav class="menu">
-      <div class="menu-item">
-        <a routerLink="planning" (click)="triggerSidenav()">Planning</a>
-      </div>
-      <div class="menu-item">
-        <a routerLink="profile" (click)="triggerSidenav()">Profile</a>
-      </div>
-      <div class="menu-item">
-        <a routerLink="meteo" (click)="triggerSidenav()">Meteo</a>
-      </div>
-      <div class="menu-item">
-        <a routerLink="profile" (click)="onLogout()">Logout</a>
-      </div>
-    </nav>
-
-
   </aside>
   <router-outlet></router-outlet>
 </div>

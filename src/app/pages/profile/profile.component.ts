@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   currentFile?: File;
   imageURL!:SafeUrl;
 
+  updateBtnStyle = {width: '50%', marginTop: '1em'}
+
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer) {
   }

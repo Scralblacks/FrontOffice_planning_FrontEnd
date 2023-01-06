@@ -56,7 +56,7 @@
       </div>
     </div>
     <ng-template #noShare>
-      <div>
+      <div class="planning__noShare">
         No Share...
       </div>
     </ng-template>
@@ -81,10 +81,13 @@
   <ng-template #calendar>
     <div *ngIf="!(isManagingTask$|async); else task" class="planning__calendar">
       <app-calendar></app-calendar>
-      <app-task-list></app-task-list>
+      <app-task-list [planningId]="(planning$ | async)?.idPlanning!"
+                     [userId]="(user$ | async)?.idUser!"
+                     [readonly]="(planning$|async)?.readOnly!"></app-task-list>
     </div>
     <ng-template #task>
-      <app-task-manager></app-task-manager>
+      <app-task-manager [planningId]="(planning$ | async)?.idPlanning!"
+                        [userId]="(user$ | async)?.idUser!"></app-task-manager>
     </ng-template>
 
   </ng-template>

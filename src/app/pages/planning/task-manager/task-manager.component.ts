@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TaskService} from "../../../services/task/task.service";
 import {Observable} from "rxjs";
 import {taskDTO} from "../../../models/taskDTO";
@@ -24,11 +24,19 @@ import {DatePipe} from '@angular/common';
 })
 export class TaskManagerComponent implements OnInit {
 
+  @Input()
+  planningId: number = 0;
+
+  @Input()
+  userId: number = 0;
+
+
   managedTask$: Observable<taskDTO | null> = this.taskService.managedTask;
   planning$: Observable<planningDTO | null> = this.planningService.planning;
+  isOwner$: Observable<boolean> = this.planningService.owner;
 
   task: taskDTO | null = null;
-  planningId: number = 0;
+  isOwner: boolean = false;
 
   saveBtnStyle = {background: 'var(--fourth-bg-color)'};
 
@@ -83,9 +91,6 @@ export class TaskManagerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('coucou');
-    console.log(this.task);
-
     this.formTask = this.formBuilder.group({
       taskName: new FormControl("", [Validators.required]),
       taskDateStart: new FormControl(new Date(), [Validators.required]),
@@ -113,13 +118,19 @@ export class TaskManagerComponent implements OnInit {
       }
     });
 
-    this.planning$.subscribe({
+    // this.planning$.subscribe({
+    //   next: (val) => {
+    //     if (val) {
+    //       this.planningId = val.idPlanning;
+    //     }
+    //   }
+    // });
+
+    this.isOwner$.subscribe({
       next: (val) => {
-        if (val) {
-          this.planningId = val.idPlanning;
-        }
+        this.isOwner = val;
       }
-    })
+    });
   }
 
   submitTask() {
@@ -146,7 +157,7 @@ export class TaskManagerComponent implements OnInit {
       }
 
       if (this.task == null) {
-        this.taskService.addTask(newTask).subscribe({
+        this.taskService.addTask(newTask, this.isOwner).subscribe({
           next: (taskDto) => {
             this.toastr.success(`New Task with ID ${taskDto.idTask} added to the Planning ID ${taskDto.idPlanning}`);
             this.planningService.addNewTaskLocally(taskDto);
@@ -155,7 +166,7 @@ export class TaskManagerComponent implements OnInit {
         })
       } else {
         newTask.idTask = this.task.idTask;
-        this.taskService.updateTask(newTask).subscribe({
+        this.taskService.updateTask(newTask, this.isOwner).subscribe({
           next: (taskDto) => {
             this.toastr.success(`Updated Task with ID ${taskDto.idTask} modified on the Planning ID ${taskDto.idPlanning}`);
             this.planningService.updateTaskLocally(taskDto);
@@ -176,11 +187,19 @@ export class TaskManagerComponent implements OnInit {
       control.markAsPristine();
       control.markAsUntouched();
     });
-    this.taskService.deleteTask(this.task?.idTask!).subscribe({
-      next: () => {
-        this.planningService.deleteTaskLocally(this.task?.idTask!);
-      }
-    })
+    if (this.isOwner) {
+      this.taskService.deleteTask(this.task?.idTask!).subscribe({
+        next: () => {
+          this.planningService.deleteTaskLocally(this.task?.idTask!);
+        }
+      })
+    } else {
+      this.taskService.deleteTaskShared(this.task?.idTask!, this.userId, this.planningId).subscribe({
+        next: () => {
+          this.planningService.deleteTaskLocally(this.task?.idTask!);
+        }
+      })
+    }
 
   }
 

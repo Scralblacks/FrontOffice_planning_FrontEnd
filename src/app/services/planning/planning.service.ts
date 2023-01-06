@@ -21,6 +21,7 @@ export class PlanningService {
 
   changeDateSelected = new BehaviorSubject<any>(null);
   private currentPlanning = new BehaviorSubject<planningDTO | null>(null);
+  private isOwner = new BehaviorSubject<boolean>(true);
 
   // private currentTasks = new BehaviorSubject<taskDTO[] | null>(null);
 
@@ -32,6 +33,10 @@ export class PlanningService {
     return this.changeDateSelected.asObservable();
   }
 
+  get owner() {
+    return this.isOwner.asObservable();
+  }
+
   constructor(private http: HttpClient) {
   }
 
@@ -40,7 +45,9 @@ export class PlanningService {
     return this.http.get<planningDTO>(this.BASE_URL).pipe(
       map((planning: planningDTO) => {
         this.planningStorage = planning;
+        console.log(this.planningStorage);
         this.currentPlanning.next(this.planningStorage);
+        this.isOwner.next(true);
         return planning;
       }),
       catchError((err) => {
@@ -55,6 +62,7 @@ export class PlanningService {
       map((planning: planningDTO) => {
         this.planningStorage = planning;
         this.currentPlanning.next(this.planningStorage);
+        this.isOwner.next(false);
         return planning;
       }),
       catchError((err) => {
@@ -76,7 +84,7 @@ export class PlanningService {
   }
 
   deleteTaskLocally(id: number) {
-    this.planningStorage.taskList.filter(task => task.idTask != id);
+    this.planningStorage.taskList = this.planningStorage.taskList.filter(task => task.idTask != id);
     this.currentPlanning.next(this.planningStorage)
   }
 
