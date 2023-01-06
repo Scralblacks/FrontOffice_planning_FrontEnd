@@ -45,18 +45,9 @@ export class TaskManagerComponent implements OnInit {
   checkDates: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     const startDate = group.get("taskDateStart");
     const endDate = group.get("taskDateEnd");
-    const startTime = group.get("taskTimeStart");
-    const endTime = group.get("taskTimeEnd");
 
     const dateStart = new Date(startDate?.value.toString());
-    const [hStart, mStart] = startTime?.value.toString().split(":");
-    dateStart.setHours(hStart);
-    dateStart.setMinutes(mStart)
-
     const dateEnd = new Date(endDate?.value.toString());
-    const [hEnd, mEnd] = endTime?.value.toString().split(":");
-    dateEnd.setHours(hEnd);
-    dateEnd.setMinutes(mEnd)
 
     return dateEnd >= dateStart ? null : {incorrectDates: true}
   }
@@ -64,18 +55,9 @@ export class TaskManagerComponent implements OnInit {
   checkDifferences: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     const startDate = group.get("taskDateStart");
     const endDate = group.get("taskDateEnd");
-    const startTime = group.get("taskTimeStart");
-    const endTime = group.get("taskTimeEnd");
 
     const dateStart = new Date(startDate?.value.toString());
-    const [hStart, mStart] = startTime?.value.toString().split(":");
-    dateStart.setHours(hStart);
-    dateStart.setMinutes(mStart)
-
     const dateEnd = new Date(endDate?.value.toString());
-    const [hEnd, mEnd] = endTime?.value.toString().split(":");
-    dateEnd.setHours(hEnd);
-    dateEnd.setMinutes(mEnd)
 
     const description = group.get("taskDescription")?.value;
     const name = group.get("taskName")?.value;
@@ -95,8 +77,6 @@ export class TaskManagerComponent implements OnInit {
       taskName: new FormControl("", [Validators.required]),
       taskDateStart: new FormControl(new Date(), [Validators.required]),
       taskDateEnd: new FormControl(new Date(), [Validators.required]),
-      taskTimeStart: new FormControl("00:00", [Validators.required]),
-      taskTimeEnd: new FormControl("23:59", [Validators.required]),
       taskDescription: new FormControl(""),
     }, {validators: this.checkDates})
 
