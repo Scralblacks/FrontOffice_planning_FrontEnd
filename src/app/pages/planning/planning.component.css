@@ -194,6 +194,12 @@ main .planning__social .planning__shareInput > span {
   background: none;
 }
 
+main .planning__social .planning__shareInput input::placeholder {
+  color: var(--normal-text-color);
+  font-size: 12px;
+  opacity: 1;
+}
+
 main i {
   background: none;
   color: var(--secondary-bg-color);
@@ -207,6 +213,13 @@ main .planning__social .planning__shareInput input {
   width: 150px;
   background: none;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  color: var(--normal-text-color);
+  font-size: 12px;
+  opacity: 1;
+}
+
+main .planning__social .planning__noShare {
+  color: var(--secondary-bg-color);
 }
 
 main .planning__calendar {

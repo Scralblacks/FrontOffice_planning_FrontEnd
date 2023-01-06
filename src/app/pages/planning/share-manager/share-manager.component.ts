@@ -26,7 +26,7 @@ export class ShareManagerComponent implements OnInit {
     this.localSharedUsers = this.data.localSharedUsers;
     this.localCurrentUser = this.data.localCurrentUser;
     this.localIdPlanning = this.data.localIdPlanning;
-    if(this.localIdPlanning != this.localCurrentUser?.planningId!) this.title = "Look who you’re sharing this schedule with"
+    if (this.localIdPlanning != this.localCurrentUser?.planningId!) this.title = "Look who you’re sharing this schedule with"
   }
 
   // When the user clicks the action button a.k.a. the logout button in the\
@@ -71,7 +71,7 @@ export class ShareManagerComponent implements OnInit {
     this.planningService.deleteShare(shareDto).subscribe({
       next: () => {
         this.toastr.success("User " + sharedUsersDTO.username + " can not access to your planning anymore...");
-        this.localSharedUsers.filter((sharedto) => sharedto.idUser != sharedUsersDTO.idUser);
+        this.localSharedUsers = this.localSharedUsers.filter((sharedto) => sharedto.idUser != sharedUsersDTO.idUser);
       }
     })
   }

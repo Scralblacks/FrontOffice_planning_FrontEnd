@@ -35,9 +35,6 @@ export class PlanningComponent implements OnInit {
 
   isPlanningLoading: boolean = true;
 
-  private _planningSubscription!: Subscription;
-  private _sharedUsersSubscription!: Subscription;
-
   constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog) {
   }
 
@@ -131,20 +128,6 @@ export class PlanningComponent implements OnInit {
 
 
     this.planningService.getSharedPlanning(getPlanningShare).subscribe();
-
-
-    /*  this.taskMapOfMonth.clear();
-      this.monthNumber--;
-
-      if (this.monthNumber < 1) {
-        this.monthNumber = 12;
-        this.year--;
-      }
-
-      this.setMonthDays(this.calendarCreator.getMonth(this.monthNumber, this.year));
-      this.selectedDay.setMonth(this.monthNumber);
-      this.selectedDay.setFullYear(this.year);
-      this.setTasksOfMonth();*/
   }
 
   submitNewShare() {
@@ -152,8 +135,6 @@ export class PlanningComponent implements OnInit {
       const newShareDto: setNewShareDTO = {
         email: this.formAddShare.value.emailShare,
         planningId: this.currentPlanning?.idPlanning!,
-        isReadOnly: true,
-
       }
       this.planningService.addNewShare(newShareDto).subscribe({
         next: (shareDto) => {

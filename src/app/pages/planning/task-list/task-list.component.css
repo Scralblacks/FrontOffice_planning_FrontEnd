@@ -17,6 +17,22 @@
   align-items: center;
 }
 
+.taskList .taskList__addButtonDisabled {
+  margin: 0.5em 1em;
+  height: 40px;
+  background: var(--secondary-bg-color);
+  border: 2px dashed var(--third-bg-color);
+  border-radius: var(--md-radius);
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskList .taskList__addButtonDisabled i {
+  color: var(--main-bg-color);
+}
+
 .taskList .taskList__addButton i {
   color: var(--main-bg-color);
 }

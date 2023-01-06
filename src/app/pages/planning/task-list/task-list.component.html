@@ -1,5 +1,5 @@
 <div class="taskList">
-  <div (click)="setManageTask(null)" class="taskList__addButton">
+  <div *ngIf="!readonly" (click)="setManageTask(null)" class="taskList__addButton">
     <i class="fa-regular fa-square-plus fa-2xl"></i>
   </div>
   <div *ngFor="let task of taskList; let i = index" class="taskList__tasks">
