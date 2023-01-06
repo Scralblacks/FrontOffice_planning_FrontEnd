@@ -27,11 +27,18 @@
         </div>
       </div>
 
-      <form [formGroup]="formUser" (ngSubmit)="submitUpdateProfile()" style="padding:0.5em  2.5em ;">
+      <form [formGroup]="formUser" (ngSubmit)="submitUpdateProfile()">
         <app-input formControlName="username" id="input-username" label="Username" type="text" name="username">
         </app-input>
-        <app-input formControlName="password" id="input-password" label="Password" type="password" name="password">
-        </app-input>
+        <div>
+          <app-input formControlName="password" id="input-password" label="Password"
+                     [type]="isVisible ? 'text' : 'password'" name="password">
+          </app-input>
+          <div (click)="switchPasswordVisibility()">
+            <i [ngClass]="isVisible ? 'fa-eye-slash': 'fa-eye'" class="fa-solid"></i>
+          </div>
+
+        </div>
         <app-input formControlName="city" id="input-city" label="City" type="text" name="city">
         </app-input>
         <app-input formControlName="zipcode" id="input-zipcode" label="Zip Code" type="text" name="zipcode">

@@ -58,6 +58,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  switchPasswordVisibility() {
+    this.isVisible = !this.isVisible;
+  }
+
   selectFile(event: any) {
     this.currentFile = event.target.files[0];
     this.upload();
@@ -101,7 +105,6 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
-
   }
 
 }
