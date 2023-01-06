@@ -10,7 +10,7 @@
     </thead>
     <tr *ngFor="let user of localSharedUsers; let i = index">
       <td><img height="32px" width="32px"
-               [src]="user.photo != null ? '/assets/profilePicture/'+user.photo : '/assets/profilePicture/neutral_avatar.png'"/>
+               [src]="localSharedPictures[i]"/>
       </td>
       <td>
         <div style="display: flex; flex-direction: column">
@@ -43,4 +43,4 @@
 <ng-template #emptyMessage>
   <p>You have no people shared anymore...</p>
 </ng-template>
-<button mat-dialog-close>Close</button>
+<button class="modal__closeBtn" mat-dialog-close>Close</button>

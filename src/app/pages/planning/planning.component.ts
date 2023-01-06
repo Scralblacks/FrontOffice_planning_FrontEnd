@@ -14,6 +14,7 @@ import {sharedUsersDTO} from "../../models/sharedUsersDTO";
 import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 import {ShareManagerComponent} from "./share-manager/share-manager.component";
 import {shareDTO} from "../../models/shareDTO";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-planning',
@@ -35,7 +36,10 @@ export class PlanningComponent implements OnInit {
 
   isPlanningLoading: boolean = true;
 
-  constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog) {
+  ownerPicture: SafeUrl = "";
+  sharedPictures: SafeUrl[] = [];
+
+  constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
@@ -48,6 +52,11 @@ export class PlanningComponent implements OnInit {
         this.currentUser = data;
         console.log("Current User :")
         console.log(this.currentUser);
+        if (this.currentUser?.photo == null || this.currentUser?.photo?.length == 0) {
+          this.ownerPicture = '/assets/profilePicture/neutral_avatar.png';
+        } else {
+          this.getProfilePicture(this.currentUser?.photo!, -1);
+        }
       },
     });
     this.usersShared$.subscribe({
@@ -56,8 +65,17 @@ export class PlanningComponent implements OnInit {
         this.currentSharedUsers = data;
         console.log(this.currentSharedUsers);
         this.isPlanningLoading = false;
+        if (this.currentSharedUsers != undefined && this.currentSharedUsers!.length > 0) {
+          for (let i = 0; i < Math.max(2, this.currentSharedUsers?.length!); i++) {
+            if (this.currentSharedUsers![i].photo == null || this.currentSharedUsers![i].photo.length == 0) {
+              this.sharedPictures.push('/assets/profilePicture/neutral_avatar.png');
+            } else {
+              this.getProfilePicture(this.currentSharedUsers![i].photo, i);
+            }
+          }
+        }
       }
-    })
+    });
     this.planning$.pipe(
       switchMap((planning, index) => {
         console.log("subscribing to new planning lol")
@@ -73,6 +91,26 @@ export class PlanningComponent implements OnInit {
         return new Observable();
       })
     ).subscribe();
+  }
+
+  getProfilePicture(filename: string, index: number) {
+    if (!filename) {
+      filename = this.currentUser?.photo!
+    }
+    console.log('LE FILENAME');
+    console.log(filename);
+    this.userService.getFile(filename).subscribe({
+      next: (blobImg: Blob) => {
+        console.log("Safe Url :")
+        console.log(blobImg);
+        const safeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+        if (index < 0) {
+          this.ownerPicture = safeUrl
+        } else {
+          this.sharedPictures.push(safeUrl);
+        }
+      }
+    })
   }
 
   onNextPlanning(): void {
@@ -153,9 +191,11 @@ export class PlanningComponent implements OnInit {
       data: {
         localSharedUsers: this.currentSharedUsers,
         localCurrentUser: this.currentUser,
-        localIdPlanning: this.currentPlanning?.idPlanning!
+        localIdPlanning: this.currentPlanning?.idPlanning!,
+        localSharedPictures: this.sharedPictures
       },
       width: "500px",
+      height: "500px",
       maxHeight: "500px",
     });
 

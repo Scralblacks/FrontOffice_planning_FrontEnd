@@ -34,23 +34,25 @@
   </div>
   <div class="planning__social">
     <div class="planning__peopleOwner">
+      <!--      <img height="40px" width="40px"-->
+      <!--           [src]="currentPlanning?.usersDTO?.photo != null ? getProfilePicture(currentPlanning?.usersDTO?.photo!): '/assets/profilePicture/neutral_avatar.png'"/>-->
       <img height="40px" width="40px"
-           [src]="currentPlanning?.usersDTO?.photo != null ? '/assets/profilePicture/'+currentPlanning?.usersDTO?.photo : '/assets/profilePicture/neutral_avatar.png'"/>
+           [src]="this.ownerPicture"/>
     </div>
     <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
          (click)="openListSharedDetailed()">
-      <div *ngIf="currentSharedUsers.length >= 1">
-        <img height="32px" width="32px" style="border: 2px solid red"
-             [src]="currentSharedUsers![0].photo != null ? '/assets/profilePicture/'+currentSharedUsers![0].photo : '/assets/profilePicture/neutral_avatar.png'"/>
-      </div>
-      <div *ngIf="currentSharedUsers.length >=2">
-        <img height="32px" width="32px" style="border: 2px solid yellow"
-             [src]="currentSharedUsers![1].photo != null ? '/assets/profilePicture/'+currentSharedUsers![1].photo : '/assets/profilePicture/neutral_avatar.png'"/>
-      </div>
-      <div *ngIf="currentSharedUsers.length >=3">
-        <img height="32px" width="32px" style="border: 2px solid white"
-             [src]="currentSharedUsers![2].photo != null ? '/assets/profilePicture/'+currentSharedUsers![2].photo : '/assets/profilePicture/neutral_avatar.png'"/>
-      </div>
+            <div *ngIf="currentSharedUsers.length >= 1">
+              <img height="32px" width="32px" style="border: 2px solid red"
+                   [src]="this.sharedPictures[0]"/>
+            </div>
+<!--            <div *ngIf="currentSharedUsers.length >=2">-->
+<!--              <img height="32px" width="32px" style="border: 2px solid yellow"-->
+<!--                   [src]="currentSharedUsers![1].photo != null ? getProfilePicture(currentSharedUsers![1].photo!) : '/assets/profilePicture/neutral_avatar.png'"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="currentSharedUsers.length >=3">-->
+<!--              <img height="32px" width="32px" style="border: 2px solid white"-->
+<!--                   [src]="currentSharedUsers![2].photo != null ? getProfilePicture(currentSharedUsers![2].photo!) : '/assets/profilePicture/neutral_avatar.png'"/>-->
+<!--            </div>-->
       <div *ngIf="currentSharedUsers.length >3">
         <span style="background: none;">+{{currentSharedUsers.length - 3}}</span>
       </div>

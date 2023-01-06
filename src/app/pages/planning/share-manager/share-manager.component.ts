@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PlanningService} from "../../../services/planning/planning.service";
 import {ToastrService} from "ngx-toastr";
 import {shareDTO} from "../../../models/shareDTO";
+import {SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-share-manager',
@@ -16,7 +17,9 @@ export class ShareManagerComponent implements OnInit {
   localSharedUsers: sharedUsersDTO[] = [];
   localCurrentUser!: userDTO | null;
   localIdPlanning!: number;
+  localSharedPictures! : SafeUrl[];
   title: string = "Manage your share users";
+
 
   constructor(public dialogRef: MatDialogRef<ShareManagerComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private planningService: PlanningService, private toastr: ToastrService) {
@@ -26,6 +29,7 @@ export class ShareManagerComponent implements OnInit {
     this.localSharedUsers = this.data.localSharedUsers;
     this.localCurrentUser = this.data.localCurrentUser;
     this.localIdPlanning = this.data.localIdPlanning;
+    this.localSharedPictures = this.data.localSharedPictures
     if (this.localIdPlanning != this.localCurrentUser?.planningId!) this.title = "Look who you’re sharing this schedule with"
   }
 

@@ -25,11 +25,21 @@
 }
 
 .modal__content {
+  max-height: 400px;
+  overflow-y: auto;
+  flex:1;
+  padding:0.5em 0;
 }
 
 .modal__table {
+  width: 100%;
   border-collapse: separate;
   border-spacing: 10px;
+
+}
+
+.modal__table tr > td > * {
+  margin: auto
 }
 
 .modal__table tr > td:nth-child(2) > div > span:nth-child(1) {
@@ -43,6 +53,11 @@
 ::ng-deep .mat-dialog-container {
   padding: 1em;
   border-radius: var(--lg-radius);
+  cursor: auto;
+}
+
+img {
+  border-radius: var(--rounded-radius);
 }
 
 .toggler-wrapper {
@@ -94,6 +109,7 @@
   left: 3px;
   top: 3px;
   background-color: #fff;
+  cursor: pointer;
 }
 
 
@@ -122,3 +138,12 @@
   color: var(--secondary-bg-color)
 }
 
+
+.modal__closeBtn {
+  width: 100%;
+  padding: 1em;
+  background-color: var(--main-bg-color);
+  border-radius: var(--sm-radius);
+  color: var(--secondary-bg-color);
+  cursor: pointer;
+}
