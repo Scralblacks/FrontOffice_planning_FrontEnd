@@ -45,14 +45,14 @@
               <img height="32px" width="32px" style="border: 2px solid red"
                    [src]="this.sharedPictures[0]"/>
             </div>
-<!--            <div *ngIf="currentSharedUsers.length >=2">-->
-<!--              <img height="32px" width="32px" style="border: 2px solid yellow"-->
-<!--                   [src]="currentSharedUsers![1].photo != null ? getProfilePicture(currentSharedUsers![1].photo!) : '/assets/profilePicture/neutral_avatar.png'"/>-->
-<!--            </div>-->
-<!--            <div *ngIf="currentSharedUsers.length >=3">-->
-<!--              <img height="32px" width="32px" style="border: 2px solid white"-->
-<!--                   [src]="currentSharedUsers![2].photo != null ? getProfilePicture(currentSharedUsers![2].photo!) : '/assets/profilePicture/neutral_avatar.png'"/>-->
-<!--            </div>-->
+            <div *ngIf="currentSharedUsers.length >=2">
+              <img height="32px" width="32px" style="border: 2px solid yellow"
+                   [src]="this.sharedPictures[1]"/>
+            </div>
+            <div *ngIf="currentSharedUsers.length >=3">
+              <img height="32px" width="32px" style="border: 2px solid white"
+                   [src]="this.sharedPictures[2]"/>
+            </div>
       <div *ngIf="currentSharedUsers.length >3">
         <span style="background: none;">+{{currentSharedUsers.length - 3}}</span>
       </div>

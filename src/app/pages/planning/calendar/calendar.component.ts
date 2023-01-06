@@ -145,6 +145,14 @@ export class CalendarComponent implements OnInit {
   }
 
   changeSelectedDay(day: Day) {
+
+    const selectedDayLocal = new Date(day.year, day.monthIndex, day.number);
+
+    if (selectedDayLocal.getDate() == this.currentDate.getDate() && selectedDayLocal.getMonth() == this.currentDate.getMonth() && selectedDayLocal.getFullYear() == this.currentDate.getFullYear()) {
+      this.selectedDay = this.currentDate;
+      return;
+    }
+
     this.selectedDay = new Date(day.year, day.monthIndex, day.number)
     this.selectedDay.setHours(1);
     console.log(this.selectedDay);

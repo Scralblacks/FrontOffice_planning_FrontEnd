@@ -10,6 +10,7 @@
   border-radius: 6px;
   color: var(--secondary-bg-color);
 }
+
 /*
 .dayBox:hover .dot {
   background-color: var(--secondary-bg-color);
@@ -41,15 +42,16 @@
 }
 
 .dayBox .currentDay {
-  background-color: var(--main-bg-color);
+  background-color: var(--main-bg-color) !important;
   border-radius: 6px;
   color: var(--secondary-bg-color);
 }
 
-.dayBox.selectedDay {
-  background-color: var(--secondary-bg-color);
+.dayBox.selectedDay > div:nth-child(1) {
+  background-color: var(--third-bg-color);
   border-radius: 6px;
-  border: 1px solid var(--main-bg-color);
+  color: var(--secondary-bg-color);
+  /*border: 1px solid var(--main-bg-color);*/
 }
 
 
