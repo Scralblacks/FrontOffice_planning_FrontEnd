@@ -107,10 +107,10 @@ export class TaskManagerComponent implements OnInit {
           this.formTask.addValidators(this.checkDifferences)
           this.formTask.setValue({
             taskName: this.task.nameTask,
-            taskDateStart: this.datePipe.transform(this.task.dateTaskStart, 'yyyy-MM-dd'), /* new Date(this.task.dateTaskStart).toLocaleDateString(),*/
-            taskDateEnd: this.datePipe.transform(this.task.dateTaskEnd, 'yyyy-MM-dd'),
-            taskTimeStart: new Date(this.task.dateTaskStart).getHours() + ":" + (new Date(this.task.dateTaskStart).getMinutes() < 10 ? '0' : '') + new Date(this.task.dateTaskStart).getMinutes(),
-            taskTimeEnd: new Date(this.task.dateTaskEnd).getHours() + ":" + (new Date(this.task.dateTaskEnd).getMinutes() < 10 ? '0' : '') + new Date(this.task.dateTaskEnd).getMinutes(),
+            taskDateStart: this.datePipe.transform(this.task.dateTaskStart, 'yyyy-MM-ddTHH:mm', '+0200'), /* new Date(this.task.dateTaskStart).toLocaleDateString(),*/
+            taskDateEnd: this.datePipe.transform(this.task.dateTaskEnd, 'yyyy-MM-ddTHH:mm', '+0200'),
+            taskTimeStart: this.datePipe.transform(this.task.dateTaskStart, 'HH:mm', '+0200'),
+            taskTimeEnd: this.datePipe.transform(this.task.dateTaskEnd, 'HH:mm', '+0200'),
             taskDescription: this.task.description
           })
 
@@ -137,16 +137,8 @@ export class TaskManagerComponent implements OnInit {
 
     if (this.formTask.valid) {
 
-      const dateStart = new Date(this.formTask.value.taskDateStart.toString());
-      const [hStart, mStart] = this.formTask.value.taskTimeStart.toString().split(":");
-      dateStart.setHours(hStart);
-      dateStart.setMinutes(mStart)
-
-      const dateEnd = new Date(this.formTask.value.taskDateEnd.toString());
-      const [hEnd, mEnd] = this.formTask.value.taskTimeEnd.toString().split(":");
-      dateEnd.setHours(hEnd);
-      dateEnd.setMinutes(mEnd)
-
+      const dateStart = new Date(this.formTask.value.taskDateStart);
+      const dateEnd = new Date(this.formTask.value.taskDateEnd);
 
       const newTask: taskDTO = {
         idPlanning: this.planningId,
