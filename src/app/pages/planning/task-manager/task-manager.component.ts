@@ -109,11 +109,8 @@ export class TaskManagerComponent implements OnInit {
             taskName: this.task.nameTask,
             taskDateStart: this.datePipe.transform(this.task.dateTaskStart, 'yyyy-MM-ddTHH:mm', '+0200'), /* new Date(this.task.dateTaskStart).toLocaleDateString(),*/
             taskDateEnd: this.datePipe.transform(this.task.dateTaskEnd, 'yyyy-MM-ddTHH:mm', '+0200'),
-            taskTimeStart: this.datePipe.transform(this.task.dateTaskStart, 'HH:mm', '+0200'),
-            taskTimeEnd: this.datePipe.transform(this.task.dateTaskEnd, 'HH:mm', '+0200'),
             taskDescription: this.task.description
           })
-
         }
       }
     });
