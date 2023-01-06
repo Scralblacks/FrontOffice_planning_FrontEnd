@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {SignupRequest} from "../../models/signupRequest";
 import {AuthService} from "../../services/auth/auth.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,8 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class RegisterComponent implements OnInit {
   formAddUser!: FormGroup;
+
+  loggedIn$: Observable<boolean> = this.authService.isLoggedIn;
 
   checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     let pass = group.get('password')!.value;
@@ -31,6 +34,15 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.loggedIn$.subscribe({
+      next: (isLoggedIn) => {
+        if (isLoggedIn) {
+          this.router.navigate(['/planning'])
+        }
+      }
+    })
+
     this.formAddUser = this.formBuilder.group({
       userEmail: new FormControl("", [Validators.required, Validators.email]),
       userName: new FormControl("", [Validators.required]),
