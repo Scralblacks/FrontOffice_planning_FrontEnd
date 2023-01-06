@@ -189,7 +189,6 @@ export class TaskManagerComponent implements OnInit {
         }
       })
     }
-
   }
 
   closeManager() {
