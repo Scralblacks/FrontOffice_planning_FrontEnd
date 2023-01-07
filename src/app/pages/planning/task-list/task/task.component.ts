@@ -19,7 +19,6 @@ export class TaskComponent implements OnInit {
   public isAllDay: boolean = false;
 
   public dateToDisplay: string = "All day"
-  isHourModif!: Boolean;
 
   constructor() {
   }
