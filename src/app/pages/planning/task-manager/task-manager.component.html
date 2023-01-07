@@ -11,8 +11,7 @@
       <div class="taskManager__start">
         <p>Select start date and time</p>
         <div class="taskManager__taskStart">
-          <input type="date" formControlName="taskDateStart" value="{{ task?.dateTaskStart | date:'dd-MM-yyyy' }}">
-          <input type="time" formControlName="taskTimeStart"/>
+          <input type="datetime-local" formControlName="taskDateStart">
         </div>
       </div>
       <div class="taskManager__arrowTransition">
@@ -21,8 +20,7 @@
       <div class="taskManager__start">
         <p>Select end date and time</p>
         <div class="taskManager__taskStart">
-          <input type="date" formControlName="taskDateEnd" value="{{ task?.dateTaskStart | date:'dd-MM-yyyy' }}">
-          <input type="time" formControlName="taskTimeEnd"/>
+          <input type="datetime-local" formControlName="taskDateEnd">
         </div>
       </div>
     </div>
