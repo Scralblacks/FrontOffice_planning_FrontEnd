@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {taskDTO} from "../../../../models/taskDTO";
+import {TaskService} from "../../../../services/task/task.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-task',
@@ -23,18 +25,22 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.dateSelected.setHours(0)
     let startOfThisDay: Date = new Date(this.dateSelected);
     this.dateSelected.setHours(23, 59, 59);
     let endOfThisDay: Date = new Date(this.dateSelected.getTime());
-    let taskStartPrint = (this.task.dateTaskStart.getHours() + 1)+ ":" +
+
+    let taskStartPrint = (this.task.dateTaskStart.getHours() + 1) + ":" +
       (this.task.dateTaskStart.getMinutes() < 10 ? "0" + this.task.dateTaskStart.getMinutes() : this.task.dateTaskStart.getMinutes())
+
     let taskEndPrint = (this.task.dateTaskEnd.getHours() + 1) + ":" +
       (this.task.dateTaskEnd.getMinutes() < 10 ? "0" + this.task.dateTaskEnd.getMinutes() : this.task.dateTaskEnd.getMinutes())
+
     if (this.task.dateTaskStart < startOfThisDay && this.task.dateTaskEnd > endOfThisDay) {
       this.isAllDay = true;
     } else if (this.task.dateTaskStart < startOfThisDay) {
       this.dateToDisplay = "00:00 - " + taskEndPrint;
-      // this.timeEnd = this.task.dateTaskEnd.getHours() + ":"
     } else if (this.task.dateTaskEnd > endOfThisDay) {
       this.dateToDisplay = taskStartPrint + " - 23:59"
     } else {
