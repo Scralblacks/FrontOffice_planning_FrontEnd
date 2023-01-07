@@ -15,6 +15,7 @@ import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 import {ShareManagerComponent} from "./share-manager/share-manager.component";
 import {shareDTO} from "../../models/shareDTO";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {ErrorResponse} from "../../models/errorResponse";
 
 @Component({
   selector: 'app-planning',
@@ -178,6 +179,10 @@ export class PlanningComponent implements OnInit {
         next: (shareDto) => {
           this.currentPlanning?.shareList.push(shareDto);
           this.formAddShare.reset();
+
+        },
+        error: (err: ErrorResponse) => {
+          this.toastr.error(err.message);
         }
       })
     } else {

@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, of, throwError} from "rxjs";
 import {planningDTO} from "../../models/planningDTO";
 import {taskDTO} from "../../models/taskDTO";
 import {shareDTO} from "../../models/shareDTO";
@@ -88,12 +88,15 @@ export class PlanningService {
     this.currentPlanning.next(this.planningStorage)
   }
 
-  addNewShare(newShareDto: setNewShareDTO) {
+  addNewShare(newShareDto: setNewShareDTO): Observable<any> {
     return this.http.post<shareDTO>(`${this.BASE_URL_SHARE}`, newShareDto).pipe(
       map((shareDto) => {
         this.planningStorage.shareList.push(shareDto);
         this.currentPlanning.next(this.planningStorage);
         return shareDto;
+      }),
+      catchError((err) => {
+        return throwError(err.error);
       })
     )
   }
