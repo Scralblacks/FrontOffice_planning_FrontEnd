@@ -49,7 +49,6 @@ import { DeleteUserComponent } from './pages/profile/delete-user/delete-user.com
     ShareManagerComponent,
     TaskManagerComponent,
     MeteoComponent,
-    DeleteUserComponent,
   ],
     imports: [
         BrowserModule,

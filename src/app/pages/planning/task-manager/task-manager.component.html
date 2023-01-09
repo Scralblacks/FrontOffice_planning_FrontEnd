@@ -1,4 +1,5 @@
 <div class="taskManager">
+  <h4>{{task == null ? "Create a new task" : "Update this task" }}</h4>
   <form autocomplete="off" class="taskManager__form" [formGroup]="formTask" (ngSubmit)="submitTask()">
     <div style="display: flex;">
       <app-input formControlName="taskName" id="input-taskName" label="Task name" type="text"

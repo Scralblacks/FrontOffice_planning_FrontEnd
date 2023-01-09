@@ -54,8 +54,12 @@ app-planning {
   overflow: auto;
 }
 
-app-profile {
+app-profile, app-meteo {
   height: 100%;
+}
+
+app-meteo {
+  overflow: scroll;
 }
 
 app-calendar {
@@ -105,5 +109,9 @@ input[type="time"]::-webkit-clear-button {
 
   app-task-list {
     flex: 1;
+  }
+
+  app-task-manager {
+    margin: 0 auto
   }
 }
