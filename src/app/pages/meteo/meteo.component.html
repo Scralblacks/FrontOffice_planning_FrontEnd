@@ -89,7 +89,7 @@
           </div>
           <div class="inner-secondary-element">
             <div class="meteo_h+3 inner-secondary-data">
-              <div>{{(meteoData$ | async).list[1].main.temp}}°C</div>
+              <div>{{(meteoData$ | async).list[1].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(meteoData$ | async).list[1].weather[0].icon">
 
@@ -127,7 +127,7 @@
             </div>
 
             <div class="meteo_h+6 inner-secondary-data">
-              <div>{{(meteoData$ | async).list[2].main.temp}}°C</div>
+              <div>{{(meteoData$ | async).list[2].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(meteoData$ | async).list[2].weather[0].icon">
 
@@ -165,7 +165,7 @@
             </div>
 
             <div class="meteo_h+9 inner-secondary-data">
-              <div>{{(meteoData$ | async).list[3].main.temp}}°C</div>
+              <div>{{(meteoData$ | async).list[3].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(meteoData$ | async).list[3].weather[0].icon">
 
@@ -205,7 +205,7 @@
             </div>
 
             <div class="meteo_h+12 inner-secondary-data">
-              <div>{{(meteoData$ | async).list[4].main.temp}}°C</div>
+              <div>{{(meteoData$ | async).list[4].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(meteoData$ | async).list[4].weather[0].icon">
 
@@ -298,8 +298,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[11].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[13].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[11].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[13].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'03:00'">
@@ -344,8 +344,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[10].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[12].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[10].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[12].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'06:00'">
@@ -387,8 +387,8 @@
 
                   </ng-container>
                 </td>
-                <td>{{(meteoData$ | async).list[9].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[11].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[9].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[11].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'09:00'">
@@ -432,8 +432,8 @@
                   </ng-container>
                 </td>
 
-                <td>{{(meteoData$ | async).list[8].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[10].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[8].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[10].main.temp   | number : '1.0-0'}}°C</td>
               </ng-container>
 
               <ng-container *ngSwitchCase="'12:00'">
@@ -478,8 +478,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[7].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[9].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[7].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[9].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'15:00'">
@@ -524,8 +524,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[6].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[8].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[6].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[8].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'18:00'">
@@ -570,8 +570,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[5].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[7].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[5].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[7].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'21:00'">
@@ -616,8 +616,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[4].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[6].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[4].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[6].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
 
@@ -671,8 +671,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[19].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[21].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[19].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[21].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'03:00'">
@@ -717,8 +717,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[18].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[20].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[18].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[20].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'06:00'">
@@ -763,8 +763,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[17].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[19].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[19].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'09:00'">
@@ -809,8 +809,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[16].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[18].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[16].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[18].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'12:00'">
@@ -855,8 +855,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[15].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[17].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[15].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'15:00'">
@@ -899,8 +899,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[14].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[16].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[14].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[16].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'18:00'">
@@ -943,8 +943,8 @@
                 </td>
 
 
-                <td>{{(meteoData$ | async).list[13].main.temp}}°C</td>
-                <td>{{(meteoData$ | async).list[17].main.temp}}°C</td>
+                <td>{{(meteoData$ | async).list[13].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(meteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'21:00'">
@@ -987,8 +987,8 @@
                 </td>
 
 
-                <div>{{(meteoData$ | async).list[12].main.temp}}°C</div>
-                <div>{{(meteoData$ | async).list[14].main.temp}}°C</div>
+                <div>{{(meteoData$ | async).list[12].main.temp   | number : '1.0-0'}}°C</div>
+                <div>{{(meteoData$ | async).list[14].main.temp   | number : '1.0-0'}}°C</div>
 
               </ng-container>
 
@@ -1033,7 +1033,7 @@
           </ng-container>
         </div>
         <div class="inner-main-data">
-          <span class="current-temperature">{{(tempMeteoData$ | async).list[0].main.temp}}°C</span>
+          <span class="current-temperature">{{(tempMeteoData$ | async).list[0].main.temp   | number : '1.0-0'}}°C</span>
 
           <div *ngIf="(tempMeteoData$ | async).list[0].rain != undefined; else noRain">
             <span>Precipitation : {{(tempMeteoData$ | async).list[0].rain['3h']}} mm</span>
@@ -1072,7 +1072,7 @@
           </div>
           <div class="inner-secondary-element">
             <div class="meteo_h+3 inner-secondary-data">
-              <div>{{(tempMeteoData$ | async).list[1].main.temp}}°C</div>
+              <div>{{(tempMeteoData$ | async).list[1].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(tempMeteoData$ | async).list[1].weather[0].icon">
 
@@ -1110,7 +1110,7 @@
             </div>
 
             <div class="meteo_h+6 inner-secondary-data">
-              <div>{{(tempMeteoData$ | async).list[2].main.temp}}°C</div>
+              <div>{{(tempMeteoData$ | async).list[2].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(tempMeteoData$ | async).list[2].weather[0].icon">
 
@@ -1148,7 +1148,7 @@
             </div>
 
             <div class="meteo_h+9 inner-secondary-data">
-              <div>{{(tempMeteoData$ | async).list[3].main.temp}}°C</div>
+              <div>{{(tempMeteoData$ | async).list[3].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(tempMeteoData$ | async).list[3].weather[0].icon">
 
@@ -1188,7 +1188,7 @@
             </div>
 
             <div class="meteo_h+12 inner-secondary-data">
-              <div>{{(tempMeteoData$ | async).list[4].main.temp}}°C</div>
+              <div>{{(tempMeteoData$ | async).list[4].main.temp   | number : '1.0-0'}}°C</div>
               <div>
                 <ng-container [ngSwitch]="(tempMeteoData$ | async).list[4].weather[0].icon">
 
@@ -1281,8 +1281,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[11].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[13].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[11].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[13].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'03:00'">
@@ -1327,8 +1327,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[10].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[12].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[10].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[12].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'06:00'">
@@ -1370,8 +1370,8 @@
 
                   </ng-container>
                 </td>
-                <td>{{(tempMeteoData$ | async).list[9].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[11].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[9].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[11].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'09:00'">
@@ -1415,8 +1415,8 @@
                   </ng-container>
                 </td>
 
-                <td>{{(tempMeteoData$ | async).list[8].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[10].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[8].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[10].main.temp   | number : '1.0-0'}}°C</td>
               </ng-container>
 
               <ng-container *ngSwitchCase="'12:00'">
@@ -1461,8 +1461,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[7].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[9].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[7].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[9].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'15:00'">
@@ -1507,8 +1507,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[6].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[8].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[6].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[8].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'18:00'">
@@ -1553,8 +1553,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[5].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[7].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[5].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[7].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'21:00'">
@@ -1599,8 +1599,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[4].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[6].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[4].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[6].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
 
@@ -1654,8 +1654,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[19].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[21].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[19].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[21].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'03:00'">
@@ -1700,8 +1700,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[18].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[20].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[18].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[20].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'06:00'">
@@ -1746,8 +1746,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[17].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[19].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[19].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'09:00'">
@@ -1792,8 +1792,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[16].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[18].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[16].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[18].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'12:00'">
@@ -1838,8 +1838,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[15].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[17].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[15].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'15:00'">
@@ -1882,8 +1882,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[14].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[16].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[14].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[16].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'18:00'">
@@ -1926,8 +1926,8 @@
                 </td>
 
 
-                <td>{{(tempMeteoData$ | async).list[13].main.temp}}°C</td>
-                <td>{{(tempMeteoData$ | async).list[17].main.temp}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[13].main.temp   | number : '1.0-0'}}°C</td>
+                <td>{{(tempMeteoData$ | async).list[17].main.temp   | number : '1.0-0'}}°C</td>
 
               </ng-container>
               <ng-container *ngSwitchCase="'21:00'">
@@ -1970,8 +1970,8 @@
                 </td>
 
 
-                <div>{{(tempMeteoData$ | async).list[12].main.temp}}°C</div>
-                <div>{{(tempMeteoData$ | async).list[14].main.temp}}°C</div>
+                <div>{{(tempMeteoData$ | async).list[12].main.temp   | number : '1.0-0'}}°C</div>
+                <div>{{(tempMeteoData$ | async).list[14].main.temp   | number : '1.0-0'}}°C</div>
 
               </ng-container>
 
