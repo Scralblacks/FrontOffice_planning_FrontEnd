@@ -54,8 +54,12 @@ app-planning {
   overflow: auto;
 }
 
-app-profile {
+app-profile, app-meteo {
   height: 100%;
+}
+
+app-meteo {
+  overflow: scroll;
 }
 
 app-calendar {
