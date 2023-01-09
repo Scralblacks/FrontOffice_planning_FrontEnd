@@ -102,7 +102,6 @@
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   border-radius: var(--sm-radius);
   padding: 0.75em;
-  margin: auto auto auto 2em;
 }
 
 .modal__deleteBtn .modal__deleteBtnDisabled {

@@ -24,3 +24,125 @@ header > div:nth-child(2) > img {
   width: 2rem;
   margin-left: 5px;
 }
+
+header .menu {
+  display: none
+}
+
+header .header__rightMenu > div:first-child > img {
+  height: 40px;
+  width: 40px;
+  margin-left: 1em;
+}
+
+header .header__rightMenu div:nth-child(2) {
+  display: none;
+}
+
+header .header__rightMenu div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .header__rightMenu div:first-child > span {
+  color: var(--secondary-bg-color)
+}
+
+@media (min-width: 769px) {
+
+  .header {
+    display: flex;
+    justify-content: center;
+    padding: 1em 2em;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+
+  header .menu_toggle {
+    display: none;
+  }
+
+  header .menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex: 1;
+  }
+
+  header .menu .header__navItems {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  header .menu:nth-child(2) > div:nth-child(2) {
+    margin-left: 5em
+  }
+
+  header nav a.active {
+    color: #3498db;
+    font-weight: bold;
+    position: relative;
+  }
+
+  header nav a.active:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--lg-radius);
+  }
+
+  header .menu > div {
+    display: flex;
+  }
+
+  .header .menu .menu-item a {
+    color: var(--secondary-bg-color);
+    text-decoration: none;
+  }
+
+  header .header__rightMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+  }
+
+  header .header__rightMenu > div {
+    width: 100%
+  }
+
+  header .header__rightMenu button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: var(--fourth-bg-color);
+    border-radius: var(--rounded-radius);
+    border: none;
+    cursor: pointer;
+  }
+
+  header .header__rightMenu > div > button:nth-child(2) > i {
+    color: white;
+    font-size: var(--xl-font-size);
+    text-align: center;
+  }
+
+  header .header__rightMenu div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  header .header__rightMenu .header__ownerPicture img {
+    border-radius: var(--rounded-radius);
+  }
+
+
+}

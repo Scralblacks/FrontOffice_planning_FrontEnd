@@ -50,6 +50,7 @@
 .calendar__body > div > div:nth-child(2) {
   padding: 1px;
 }
+
 /*
 .calendar__body > div:nth-child(7) {
   height: auto;
@@ -62,12 +63,23 @@
 }
 
 
-/*
-.calendar {
-  width: 210px;
-}
+@media (min-width: 769px) {
+  .calendar {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
 
-.day {
-  width: 30px;
-  display: inline-block;
-}*/
+  .calendar__body {
+    grid-gap: 0.5em;
+  }
+
+  .calendar .calendar__header span {
+    font-size: var(--2xl-font-size);
+  }
+
+  .calendar .calendar__body > div {
+    max-height: none;
+    font-size: var(--2xl-font-size);
+  }
+}

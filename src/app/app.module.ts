@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -25,8 +25,12 @@ import {ProfileComponent} from './pages/profile/profile.component';
 import {ModalComponent} from './layout/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import { ShareManagerComponent } from './pages/planning/share-manager/share-manager.component';
-import { MeteoComponent } from './pages/meteo/meteo.component';
+import {ShareManagerComponent} from './pages/planning/share-manager/share-manager.component';
+import {MeteoComponent} from './pages/meteo/meteo.component';
+import {registerLocaleData} from "@angular/common";
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -49,26 +53,26 @@ import { MeteoComponent } from './pages/meteo/meteo.component';
     TaskManagerComponent,
     MeteoComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true,
-            autoDismiss: true,
-            closeButton: true,
-            progressBar: true,
-            progressAnimation: "decreasing",
-        }),
-        MatButtonModule,
-        FormsModule
-    ],
-  providers: [AuthInterceptorProviders],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      autoDismiss: true,
+      closeButton: true,
+      progressBar: true,
+      progressAnimation: "decreasing",
+    }),
+    MatButtonModule,
+    FormsModule
+  ],
+  providers: [AuthInterceptorProviders, {provide: LOCALE_ID, useValue: 'fr-FR'}],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent],
 })

@@ -5,6 +5,22 @@
   cursor: pointer;
 }
 
+.emptyBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.emptyBox > div:first-child {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+}
+
 .dayBox:hover > div:first-child {
   background-color: var(--third-bg-color);
   border-radius: 6px;
@@ -52,6 +68,55 @@
   border-radius: 6px;
   color: var(--secondary-bg-color);
   /*border: 1px solid var(--main-bg-color);*/
+}
+
+.dayBox > div:first-child > div {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .dayBox > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: start;
+    height: 50px;
+    width: 50px;
+  }
+
+  .dayBox > div:first-child > div {
+    display: flex;
+    margin: auto;
+  }
+
+  .dayBox > div:first-child > span {
+    margin: 5px 10px;
+  }
+
+  .dayBox > div:nth-child(2) {
+    display: none;
+  }
+
+  .dayBox:hover .dot {
+    background-color: var(--secondary-bg-color)
+  }
+
+  .dayBox.selectedDay .dot {
+    background-color: var(--secondary-bg-color)
+  }
+}
+
+@media (min-width: 1025px) {
+  .dayBox > div:first-child {
+    width: 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dayBox > div:first-child {
+    width: 100px;
+    height: 70px;
+  }
 }
 
 

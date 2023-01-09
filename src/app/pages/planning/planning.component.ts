@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Observable, Subscription, switchMap} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UserService} from "../../services/user/user.service";
@@ -16,6 +16,7 @@ import {ShareManagerComponent} from "./share-manager/share-manager.component";
 import {shareDTO} from "../../models/shareDTO";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {ErrorResponse} from "../../models/errorResponse";
+import {taskDTO} from "../../models/taskDTO";
 
 @Component({
   selector: 'app-planning',
@@ -40,10 +41,35 @@ export class PlanningComponent implements OnInit {
   ownerPicture: SafeUrl = "";
   sharedPictures: SafeUrl[] = [];
 
+  innerWidth: any;
+
+  ismanaging: boolean = false;
+
+  nextTask!: taskDTO | null;
+
   constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog, private sanitizer: DomSanitizer) {
   }
 
+  @HostListener('window.resize', ['$event'])
+  onResize(event: any) {
+    console.log('isManaging task ?');
+    console.log(this.ismanaging);
+    this.innerWidth = event.target.innerWidth;
+    console.log(innerWidth < 769);
+
+  }
+
+
   ngOnInit(): void {
+
+    this.innerWidth = window.innerWidth;
+
+    this.isManagingTask$.subscribe({
+      next: (test) => {
+        console.log('Is managing task ?');
+        this.ismanaging = test;
+      }
+    })
 
     this.formAddShare = this.formBuilder.group({
       emailShare: new FormControl("", [Validators.required, Validators.email])
@@ -81,6 +107,14 @@ export class PlanningComponent implements OnInit {
       switchMap((planning, index) => {
         console.log("subscribing to new planning lol")
         this.currentPlanning = planning;
+        this.currentPlanning?.taskList.forEach((task) => {
+          if (new Date(task.dateTaskStart) > new Date() && (this.nextTask?.dateTaskStart! > task.dateTaskStart || this.nextTask == undefined)) {
+            this.nextTask = task;
+          }
+        })
+
+        // this.nextTask = this.currentPlanning?.taskList.find(task => new Date(task.dateTaskStart) > new Date())!;
+        console.log(this.nextTask);
         console.log(this.currentPlanning);
         const shared: GetSharedUsers = {
           idPlanning: this.currentPlanning?.idPlanning!,

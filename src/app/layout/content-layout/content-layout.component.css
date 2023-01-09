@@ -66,3 +66,9 @@
 .sidebar .menu .menu-item:hover {
   border-right: 5px solid #3bba9c;
 }
+
+@media (min-width: 769px) {
+  .sidebar {
+    display: none;
+  }
+}
