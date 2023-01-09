@@ -120,7 +120,7 @@ app-input {
 .planning__card textarea{
   height: 95%;
   overflow-y: auto;
-  text-align: left;
+  justify-content: left;
 }
 
 .next_task_present__upper{

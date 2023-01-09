@@ -76,39 +76,39 @@
             <span>Pas de tâche prochainement</span>
           </div>
         </div>
-        <div class="shared_planning__card" *ngIf="(this.cardPlanningSharedList | async) != null">
-          <ng-container *ngFor="let cardPlanningShared of (this.cardPlanningSharedList | async);let index = index">
-            <div class="next_task_present__upper" *ngIf="(ownerNextTask | async) != null">
-              <span>Agenda {{index + 2}}</span>
-              <span>{{(cardPlanningShared | async).nextTask.dateTaskStart | date: 'HH:mm' : '+0200'}} -
-                {{(cardPlanningShared | async)?.nextTask.dateTaskEnd | date: 'HH:mm' : '+0200'}} /
-                {{(cardPlanningShared | async)?.nextTask.dateTaskStart | date: 'dd-MM-yyyy' : '+0200'}}</span>
-            </div>
-            <div class="next_task_absent__upper" *ngIf="(cardPlanningShared | async) == null">
-              <span>Agenda 1</span>
-            </div>
-            <div class="next_task_present__bottom" *ngIf="(cardPlanningShared | async) != null">
-              <div>{{(cardPlanningShared | async)?.nextTask.nameTask}}</div>
-              <div class="inner__next_task_present__bottom">
-                <span>Proch. Tâche :</span>
-                <div *ngIf="(cardPlanningShared | async)?.nextTask.description != ''">
-                  <textarea readonly>{{(cardPlanningShared | async)?.nextTask.description}}</textarea>
-                </div>
-                <div *ngIf="(cardPlanningShared | async)?.nextTask.description == ''">
-                  <textarea readonly>Pas de description pour cette tâche</textarea>
-                </div>
-                <img [src]="cardPlanningShared.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'"
-                     alt="user pic">
-              </div>
-            </div>
-            <div class="next_task_absent__bottom" *ngIf="(cardPlanningShared | async).nextTask == null">
-              <span>Pas de tâche prochainement</span>
-            </div>
-          </ng-container>
-        </div>
-        <div *ngIf="(this.cardPlanningSharedList | async) != null">
-          Pas de planning partagé actuellement
-        </div>
+<!--        <div class="shared_planning__card" *ngIf="(this.cardPlanningSharedList | async) != null">-->
+<!--          <ng-container *ngFor="let cardPlanningShared of (this.cardPlanningSharedList | async);let index = index">-->
+<!--            <div class="next_task_present__upper" *ngIf="(ownerNextTask | async) != null">-->
+<!--              <span>Agenda {{index + 2}}</span>-->
+<!--              <span>{{(cardPlanningShared | async).nextTask.dateTaskStart | date: 'HH:mm' : '+0200'}} - -->
+<!--                {{(cardPlanningShared | async)?.nextTask.dateTaskEnd | date: 'HH:mm' : '+0200'}} /-->
+<!--                {{(cardPlanningShared | async)?.nextTask.dateTaskStart | date: 'dd-MM-yyyy' : '+0200'}}</span>-->
+<!--            </div>-->
+<!--            <div class="next_task_absent__upper" *ngIf="(cardPlanningShared | async) == null">-->
+<!--              <span>Agenda 1</span>-->
+<!--            </div>-->
+<!--            <div class="next_task_present__bottom" *ngIf="(cardPlanningShared | async) != null">-->
+<!--              <div>{{(cardPlanningShared | async)?.nextTask.nameTask}}</div>-->
+<!--              <div class="inner__next_task_present__bottom">-->
+<!--                <span>Proch. Tâche :</span>-->
+<!--                <div *ngIf="(cardPlanningShared | async)?.nextTask.description != ''">-->
+<!--                  <textarea readonly>{{(cardPlanningShared | async)?.nextTask.description}}</textarea>-->
+<!--                </div>-->
+<!--                <div *ngIf="(cardPlanningShared | async)?.nextTask.description == ''">-->
+<!--                  <textarea readonly>Pas de description pour cette tâche</textarea>-->
+<!--                </div>-->
+<!--                <img [src]="cardPlanningShared.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'"-->
+<!--                     alt="user pic">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="next_task_absent__bottom" *ngIf="(cardPlanningShared | async).nextTask == null">-->
+<!--              <span>Pas de tâche prochainement</span>-->
+<!--            </div>-->
+<!--          </ng-container>-->
+<!--        </div>-->
+<!--        <div *ngIf="(this.cardPlanningSharedList | async) != null">-->
+<!--          Pas de planning partagé actuellement-->
+<!--        </div>-->
       </div>
       <button class="deleteBtn" type="button" (click)="openDeleteDiag()">Delete count</button>
     </div>
