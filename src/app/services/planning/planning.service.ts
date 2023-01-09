@@ -82,6 +82,7 @@ export class PlanningService {
       }
       nextTask = planning.taskList[i]
       nextTaskStart = nextTask.dateTaskStart
+      console.log("TYPE : " + typeof nextTask.dateTaskStart)
       i = i + 1
       console.log(nextTask)
       console.log(nextTaskStart)

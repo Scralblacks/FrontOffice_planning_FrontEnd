@@ -15,7 +15,6 @@ import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 import {ShareManagerComponent} from "./share-manager/share-manager.component";
 import {shareDTO} from "../../models/shareDTO";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {DeleteUserComponent} from "../profile/delete-user/delete-user/delete-user.component";
 
 @Component({
   selector: 'app-planning',
