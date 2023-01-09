@@ -106,4 +106,8 @@ input[type="time"]::-webkit-clear-button {
   app-task-list {
     flex: 1;
   }
+
+  app-task-manager {
+    margin: 0 auto
+  }
 }

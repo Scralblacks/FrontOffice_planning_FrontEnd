@@ -43,8 +43,6 @@ export class PlanningComponent implements OnInit {
 
   innerWidth: any;
 
-  ismanaging: boolean = false;
-
   nextTask!: taskDTO | null;
 
   constructor(private userService: UserService, private planningService: PlanningService, private taskService: TaskService, private formBuilder: FormBuilder, private toastr: ToastrService, private dialog: MatDialog, private sanitizer: DomSanitizer) {
@@ -52,24 +50,13 @@ export class PlanningComponent implements OnInit {
 
   @HostListener('window.resize', ['$event'])
   onResize(event: any) {
-    console.log('isManaging task ?');
-    console.log(this.ismanaging);
     this.innerWidth = event.target.innerWidth;
-    console.log(innerWidth < 769);
-
   }
 
 
   ngOnInit(): void {
 
     this.innerWidth = window.innerWidth;
-
-    this.isManagingTask$.subscribe({
-      next: (test) => {
-        console.log('Is managing task ?');
-        this.ismanaging = test;
-      }
-    })
 
     this.formAddShare = this.formBuilder.group({
       emailShare: new FormControl("", [Validators.required, Validators.email])

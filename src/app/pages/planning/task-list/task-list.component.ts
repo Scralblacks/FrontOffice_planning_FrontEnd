@@ -21,6 +21,9 @@ export class TaskListComponent implements OnInit {
   @Input()
   userId: number = 0;
 
+  @Input()
+  isManagingTask: boolean = false;
+
 
   changeDateSelected$: Observable<any> = this.planningService.newDailyTasks;
   isOwner$: Observable<boolean> = this.planningService.owner;

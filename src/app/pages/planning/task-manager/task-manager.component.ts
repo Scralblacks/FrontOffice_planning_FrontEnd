@@ -30,6 +30,9 @@ export class TaskManagerComponent implements OnInit {
   @Input()
   userId: number = 0;
 
+  @Input()
+  isManagingTask: boolean = false;
+
 
   managedTask$: Observable<taskDTO | null> = this.taskService.managedTask;
   planning$: Observable<planningDTO | null> = this.planningService.planning;
@@ -82,26 +85,23 @@ export class TaskManagerComponent implements OnInit {
 
     this.managedTask$.subscribe({
       next: (taskDto) => {
+        this.formTask.clearValidators();
+        this.formTask.reset();
+
         if (taskDto) {
           this.task = taskDto;
-          this.formTask.addValidators(this.checkDifferences)
           this.formTask.setValue({
             taskName: this.task.nameTask,
-            taskDateStart: this.datePipe.transform(this.task.dateTaskStart, 'yyyy-MM-ddTHH:mm', '+0200'), /* new Date(this.task.dateTaskStart).toLocaleDateString(),*/
+            taskDateStart: this.datePipe.transform(this.task.dateTaskStart, 'yyyy-MM-ddTHH:mm', '+0200'),
             taskDateEnd: this.datePipe.transform(this.task.dateTaskEnd, 'yyyy-MM-ddTHH:mm', '+0200'),
             taskDescription: this.task.description
           })
+          this.formTask.addValidators(this.checkDifferences)
+        } else {
+          this.task = null;
         }
       }
     });
-
-    // this.planning$.subscribe({
-    //   next: (val) => {
-    //     if (val) {
-    //       this.planningId = val.idPlanning;
-    //     }
-    //   }
-    // });
 
     this.isOwner$.subscribe({
       next: (val) => {

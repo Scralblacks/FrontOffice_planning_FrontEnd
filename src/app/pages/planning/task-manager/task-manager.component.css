@@ -5,13 +5,16 @@
   overflow: auto;
   position: relative;
   background-color: var(--secondary-bg-color);
-  border-radius: var(--xl-radius);
   height: 100%;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.taskManager h4 {
+  margin: 1em;
 }
 
 .taskManager .taskManager__form {
-  padding: 1em 0;
+  /*  padding: 1em 0;*/
+  /* padding: 0;*/
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -115,6 +118,16 @@
 
 .taskManager .taskManager__actions app-submit-button {
   flex: 1;
+}
+
+@media (min-width: 769px) {
+  .taskManager .taskManager__dates {
+    margin: 1em 0;
+  }
+
+  .taskManager .taskManager__notes {
+    margin: 1em 0;
+  }
 }
 
 

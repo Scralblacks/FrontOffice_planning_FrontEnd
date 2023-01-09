@@ -25,8 +25,9 @@ import {ProfileComponent} from './pages/profile/profile.component';
 import {ModalComponent} from './layout/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import { ShareManagerComponent } from './pages/planning/share-manager/share-manager.component';
-import { MeteoComponent } from './pages/meteo/meteo.component';
+import {ShareManagerComponent} from './pages/planning/share-manager/share-manager.component';
+import {MeteoComponent} from './pages/meteo/meteo.component';
+import {DeleteUserComponent} from "./pages/profile/delete-user/delete-user/delete-user.component";
 
 @NgModule({
   declarations: [
@@ -48,26 +49,27 @@ import { MeteoComponent } from './pages/meteo/meteo.component';
     ShareManagerComponent,
     TaskManagerComponent,
     MeteoComponent,
+    DeleteUserComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true,
-            autoDismiss: true,
-            closeButton: true,
-            progressBar: true,
-            progressAnimation: "decreasing",
-        }),
-        MatButtonModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      autoDismiss: true,
+      closeButton: true,
+      progressBar: true,
+      progressAnimation: "decreasing",
+    }),
+    MatButtonModule,
+    FormsModule
+  ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent],

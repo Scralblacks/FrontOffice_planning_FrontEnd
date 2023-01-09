@@ -33,6 +33,12 @@
   border-radius: 8px;
 }
 
+.taskList .taskList__default {
+  text-align: center;
+  margin: 5em 3em;
+  font-style: italic;
+}
+
 
 @media (min-width: 769px) {
   .taskList {

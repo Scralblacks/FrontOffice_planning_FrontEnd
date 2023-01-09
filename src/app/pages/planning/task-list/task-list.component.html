@@ -9,4 +9,7 @@
     <app-task (click)="setManageTask(task.idTask!)" [task]="task" [dateSelected]="dateSelected"></app-task>
     <hr *ngIf="i != taskList.length-1"/>
   </div>
+  <div *ngIf="taskList.length == 0" class="taskList__default">
+    There is no scheduled task for this date.
+  </div>
 </div>

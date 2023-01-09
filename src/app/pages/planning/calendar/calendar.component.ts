@@ -5,6 +5,7 @@ import {taskDTO} from "../../../models/taskDTO";
 import {Observable} from "rxjs";
 import {planningDTO} from "../../../models/planningDTO";
 import {PlanningService} from "../../../services/planning/planning.service";
+import {TaskService} from "../../../services/task/task.service";
 
 @Component({
   selector: 'app-calendar',
@@ -32,7 +33,7 @@ export class CalendarComponent implements OnInit {
 
   public isReadyToRender: Promise<boolean> = Promise.resolve(false);
 
-  constructor(public calendarCreator: CalendarCreatorService, private planningService: PlanningService) {
+  constructor(public calendarCreator: CalendarCreatorService, private planningService: PlanningService, private taskService: TaskService) {
   }
 
   ngOnInit(): void {
@@ -147,6 +148,7 @@ export class CalendarComponent implements OnInit {
   changeSelectedDay(day: Day) {
 
     const selectedDayLocal = new Date(day.year, day.monthIndex, day.number);
+    this.taskService.closeTask();
 
     if (selectedDayLocal.getDate() == this.currentDate.getDate() && selectedDayLocal.getMonth() == this.currentDate.getMonth() && selectedDayLocal.getFullYear() == this.currentDate.getFullYear()) {
       this.selectedDay = this.currentDate;
@@ -155,7 +157,6 @@ export class CalendarComponent implements OnInit {
 
     this.selectedDay = new Date(day.year, day.monthIndex, day.number)
     this.selectedDay.setHours(1);
-    console.log(this.selectedDay);
   }
 
   nextMonth(date: Date): Date {
