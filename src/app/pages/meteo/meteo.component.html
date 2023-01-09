@@ -14,7 +14,7 @@
     </ng-container>
     <ng-template #tempAdress>
       <div>
-        {{(tempMeteoData$ | async).city.name}} ({{tempZipcode$ | async}})
+        <span>{{(tempMeteoData$ | async).city.name}} ({{tempZipcode$ | async}})</span>
       </div>
     </ng-template>
   </div>
@@ -50,16 +50,17 @@
           </ng-container>
         </div>
         <div class="inner-main-data">
-          <span class="current-temperature">{{(meteoData$ | async).list[0].main.temp}}°C</span>
+          <span class="current-temperature">{{(meteoData$ | async).list[0].main.temp   | number : '1.0-0'}}°C</span>
 
           <div *ngIf="(meteoData$ | async).list[0].rain != undefined; else noRain">
-            <span>Precipitation : {{(meteoData$ | async).list[0].rain['3h']}} mm</span>
+            <span>Precipitation : {{(meteoData$ | async).list[0].rain['3h']   | number : '1.0-0'}} mm</span>
           </div>
           <ng-template #noRain>
             <span>Precipitation : 0 mm</span>
           </ng-template>
           <div>
-            Max: {{(meteoData$ | async).list[0].main.temp_max}}° - Min: {{(meteoData$ | async).list[0].main.temp_min}}°
+            <span>Max: {{(meteoData$ | async).list[0].main.temp_max   | number : '1.0-0'}}
+              ° - Min: {{(meteoData$ | async).list[0].main.temp_min   | number : '1.0-0'}}°</span>
           </div>
         </div>
       </div>
@@ -77,7 +78,7 @@
           </div>
           <div class="inner-secondary-data">
             <img class="picture-secondary" src="/assets/weather/wind.png" alt="wind speed">
-            <span>{{(meteoData$ | async).list[0].wind.speed}} m/s</span>
+            <span>{{(meteoData$ | async).list[0].wind.speed  | number : '1.0-0'}} m/s</span>
           </div>
         </div>
 

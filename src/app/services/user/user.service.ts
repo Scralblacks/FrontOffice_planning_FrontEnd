@@ -84,5 +84,11 @@ export class UserService {
     return this.http.get(`http://localhost:8080/api/images/${filename}`, {responseType: 'blob'});
   }
 
-
+  deleteUserById(id : number | undefined): Observable<any>{
+    if (id != undefined){
+    return this.http.delete(`http://localhost:8080/api/users/${id}`)
+    } else {
+      throw new Error("User not found")
+    }
+  }
 }

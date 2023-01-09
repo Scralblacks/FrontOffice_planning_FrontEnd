@@ -1,16 +1,16 @@
-.meteo-main{
+.meteo-main {
   color: #ffffff;
   overflow: hidden;
 }
 
-.mobile_meteo{
+.mobile_meteo {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   color: #ffffff;
 }
 
-input{
+input {
   position: relative;
   bottom: 0.66em;
   padding: 0.5em;
@@ -21,12 +21,12 @@ input{
   color: #ffffff;
 }
 
-.form_and_reset{
+.form_and_reset {
   display: flex;
   flex-direction: row;
 }
 
-.main-data{
+.main-data {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -35,7 +35,7 @@ input{
   margin: 4vh auto;
 }
 
-.inner-main-data{
+.inner-main-data {
   margin-inside: 1em;
   display: flex;
   flex-direction: column;
@@ -46,19 +46,19 @@ input{
   text-align: center;
 }
 
-.current-temperature{
+.current-temperature {
   margin-bottom: 1em;
   font-size: 1.2em;
   font-weight: bolder;
 }
 
-.temperature-range{
+.temperature-range {
   display: flex;
   flex-direction: row;
   margin-inside: 1em;
 }
 
-.secondary-data{
+.secondary-data {
   display: flex;
   flex-direction: row;
   width: 95%;
@@ -73,12 +73,12 @@ input{
   padding-bottom: 1em;
 }
 
-.forecast-today{
+.forecast-today {
   display: flex;
   flex-direction: column;
 }
 
-.inner-secondary-data{
+.inner-secondary-data {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -86,14 +86,14 @@ input{
   text-align: center;
 }
 
-.inner-secondary-element{
+.inner-secondary-element {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 1vh;
 }
 
-table{
+table {
   width: 95%;
   margin: auto;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -103,26 +103,26 @@ table{
   padding-bottom: 1em;
 }
 
-tr{
+tr {
   text-align: center;
 }
 
-.picture-main{
+.picture-main {
   max-width: 7rem;
 }
 
-.picture-secondary{
+.picture-secondary {
   max-width: 2rem;
   max-height: 2rem;
 }
 
-.reset_button{
+.reset_button {
   width: 1.75rem;
   height: 1.75rem;
   margin-left: 0.33em;
 }
 
-.scrollable-data{
+.scrollable-data {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -131,24 +131,24 @@ tr{
 
 @media screen and (min-height: 620px) {
 
-  .current-temperature{
+  .current-temperature {
     margin-bottom: 1.5em;
     font-size: 1.4em;
     font-weight: bolder;
   }
 
-  .scrollable-data{
+  .scrollable-data {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     height: 300px;
   }
 
-  .picture-main{
+  .picture-main {
     max-width: 8rem;
   }
 
-  .picture-secondary{
+  .picture-secondary {
     max-width: 3rem;
     max-height: 3rem;
   }
@@ -157,24 +157,24 @@ tr{
 
 @media screen and (min-height: 700px) {
 
-  .current-temperature{
+  .current-temperature {
     margin-bottom: 2em;
     font-size: 1.4em;
     font-weight: bolder;
   }
 
-  .scrollable-data{
+  .scrollable-data {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     height: 400px;
   }
 
-  .picture-main{
+  .picture-main {
     width: 10rem;
   }
 
-  .picture-secondary{
+  .picture-secondary {
     max-width: 3rem;
     height: 3rem;
   }
@@ -183,26 +183,39 @@ tr{
 
 @media screen and (min-height: 820px) {
 
-  .current-temperature{
+  .current-temperature {
     margin-bottom: 2em;
     font-size: 1.4em;
     font-weight: bolder;
   }
 
-  .scrollable-data{
+  .scrollable-data {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     height: 100%;
   }
 
-  .picture-main{
+  .picture-main {
     width: 10rem;
   }
 
-  .picture-secondary{
+  .picture-secondary {
     max-width: 3rem;
     height: 3rem;
   }
 
+}
+
+@media (min-width: 769px) {
+  main {
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--xl-radius);
+    padding: 1em;
+    margin: 1em;
+  }
+
+  span {
+    color: var(--main-bg-color)
+  }
 }

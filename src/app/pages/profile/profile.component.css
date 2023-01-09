@@ -93,4 +93,13 @@ app-input {
   overflow: hidden;
 }
 
+.deleteBtn{
+  margin-left: 70%;
+  margin-top: 72%;
+  background: var(--btn-delete-color);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--sm-radius);
+  padding: 0.50em 0.75em;
+}
+
 

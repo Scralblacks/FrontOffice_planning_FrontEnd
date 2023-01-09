@@ -4,8 +4,9 @@ import {UserService} from "../../services/user/user.service";
 import {Observable} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UpdateUserDTO} from "../../models/updateUserDTO";
-import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {DeleteUserComponent} from "./delete-user/delete-user/delete-user.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   updateBtnStyle = {width: '50%', marginTop: '1em'}
 
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -105,6 +106,15 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  openDeleteDiag(){
+
+    this.dialog.open(DeleteUserComponent, {
+      width: "500px",
+      height: "200px",
+      maxHeight: "200px",
+    })
   }
 
 }
