@@ -4,13 +4,14 @@ main {
   height: 100%;
   gap: 1em;
   overflow: hidden;
+  max-width: 1200px;
 }
 
 main .planning__header {
   display: flex;
   height: fit-content;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 1em;
 }
 
@@ -205,6 +206,10 @@ main i {
   color: var(--secondary-bg-color);
 }
 
+main .planning__social .planning__shareInput form {
+  padding-left: 5px;
+}
+
 main .planning__social .planning__shareInput input {
   appearance: none;
   border: 0;
@@ -216,6 +221,10 @@ main .planning__social .planning__shareInput input {
   color: var(--normal-text-color);
   font-size: 12px;
   opacity: 1;
+}
+
+main .planning__social .planning__shareInput i {
+  color: white;
 }
 
 main .planning__social .planning__noShare {
@@ -236,4 +245,82 @@ main .planning__calendar {
 
 main .planning__calendar > app-task-list:nth-child(2) {
   overflow-y: auto
+}
+
+.planning__nextTask {
+  display: none;
+}
+
+@media (min-width: 769px) {
+
+  main {
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--lg-radius) /* ou 26px */;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 2em 1em;
+    margin: auto;
+    height: auto;
+  }
+
+  main i {
+    background: none;
+    color: var(--main-bg-color);
+  }
+
+  main > div:nth-child(1) {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  main .planning__header {
+    width: 100%;
+  }
+
+  main .planning__social {
+    width: 100%;
+  }
+
+  main .planning__calendar {
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+  }
+
+  main .planning__header .planning__agendaSelector span {
+    color: var(--main-bg-color);
+    font-size: var(--2xl-font-size);
+  }
+
+  main .planning__social .planning__shareInput input {
+    box-shadow: none;
+  }
+
+  .planning__nextTask {
+    display: flex;
+    padding: 1em;
+    background: #2A303D;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  .planning__nextTask span, .planning__nextTask i {
+    color: var(--secondary-bg-color);
+    margin: 0 1em;
+  }
+
+  .planning__nextTask .planning__nextTaskBody {
+    display: flex;
+    align-items: center;
+  }
+
+  .planning__nextTask .planning__nextTaskBody > div:nth-child(1) {
+    display: flex;
+    margin-left: 2em;
+    align-items: center;
+  }
 }

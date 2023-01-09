@@ -1,6 +1,11 @@
 .taskList {
   width: 100%;
   max-width: 100%;
+  min-width: 285px;
+}
+
+.taskList .taskList__header {
+  display: none;
 }
 
 .taskList .taskList__addButton {
@@ -23,7 +28,51 @@
 .taskList hr {
   width: 80%;
   margin: auto;
-  background-color: var(--third-bg-color);
+  color: var(--third-bg-color);
+  border-top: 1px;
+  border-radius: 8px;
 }
+
+
+@media (min-width: 769px) {
+  .taskList {
+    max-width: none;
+    min-width: auto;
+  }
+
+  .taskList .taskList__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 1em 2em;
+  }
+
+  .taskList .taskList__header h4 {
+    z-index: 1;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .taskList .taskList__header:before,
+  .taskList .taskList__header:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: #3498db;
+    border: 1px solid #000000;
+    transform: rotate(90deg);
+  }
+
+  .taskList .taskList__header:before {
+    left: 0;
+  }
+
+  .taskList .taskList__header:after {
+    right: 0;
+  }
+}
+
 
 

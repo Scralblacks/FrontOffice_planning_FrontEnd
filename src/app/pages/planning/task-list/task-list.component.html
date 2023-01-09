@@ -1,4 +1,7 @@
 <div class="taskList">
+  <div class="taskList__header">
+    <h4>{{dateSelected | date: 'EEEE d MMMM' }}</h4>
+  </div>
   <div *ngIf="!readonly" (click)="setManageTask(null)" class="taskList__addButton">
     <i class="fa-regular fa-square-plus fa-2xl"></i>
   </div>

@@ -70,7 +70,7 @@ app-task-manager {
 app-share-manager.ng-star-inserted {
   display: flex;
   flex-direction: column;
-  height:100%;
+  height: 100%;
 }
 
 body {
@@ -84,10 +84,26 @@ button, textarea, input {
   background: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 textarea {
   resize: none;
 }
 
 input[type="time"]::-webkit-clear-button {
   display: none;
+}
+
+
+@media (min-width: 769px) {
+  app-planning {
+    flex: none;
+    margin: 1em 2em;
+  }
+
+  app-task-list {
+    flex: 1;
+  }
 }

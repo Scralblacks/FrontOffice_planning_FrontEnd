@@ -1,76 +1,77 @@
-<main>
-  <div class="planning__header">
-    <div class="planning__agendaSelector">
-      <div (click)="onPreviousPlanning()"
-           *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
-        <i class="fa-solid fa-chevron-left fa-lg"></i>
+<main (window:resize)="onResize($event)">
+  <div>
+    <div class="planning__header">
+      <div class="planning__agendaSelector">
+        <div (click)="onPreviousPlanning()"
+             *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
+          <i class="fa-solid fa-chevron-left fa-lg"></i>
+        </div>
+        <div>
+          <span>{{currentPlanning?.namePlanning}}</span>
+        </div>
+        <div (click)="onNextPlanning()"
+             *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
+          <i class="fa-solid fa-chevron-right fa-lg"></i>
+        </div>
       </div>
       <div>
-        <span
-        >{{currentPlanning?.namePlanning}}</span>
+        <div *ngIf="currentUser?.planningId == currentPlanning?.idPlanning; else shared">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <ng-template #shared>
+          <div (click)="removeCurrentUserFromShare()">
+            <i class="fa-solid fa-bookmark"></i>
+          </div>
+        </ng-template>
       </div>
-      <div (click)="onNextPlanning()"
-           *ngIf="currentUser?.sharedPlanningId != null && currentUser?.sharedPlanningId!.length > 0">
-        <i class="fa-solid fa-chevron-right fa-lg"></i>
-      </div>
+      <!--      <div class="planning__switchEvents">-->
+      <!--        <label class="toggle">-->
+      <!--          <input type="checkbox">-->
+      <!--          <span class="slider"></span>-->
+      <!--          <span class="labels" data-off="EVENTS" data-on="EVENTS"></span>-->
+      <!--        </label>-->
+      <!--      </div>-->
     </div>
-    <div>
-      <div *ngIf="currentUser?.planningId == currentPlanning?.idPlanning; else shared">
-        <i class="fa-solid fa-star"></i>
+    <div class="planning__social">
+      <div class="planning__peopleOwner">
+        <img height="40px" width="40px"
+             [src]="this.ownerPicture"/>
       </div>
-      <ng-template #shared>
-        <div (click)="removeCurrentUserFromShare()">
-          <i class="fa-solid fa-bookmark"></i>
+      <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
+           (click)="openListSharedDetailed()">
+        <div *ngIf="currentSharedUsers.length >= 1">
+          <img height="32px" width="32px" style="border: 2px solid red"
+               [src]="this.sharedPictures[0]"/>
+        </div>
+        <div *ngIf="currentSharedUsers.length >=2">
+          <img height="32px" width="32px" style="border: 2px solid yellow"
+               [src]="this.sharedPictures[1]"/>
+        </div>
+        <div *ngIf="currentSharedUsers.length >=3">
+          <img height="32px" width="32px" style="border: 2px solid white"
+               [src]="this.sharedPictures[2]"/>
+        </div>
+        <div *ngIf="currentSharedUsers.length >3">
+          <span style="background: none;">+{{currentSharedUsers.length - 3}}</span>
+        </div>
+      </div>
+      <ng-template #noShare>
+        <div class="planning__noShare">
+          No Share...
         </div>
       </ng-template>
-    </div>
-    <div class="planning__switchEvents">
-      <label class="toggle">
-        <input type="checkbox">
-        <span class="slider"></span>
-        <span class="labels" data-off="EVENTS" data-on="EVENTS"></span>
-      </label>
-    </div>
-  </div>
-  <div class="planning__social">
-    <div class="planning__peopleOwner">
-      <img height="40px" width="40px"
-           [src]="this.ownerPicture"/>
-    </div>
-    <div *ngIf="currentSharedUsers != null && currentSharedUsers.length > 0; else noShare"
-         (click)="openListSharedDetailed()">
-            <div *ngIf="currentSharedUsers.length >= 1">
-              <img height="32px" width="32px" style="border: 2px solid red"
-                   [src]="this.sharedPictures[0]"/>
-            </div>
-            <div *ngIf="currentSharedUsers.length >=2">
-              <img height="32px" width="32px" style="border: 2px solid yellow"
-                   [src]="this.sharedPictures[1]"/>
-            </div>
-            <div *ngIf="currentSharedUsers.length >=3">
-              <img height="32px" width="32px" style="border: 2px solid white"
-                   [src]="this.sharedPictures[2]"/>
-            </div>
-      <div *ngIf="currentSharedUsers.length >3">
-        <span style="background: none;">+{{currentSharedUsers.length - 3}}</span>
-      </div>
-    </div>
-    <ng-template #noShare>
-      <div class="planning__noShare">
-        No Share...
-      </div>
-    </ng-template>
-    <div class="planning__shareInput">
+      <div class="planning__shareInput">
 
-      <div>
+        <div>
         <span>
               <i class="fa-solid fa-share-nodes" style="background:none"></i>
         </span>
+        </div>
+        <form autocomplete="off" [formGroup]="formAddShare">
+          <input type="text" placeholder="Type a username..." formControlName="emailShare"
+                 (keyup.enter)="submitNewShare()"/>
+        </form>
       </div>
-      <form autocomplete="off" [formGroup]="formAddShare">
-        <input type="text" placeholder="Type a username..." formControlName="emailShare"
-               (keyup.enter)="submitNewShare()"/>
-      </form>
     </div>
   </div>
 
@@ -80,14 +81,38 @@
 
   <ng-template #calendar>
     <div *ngIf="!(isManagingTask$|async); else task" class="planning__calendar">
-      <app-calendar></app-calendar>
+      <div>
+        <app-calendar></app-calendar>
+        <div class="planning__nextTask">
+          <span>Next Task :</span>
+          <div style="display: flex;">
+            <div class="task__icon">
+              <i class="fa-regular fa-calendar fa-lg" style="color: white"></i>
+            </div>
+            <div>
+              <span>{{nextTask?.nameTask!}}</span>
+            </div>
+          </div>
+          <div class="planning__nextTaskBody">
+            <div>
+              <i class="fa-regular fa-clock"></i>
+              <div style="display: flex; flex-direction: column">
+                <span>{{nextTask?.dateTaskStart! | date: 'EEEE d MMMM'}}</span>
+                <span>{{nextTask?.dateTaskStart! | date: 'hh:mm'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <app-task-list [planningId]="(planning$ | async)?.idPlanning!"
                      [userId]="(user$ | async)?.idUser!"
                      [readonly]="(planning$|async)?.readOnly!"></app-task-list>
     </div>
     <ng-template #task>
-      <app-task-manager [planningId]="(planning$ | async)?.idPlanning!"
-                        [userId]="(user$ | async)?.idUser!"></app-task-manager>
+      <div *ngIf="innerWidth < 769">
+        <app-task-manager [planningId]="(planning$ | async)?.idPlanning!"
+                          [userId]="(user$ | async)?.idUser!"></app-task-manager>
+      </div>
     </ng-template>
 
   </ng-template>

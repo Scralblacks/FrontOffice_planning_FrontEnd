@@ -68,3 +68,21 @@
   font-size: var(--md-font-size);
   color: var(--main-bg-color)
 }
+
+@media (min-width: 769px) {
+
+  .task .task__body {
+    justify-content: space-evenly;
+  }
+
+  .task .task__body > div:nth-child(2) > span {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .task .task__body > div:nth-child(2) > span {
+    display: block;
+  }
+
+}

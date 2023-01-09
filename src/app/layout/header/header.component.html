@@ -1,31 +1,62 @@
-<header>
+<header class="header">
   <div class="menu_toggle" (click)="triggerSidebar()">
     <i class="fa-solid fa-bars fa-xl"></i>
   </div>
-  <div>
-    <span>{{(meteoData$ | async).list[0].main.temp}}°C</span>
-    <ng-container [ngSwitch]="(meteoData$ | async).list[0].weather[0].icon">
+  <nav class="menu">
+    <div class="header__navItems">
+      <div class="menu-item">
+        <a [class.active]="activeTab === 'planning'" (click)="setActivateTab('planning')" routerLink="planning">Planning</a>
+      </div>
+      <div class="menu-item">
+        <a [class.active]="activeTab === 'profile'" (click)="setActivateTab('profile')" routerLink="profile">Profile</a>
+      </div>
+      <div class="menu-item">
+        <a [class.active]="activeTab === 'meteo'" (click)="setActivateTab('meteo')" routerLink="meteo">Meteo</a>
+      </div>
+    </div>
+  </nav>
 
-      <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
-      <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
-      <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
-      <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
-      <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
-      <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
-      <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
-      <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
-      <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
-      <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
-      <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
-      <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
-      <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
-      <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
-      <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
-      <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
-      <img *ngSwitchCase="'50d'" src="/assets/weather/fog.png" alt="fog"/>
-      <img *ngSwitchCase="'50n'" src="/assets/weather/fog.png" alt="fog"/>
 
-    </ng-container>
+  <div class="header__rightMenu">
+    <div>
+      <span>{{(meteoData$ | async).list[0].main.temp | number : '1.0-0'}}°C</span>
+      <ng-container [ngSwitch]="(meteoData$ | async).list[0].weather[0].icon">
+
+        <img *ngSwitchCase="'01d'" src="/assets/weather/Sun.png" alt="sun"/>
+        <img *ngSwitchCase="'01n'" src="/assets/weather/Moon.png" alt="moon"/>
+        <img *ngSwitchCase="'02d'" src="/assets/weather/sun_some_clouds.png" alt="sun with some cloud"/>
+        <img *ngSwitchCase="'02n'" src="/assets/weather/Moon_stars_clouds.png" alt="moon with some cloud"/>
+        <img *ngSwitchCase="'03d'" src="/assets/weather/sun%20clouds.png" alt="cloudyn sun"/>
+        <img *ngSwitchCase="'04d'" src="/assets/weather/sun%20clouds.png" alt="cloudy sun"/>
+        <img *ngSwitchCase="'03n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'04n'" src="/assets/weather/Moon%20clouds.png" alt="cloudy moon"/>
+        <img *ngSwitchCase="'09d'" src="/assets/weather/sun%20rain.png" alt="sun with rain"/>
+        <img *ngSwitchCase="'09n'" src="/assets/weather/moon%20and%20rain.png" alt="moon with rain"/>
+        <img *ngSwitchCase="'10d'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'10n'" src="/assets/weather/rain.png" alt="heavy rain"/>
+        <img *ngSwitchCase="'11d'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'11n'" src="/assets/weather/Thunder.png" alt="thunder"/>
+        <img *ngSwitchCase="'13d'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'13n'" src="/assets/weather/Snow.png" alt="snow"/>
+        <img *ngSwitchCase="'50d'" src="/assets/weather/fog.png" alt="fog"/>
+        <img *ngSwitchCase="'50n'" src="/assets/weather/fog.png" alt="fog"/>
+
+      </ng-container>
+    </div>
+
+    <div>
+
+      <button class="header__ownerPicture">
+        <a routerLink="profile">
+          <img height="40px" width="40px"
+               [src]="this.ownerPicture"/>
+        </a>
+      </button>
+
+      <button (click)="onLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
 
   </div>
 </header>
