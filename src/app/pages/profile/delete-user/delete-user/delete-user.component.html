@@ -2,9 +2,7 @@
 
 <div class="buttons">
   <button type="button" class="modal__noBtn" (click)="no()">NO</button>
-  <div>
-    <button *ngIf="deleteAvailable | async; else deleteNotAvailable" type="button" class="modal__yesBtn" (click)="yes()">YES</button>
-  </div>
+  <button *ngIf="deleteAvailable | async; else deleteNotAvailable" type="button" class="modal__yesBtn" (click)="yes()">YES</button>
   <ng-template #deleteNotAvailable>
     <button class="modal__yesBtnDisabled">YES</button>
   </ng-template>

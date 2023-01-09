@@ -94,12 +94,51 @@ app-input {
 }
 
 .deleteBtn{
-  margin-left: 70%;
-  margin-top: 72%;
+  display: flex;
+  justify-self: flex-end;
   background: var(--btn-delete-color);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   border-radius: var(--sm-radius);
   padding: 0.50em 0.75em;
 }
+
+
+.planning__cards{
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
+.planning__card{
+  border: solid #919D9E;
+  border-radius: 8px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.planning__card textarea{
+  height: 95%;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.next_task_present__upper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.next_task_present__bottom{
+  display: flex;
+  flex-direction: column;
+}
+
+.inner__next_task_present__bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 
 

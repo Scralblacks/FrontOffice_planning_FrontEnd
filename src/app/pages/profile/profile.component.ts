@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../services/user/user.service";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {UpdateUserDTO} from "../../models/updateUserDTO";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {DeleteUserComponent} from "./delete-user/delete-user/delete-user.component";
 import {MatDialog} from "@angular/material/dialog";
+import {PlanningService} from "../../services/planning/planning.service";
+import {planningDTO} from "../../models/planningDTO";
+import {taskDTO} from "../../models/taskDTO";
 
 @Component({
   selector: 'app-profile',
@@ -20,12 +23,19 @@ export class ProfileComponent implements OnInit {
   user$: Observable<userDTO | null> = this.userService.user;
   currentUser!: userDTO | null;
   currentFile?: File;
-  imageURL!:SafeUrl;
-
+  imageURL!: SafeUrl;
+  ownerPlanning = this.planningService.getOwnerPlanning()
+  sharedPlanning!: Observable<any>
   updateBtnStyle = {width: '50%', marginTop: '1em'}
+  ownerNextTask$ = new BehaviorSubject<taskDTO | null>(null)
+  cardPlanningSharedList$ = new BehaviorSubject<any>(null)
 
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer, private dialog: MatDialog) {
+  get ownerNextTask(){return this.ownerNextTask$.asObservable()}
+  get cardPlanningSharedList(){return this.cardPlanningSharedList$.asObservable()}
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer, private dialog: MatDialog,
+              private planningService: PlanningService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +44,20 @@ export class ProfileComponent implements OnInit {
       password: new FormControl("", [Validators.min(6)]),
       city: new FormControl("", [Validators.required]),
       zipcode: new FormControl("", [Validators.required, Validators.pattern("^[0-9]*$")]),
+    })
+
+
+    this.ownerPlanning.subscribe({
+      next: planning => {
+        console.log(planning)
+        this.ownerNextTask$.next(this.planningService.getFirstNextTask(planning))
+      },
+    })
+
+    this.sharedPlanning.subscribe({
+      next: data => {
+        console.log("SHARE PLANNING : " + data)
+      },
     })
 
     this.user$.subscribe({
@@ -50,13 +74,18 @@ export class ProfileComponent implements OnInit {
         if (this.currentUser?.photo) {
           this.userService.getFile(this.currentUser?.photo).subscribe({
             next: (blobImg: Blob) => {
-              this.imageURL =  this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+              this.imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
             }
+          })
+        }
+        if (data?.idUser != undefined && data.planningId) {
+          this.sharedPlanning = this.planningService.getSharedPlanning({
+            userId: data.idUser,
+            planningId: data.planningId
           })
         }
       },
     });
-
   }
 
   switchPasswordVisibility() {
@@ -72,7 +101,7 @@ export class ProfileComponent implements OnInit {
     if (this.currentFile) {
       this.userService.upload(this.currentFile).subscribe(
         (blobImg) => {
-            this.imageURL =  this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+          this.imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
         },
         (err: any) => {
           console.log(err);
@@ -82,7 +111,6 @@ export class ProfileComponent implements OnInit {
 
     }
   }
-
 
   submitUpdateProfile() {
     if (this.formUser.valid) {
@@ -108,7 +136,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  openDeleteDiag(){
+  openDeleteDiag() {
 
     this.dialog.open(DeleteUserComponent, {
       width: "500px",

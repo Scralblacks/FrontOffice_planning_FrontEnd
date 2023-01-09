@@ -71,6 +71,25 @@ export class PlanningService {
     )
   }
 
+  getFirstNextTask(planning: planningDTO): taskDTO | null{
+    let now = new Date()
+    let i = 0;
+    let nextTask! : taskDTO
+    let nextTaskStart!: Date
+    do{
+      if (i == planning.taskList.length) {
+        return null;
+      }
+      nextTask = planning.taskList[i]
+      nextTaskStart = nextTask.dateTaskStart
+      i = i + 1
+      console.log(nextTask)
+      console.log(nextTaskStart)
+    } while(nextTaskStart < now)
+    console.log(nextTask)
+    return nextTask
+  }
+
   addNewTaskLocally(taskDto: taskDTO) {
     this.planningStorage.taskList.push(taskDto);
     this.currentPlanning.next(this.planningStorage)
