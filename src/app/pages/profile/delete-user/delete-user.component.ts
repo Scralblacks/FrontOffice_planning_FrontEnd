@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {userDTO} from "../../../../models/userDTO";
-import {UserService} from "../../../../services/user/user.service";
+import {userDTO} from "../../../models/userDTO";
+import {UserService} from "../../../services/user/user.service";
 import {Router} from "@angular/router";
-import {AuthService} from "../../../../services/auth/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {BehaviorSubject} from "rxjs";
 

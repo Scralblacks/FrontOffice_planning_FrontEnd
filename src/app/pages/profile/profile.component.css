@@ -13,7 +13,8 @@ main .profile {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 5em 1em 1em 1em
+  margin: 5em 1em 1em 1em;
+  position: relative;
 }
 
 .custom__form input {
@@ -94,12 +95,70 @@ app-input {
 }
 
 .deleteBtn{
-  margin-left: 70%;
-  margin-top: 72%;
+  display: flex;
   background: var(--btn-delete-color);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   border-radius: var(--sm-radius);
   padding: 0.50em 0.75em;
+  position: absolute;
+  bottom: 1vh;
+  right: 3vw;
 }
+
+
+.planning__cards{
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
+.planning__card{
+  border: solid #919D9E;
+  border-radius: 8px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.shared_planning__cards{
+  overflow-y: auto;
+  height: 100px;
+}
+
+.shared_planning__card{
+  border: solid #919D9E;
+  border-radius: 8px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.planning__card textarea{
+  height: 95%;
+  overflow-y: auto;
+  justify-content: left;
+}
+
+.next_task_present__upper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.next_task_present__bottom{
+  display: flex;
+  flex-direction: column;
+}
+
+.inner__next_task__bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.planning__cards img{
+  height: 30px;
+  width: 30px;
+}
+
 
 
