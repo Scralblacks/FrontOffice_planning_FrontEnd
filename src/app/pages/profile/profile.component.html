@@ -78,6 +78,7 @@
           </div>
         </div>
         <div class="shared_planning__cards" *ngIf="(this.cardPlanningSharedList | async) != []">
+          <div>Shared planning</div>
           <ng-container *ngFor="let cardPlanningShared of cardPlanningSharedList | async;let index = index">
             <div class="shared_planning__card">
               <div class="next_task_present__upper" *ngIf="cardPlanningShared.nextTask != null">

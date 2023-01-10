@@ -50,24 +50,24 @@ app-input {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 150%;
+  font-size: 90%;
   cursor: pointer;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
   object-fit: cover;
   background-color: var(--secondary-bg-color);
 }
 
 .custom__image-container img {
-  width: 120px;
-  height: 120px;
+  width:72px;
+  height: 72px;
   border-radius: 5px;
   object-fit: cover;
 }
 
 .upload {
-  width: 112px;
+  width: 67px;
   position: relative;
   margin: auto;
 }
@@ -86,9 +86,9 @@ app-input {
 .upload .round {
   position: absolute;
   bottom: 0;
-  width: 112px;
-  height: 112px;
-  line-height: 33px;
+  width: 67px;
+  height: 67px;
+  line-height: 20px;
   text-align: center;
   border-radius: 50%;
   overflow: hidden;
@@ -105,12 +105,13 @@ app-input {
   right: 3vw;
 }
 
-
 .planning__cards{
   display: flex;
   flex-direction: column;
   margin-right: 0.5em;
   margin-left: 0.5em;
+  overflow-y: auto;
+  height: 50px;
 }
 
 .planning__card{
@@ -118,11 +119,6 @@ app-input {
   border-radius: 8px;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
-}
-
-.shared_planning__cards{
-  overflow-y: auto;
-  height: 100px;
 }
 
 .shared_planning__card{
@@ -135,7 +131,7 @@ app-input {
 .planning__card textarea{
   height: 95%;
   overflow-y: auto;
-  justify-content: left;
+  justify-content: center;
 }
 
 .next_task_present__upper{
@@ -152,6 +148,7 @@ app-input {
 .inner__next_task__bottom{
   display: flex;
   flex-direction: row;
+  height: auto;
   justify-content: space-between;
 }
 
@@ -160,5 +157,182 @@ app-input {
   width: 30px;
 }
 
+@media screen and (min-height: 650px){
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
 
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
 
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    height: 70px;
+  }
+}
+
+@media screen and (min-height: 660px) {
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
+
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    height: 80px;
+  }
+}
+
+@media screen and (min-height: 700px){
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
+
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    height: 130px;
+  }
+}
+
+@media screen and (min-height: 725px){
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
+
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    height: 145px;
+  }
+}
+
+@media screen and (min-height: 800px){
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
+
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    overflow-y: hidden;
+    height: revert;
+  }
+
+  .shared_planning__cards{
+    overflow-y: auto;
+    height: 125px;
+  }
+}
+
+@media screen and (min-height: 855px){
+  .custom__image-container label {
+    width: 100px;
+    height: 100px;
+  }
+
+  .custom__image-container img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .upload {
+    width: 112px;
+    position: relative;
+    margin: auto;
+  }
+
+  .upload .round {
+    width: 112px;
+    height: 112px;
+    line-height: 33px;
+  }
+
+  .planning__cards{
+    overflow-y: hidden;
+    height: revert;
+  }
+
+  .shared_planning__cards{
+    overflow-y: auto;
+    height: revert;
+  }
+}
