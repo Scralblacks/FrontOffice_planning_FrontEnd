@@ -3,7 +3,6 @@ import {PlanningService} from "../../../services/planning/planning.service";
 import {taskDTO} from "../../../models/taskDTO";
 import {Observable} from "rxjs";
 import {TaskService} from "../../../services/task/task.service";
-import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-task-list',

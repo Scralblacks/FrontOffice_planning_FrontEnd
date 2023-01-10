@@ -12,7 +12,10 @@ import {environment} from "../../../environments/environment";
 })
 export class AuthService {
 
+  // URL to access auth route
   BASE_URL = `${environment.apiUrl}/auth`;
+
+  // Login Observable
   private loggedIn = new BehaviorSubject<boolean>(!!this.authStorage.getToken())
 
   get isLoggedIn() {
@@ -22,6 +25,10 @@ export class AuthService {
   constructor(private http: HttpClient, private authStorage: AuthStorageService, private router: Router) {
   }
 
+  /**
+   * Allows users to log in to the app
+   * @param signinRequest Object taking email and password from input
+   */
   login(signinRequest: SigninRequest) {
     return this.http.post<any>(`${this.BASE_URL}/signin`, signinRequest)
       .pipe(
@@ -36,6 +43,10 @@ export class AuthService {
       );
   }
 
+  /**
+   * Allows users to register
+   * @param signupRequest Object with multiple fields for registering
+   */
   register(signupRequest: SignupRequest) {
     return this.http.post<any>(`${this.BASE_URL}/signup`, signupRequest)
       .pipe(
@@ -49,6 +60,9 @@ export class AuthService {
       );
   }
 
+  /**
+   * Allows users to logout. Clears the session
+   */
   logout(){
     this.loggedIn.next(false);
     this.authStorage.clearSession();

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {taskDTO} from "../../models/taskDTO";
-import {shareDTO} from "../../models/shareDTO";
 import {environment} from "../../../environments/environment";
 
 @Injectable({

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";

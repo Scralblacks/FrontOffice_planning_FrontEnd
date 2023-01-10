@@ -1,12 +1,10 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, of, throwError} from "rxjs";
 import {planningDTO} from "../../models/planningDTO";
 import {taskDTO} from "../../models/taskDTO";
 import {shareDTO} from "../../models/shareDTO";
 import {setNewShareDTO} from "../../models/setNewShareDTO";
-import {ErrorResponse} from "../../models/errorResponse";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import {GetSharedPlanning} from "../../models/GetSharedPlanning";
 import {environment} from "../../../environments/environment";
 

@@ -6,19 +6,23 @@ import {Day} from "../../models/day";
 })
 export class CalendarCreatorService {
 
+  // Storage current year and month index
   private currentYear: number;
   private currentMonthIndex: number
 
+  // Initialize service with current year and month
   constructor() {
     let date = new Date();
     this.currentYear = date.getFullYear();
     this.currentMonthIndex = date.getMonth();
   }
 
+  // Retrieves the month which is a list of Day Object
   public getCurrentMonth(): Day[] {
     return this.getMonth(this.currentMonthIndex, this.currentYear);
   }
 
+  // Gets all Day from selected month and year
   public getMonth(monthIndex: number, year: number): Day[] {
     let days = [];
 
@@ -43,6 +47,7 @@ export class CalendarCreatorService {
     return days;
   }
 
+  // Gets month name
   public getMonthName(monthIndex: number): string {
     switch (monthIndex) {
       case 0 :
@@ -76,6 +81,7 @@ export class CalendarCreatorService {
     }
   }
 
+  // Get day name
   public getWeekDayName(weekDay: number): string {
     switch (weekDay) {
       case 0:
@@ -97,6 +103,7 @@ export class CalendarCreatorService {
     }
   }
 
+  // Generates a new Day object for each day of a month
   private createDay(dayNumber: number, monthIndex: number, year: number) {
 
     if (new Date(year, monthIndex, dayNumber).getDay() == 0){

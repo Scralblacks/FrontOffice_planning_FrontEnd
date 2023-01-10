@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Day} from "../../../models/day";
 import {CalendarCreatorService} from "../../../services/calendar-creator/calendar-creator.service";
 import {taskDTO} from "../../../models/taskDTO";
