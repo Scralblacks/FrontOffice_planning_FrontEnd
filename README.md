@@ -10,6 +10,8 @@
   * [Technologies](#technologies)
   * [Features](#features)
   * [Start Project](#start-project)
+  * [Contributors](#contributor)
+  * [Credit](#credit)
 
 ## Technologies [↑](#frontofficefrontend)
 
