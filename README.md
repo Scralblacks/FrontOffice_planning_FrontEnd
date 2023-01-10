@@ -2,12 +2,18 @@
 
   This project is a part of a collaborative agenda application as an end of formation project. This is the front end of its front office.
 
-  * [Back end of front office](https://github.com/FabriceT95/FrontOffice_Planning)
   * [Back Office](https://github.com/Scralblacks/Back_Office_Fil_Rouge)
+  * [Back end of front office](https://github.com/FabriceT95/FrontOffice_Planning)
+  
+## Table of content
+
+  * [Technologies](#technologies)
+  * [Features](#features)
+  * [Start Project](#start-project)
 
 ## Technologies
 
-  * <img height=50px width=50px src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg" atl="angular-icon"> [Angular](https://github.com/angular)  version 14.2.10.
+  <img width=50px src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg" atl="angular-icon"> Angular
 
 ## Features
 
@@ -20,5 +26,3 @@
 ## Start Project
 
   Run `ng serve` in a terminal in the project root directory. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## 
