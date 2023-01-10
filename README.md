@@ -1,9 +1,9 @@
 # FrontOfficeFrontend
 
-  This project is a part of a collaborative agenda application as an end of formation project. It is the front end of its front office.
+  This project is a part of a collaborative agenda application as an end of formation project. This is the front end of its front office.
 
-  * [Back end of front office](https://github.com/Scralblacks/Back_Office_Fil_Rouge)
-  * [Back Office](https://github.com/FabriceT95/FrontOffice_Planning)
+  * [Back end of front office](https://github.com/FabriceT95/FrontOffice_Planning)
+  * [Back Office](https://github.com/Scralblacks/Back_Office_Fil_Rouge)
 
 ## Technologies
 
