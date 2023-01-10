@@ -36,4 +36,4 @@
 
 ## Credit [↑](#frontofficefrontend)
 
-  We used the api of [openweathermap.org](https://openweathermap.org/) for the weather data.
+  We used [openweathermap.org](https://openweathermap.org/)'s api for the weather data.
