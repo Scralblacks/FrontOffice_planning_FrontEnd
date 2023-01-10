@@ -1,27 +1,24 @@
 # FrontOfficeFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+  This project is a part of a collaborative agenda application as an end of formation project. It is the front end of its front office.
 
-## Development server
+  * [Back end of front office](https://github.com/Scralblacks/Back_Office_Fil_Rouge)
+  * [Back Office](https://github.com/FabriceT95/FrontOffice_Planning)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies
 
-## Code scaffolding
+  * <img height=50px width=50px src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg" atl="angular-icon"> [Angular](https://github.com/angular)  version 14.2.10.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+  * **Profile Managing** - You san see and edit your user name, image, the town you are living in and see the next task of all plannings you have access to. You can as well delete your account.
+  * **Planning Managing** - See your own planning and planning shared with you and their tasks.
+    * **Share my planning** - You can share your planning with other users and give them writing right (by default a share is with read-only rights).
+    * **Task Managing** - On the planning page, the user can add, modify or delete a task if given the right.
+  * **Meteo Overview** - See a meteo forecast on different hours and days.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Start Project
 
-## Running unit tests
+  Run `ng serve` in a terminal in the project root directory. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 
