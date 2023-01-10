@@ -7,11 +7,11 @@
   
 ## Table of content
 
-  * [Technologies](#technologies)
-  * [Features](#features)
-  * [Start Project](#start-project)
-  * [Contributors](#contributor)
-  * [Credit](#credit)
+  * [Technologies](#technologies-)
+  * [Features](#features-)
+  * [Start Project](#start-project-)
+  * [Contributors](#contributor-)
+  * [Credit](#credit-)
 
 ## Technologies [↑](#frontofficefrontend)
 
