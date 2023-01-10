@@ -11,11 +11,11 @@
   * [Features](#features)
   * [Start Project](#start-project)
 
-## Technologies
+## Technologies [↑](#frontofficefrontend)
 
   <img width=50px src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg" atl="angular-icon"> Angular
 
-## Features
+## Features [↑](#frontofficefrontend)
 
   * **Profile Managing** - You san see and edit your user name, image, the town you are living in and see the next task of all plannings you have access to. You can as well delete your account.
   * **Planning Managing** - See your own planning and planning shared with you and their tasks.
@@ -23,6 +23,15 @@
     * **Task Managing** - On the planning page, the user can add, modify or delete a task if given the right.
   * **Meteo Overview** - See a meteo forecast on different hours and days.
 
-## Start Project
+## Start Project [↑](#frontofficefrontend)
 
   Run `ng serve` in a terminal in the project root directory. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Contributor [↑](#frontofficefrontend)
+
+* @[FabriceT95](https://github.com/FabriceT95)
+* @[Scralblacks](https://github.com/Scralblacks)
+
+## Credit [↑](#frontofficefrontend)
+
+  We used [api.openweathermap.org](https://openweathermap.org/) for the weather data.
