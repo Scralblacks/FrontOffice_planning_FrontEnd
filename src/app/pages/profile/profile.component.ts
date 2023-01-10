@@ -59,7 +59,6 @@ export class ProfileComponent implements OnInit {
 
     this.ownerPlanning.subscribe({
       next: planning => {
-        console.log(planning)
         this.ownerNextTask$.next(this.planningService.getFirstNextTask(planning))
       },
     })
@@ -67,8 +66,6 @@ export class ProfileComponent implements OnInit {
     this.user$.subscribe({
       next: (data) => {
         this.currentUser = data;
-        console.log('Profile')
-        console.log(this.currentUser);
         this.formUser.patchValue({
             username: this.currentUser?.username,
             city: this.currentUser?.addressDTO?.city,
@@ -101,8 +98,6 @@ export class ProfileComponent implements OnInit {
 
     this.sharedPlannings.subscribe({
       next: (plannings) => {
-        console.log("SHARRED PLANNING :")
-        console.log(plannings)
         let card: planningCardShared = {
           nextTask: this.ownerNextTask$.value,
           image: null
@@ -115,8 +110,6 @@ export class ProfileComponent implements OnInit {
                 nextTask: this.planningService.getFirstNextTask(plannings[i]),
                 image: null
               }
-              console.log("TYPE OF CARD : " + typeof card)
-              console.log("TYPE DATETASKSTART : " + typeof card.nextTask?.dateTaskStart)
               this.cardPlanningSharedList$.value.push(card)
               this.cardPlanningSharedList$.next(this.cardPlanningSharedList$.value)
             } else {
@@ -124,8 +117,6 @@ export class ProfileComponent implements OnInit {
                 nextTask: this.planningService.getFirstNextTask(plannings[i]),
                 image: this.getProfilePicture(plannings[i].usersDTO.photo)
               }
-              console.log("TYPE OF CARD : " + typeof card)
-              console.log("TYPE DATETASKSTART : " + typeof card.nextTask?.dateTaskStart)
               this.cardPlanningSharedList$.value.push(card)
               this.cardPlanningSharedList$.next(this.cardPlanningSharedList$.value)
             }
@@ -148,19 +139,13 @@ export class ProfileComponent implements OnInit {
     this.isVisible = !this.isVisible;
   }
 
-  selectFile(event
-               :
-               any
-  ) {
+  selectFile(event: any) {
     this.currentFile = event.target.files[0];
     this.upload();
   }
 
-  upload()
-    :
-    void {
-    if (this.currentFile
-    ) {
+  upload(): void {
+    if (this.currentFile) {
       this.userService.upload(this.currentFile).subscribe(
         (blobImg) => {
           this.imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
@@ -213,12 +198,8 @@ export class ProfileComponent implements OnInit {
       if (!filename) {
         filename = this.currentUser?.photo!
       }
-      console.log('LE FILENAME');
-      console.log(filename);
       this.userService.getFile(filename).subscribe({
         next: (blobImg: Blob) => {
-          console.log("Safe Url :")
-          console.log(blobImg);
           safeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
         }
       })

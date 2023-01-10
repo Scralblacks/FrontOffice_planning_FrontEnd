@@ -46,7 +46,6 @@ main .login__content > div > div:first-child {
 }
 
 main .login__form > div:first-child {
-  /*margin: 0.5em 0;*/
   margin-bottom: 4em;
 }
 

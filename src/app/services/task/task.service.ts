@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {taskDTO} from "../../models/taskDTO";
 import {shareDTO} from "../../models/shareDTO";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  BASE_URL: string = "http://localhost:8080/api/task";
+  BASE_URL: string = `${environment.apiUrl}/task`;
 
   private taskBeingManaged = new BehaviorSubject<taskDTO | null>(null);
   private managingTask = new BehaviorSubject<boolean>(false);
@@ -91,8 +92,6 @@ export class TaskService {
     let url = this.BASE_URL;
     return this.http.delete<any>(`${url}/delete/${id}`).pipe(
       map(res => {
-        console.log('looooooooool');
-        console.log(res);
         this.taskBeingManaged.next(null);
         this.managingTask.next(false);
       })
@@ -104,8 +103,6 @@ export class TaskService {
     url += "/shared";
     return this.http.delete<any>(`${url}/delete/${id}?idUser=${idUser}&idPlanning=${idPlanning}`).pipe(
       map(res => {
-        console.log('looooooooool');
-        console.log(res);
         this.taskBeingManaged.next(null);
         this.managingTask.next(false);
       })

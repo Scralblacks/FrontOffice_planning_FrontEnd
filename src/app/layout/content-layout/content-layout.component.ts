@@ -18,10 +18,8 @@ export class ContentLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Init Content Layout...')
     this.userService.getLoggedUser().pipe(
       switchMap(user => {
-        // if(!user) return this.planningService.getCurrentPlanning(0)
         return this.planningService.getOwnerPlanning()
       })
     ).subscribe();

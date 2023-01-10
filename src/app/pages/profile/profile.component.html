@@ -1,16 +1,6 @@
 <main>
   <div class="profile">
     <div id="inputGroup" style="width: 100%;">
-      <!--      <div-->
-      <!--        style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-4em; border-radius: 8px"-->
-      <!--        class="profile-pic-div">-->
-      <!--                <img width="112" height="112"-->
-      <!--                     [src]="currentUser?.photo != null ? currentUser?.photo: '/assets/profilePicture/neutral_avatar.png'"/>-->
-      <!--                <label id="uploadBtn" for="file">Choose Photo</label>-->
-      <!--                <input type="file" id="file" accept="image/jpeg" style="display: none"/>-->
-      <!--        -->
-
-      <!--      </div>-->
 
       <div class="upload"
            style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-4em; border-radius: 8px">
@@ -18,10 +8,6 @@
           [src]="this.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'"
           width="112"
           height="112" alt="">
-        <!--        <img-->
-        <!--          [src]="this.currentUser?.photo ? this.currentUser?.photo : '/assets/profilePicture/neutral_avatar.png'"-->
-        <!--          width="112"-->
-        <!--          height="112" alt="">-->
         <div class="round">
           <input (change)="selectFile($event)" type="file">
         </div>

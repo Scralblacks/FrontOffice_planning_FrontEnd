@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(signinRequest).subscribe({
       next: (connected: boolean) => {
-        console.log("Connected : " + connected);
         if (connected) {
           this.toastr.success("Successfully logged in !");
           this.router.navigate(['/planning'])

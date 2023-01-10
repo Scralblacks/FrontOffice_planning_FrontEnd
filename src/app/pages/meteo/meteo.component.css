@@ -45,17 +45,6 @@
   color: #ffffff;
 }
 
-/*input {*/
-/*  position: relative;*/
-/*  bottom: 0.66em;*/
-/*  padding: 0.5em;*/
-/*  width: 10em;*/
-/*  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 4px 12px rgba(0, 0, 0, 0.25);*/
-/*  background: linear-gradient(180deg, var(--main-bg-color) 0%, #686868 100%);*/
-/*  border-radius: 12px;*/
-/*  color: #ffffff;*/
-/*}*/
-
 .form_and_reset {
   display: flex;
   flex-direction: row;

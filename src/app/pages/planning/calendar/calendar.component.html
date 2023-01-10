@@ -17,7 +17,6 @@
     </div>
     <ng-template #boxes>
       <div *ngFor='let day of monthDays'>
-        <!--                     [isSelectedDay]="selectedDay.getUTCDate() == day.number && currentDate.getMonth() == day.monthIndex && currentDate.getFullYear() == day.year"-->
         <app-day-box [day]="day"
                      (select)="changeSelectedDay($event)"
                      [isSelectedDay]="selectedDay.getUTCDate() == day.number"
@@ -28,28 +27,5 @@
         ></app-day-box>
       </div>
     </ng-template>
-
-
   </div>
-
-
 </div>
-
-
-<!--<div>-->
-<!--  <button (click)="onPreviousMonth()"> Previous </button>-->
-<!--  <span> {{ calendarCreator.getMonthName(monthNumber) }} &nbsp; {{ year }} </span>-->
-<!--  <button (click)="onNextMonth()"> Next </button>-->
-<!--</div>-->
-
-<!--<br>-->
-
-<!--<div class="calendar">-->
-<!--  <span *ngFor='let weekDay of weekDaysName' class="day">-->
-<!--    {{ weekDay }}-->
-<!--  </span>-->
-
-<!--  <span *ngFor='let day of monthDays' class="day">-->
-<!--    {{ day.number }}-->
-<!--  </span>-->
-<!--</div>-->

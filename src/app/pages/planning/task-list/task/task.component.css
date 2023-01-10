@@ -12,13 +12,12 @@
 
 .task .task__icon {
   display: flex;
-  margin: auto;
   background: var(--third-bg-color);
   border-radius: var(--md-radius);
   min-width: 40px;
   min-height: 40px;
   text-align: center;
-  margin-left: 0.5em;
+  margin: auto auto auto 0.5em;
 }
 
 .task .task__icon i {

@@ -41,8 +41,6 @@ export class TaskListComponent implements OnInit {
         if (data) {
           this.taskList = [...data.taskDTOList];
           this.dateSelected = new Date(data.dateSelected);
-          console.log(this.dateSelected);
-          console.log(this.taskList);
         }
       }
     });

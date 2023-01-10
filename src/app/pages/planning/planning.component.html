@@ -24,13 +24,6 @@
           </div>
         </ng-template>
       </div>
-      <!--      <div class="planning__switchEvents">-->
-      <!--        <label class="toggle">-->
-      <!--          <input type="checkbox">-->
-      <!--          <span class="slider"></span>-->
-      <!--          <span class="labels" data-off="EVENTS" data-on="EVENTS"></span>-->
-      <!--        </label>-->
-      <!--      </div>-->
     </div>
     <div class="planning__social">
       <div class="planning__peopleOwner">
@@ -81,7 +74,8 @@
 
   <ng-template #calendar>
     <div class="planning__calendar">
-      <div [ngStyle]="{'display' : !(isManagingTask$|async) || ((isManagingTask$|async) && (innerWidth > 769)) ? 'block': 'none'}">
+      <div
+        [ngStyle]="{'display' : !(isManagingTask$|async) || ((isManagingTask$|async) && (innerWidth > 769)) ? 'block': 'none'}">
         <app-calendar></app-calendar>
         <div class="planning__nextTask">
           <span>Next Task :</span>
@@ -104,19 +98,14 @@
           </div>
         </div>
       </div>
-      <app-task-list [ngStyle]="{'display' : !(isManagingTask$|async)  ? 'block': 'none'}" [planningId]="(planning$ | async)?.idPlanning!"
+      <app-task-list [ngStyle]="{'display' : !(isManagingTask$|async)  ? 'block': 'none'}"
+                     [planningId]="(planning$ | async)?.idPlanning!"
                      [userId]="(user$ | async)?.idUser!"
                      [readonly]="(planning$|async)?.readOnly!"></app-task-list>
-      <app-task-manager [ngStyle]="{'display' : (isManagingTask$|async)  ? 'block': 'none'}" [planningId]="(planning$ | async)?.idPlanning!"
+      <app-task-manager [ngStyle]="{'display' : (isManagingTask$|async)  ? 'block': 'none'}"
+                        [planningId]="(planning$ | async)?.idPlanning!"
                         [userId]="(user$ | async)?.idUser!"></app-task-manager>
     </div>
-<!--    <ng-template #task>-->
-<!--      <div *ngIf="innerWidth < 769">-->
-<!--        <app-task-manager [planningId]="(planning$ | async)?.idPlanning!"-->
-<!--                          [userId]="(user$ | async)?.idUser!"></app-task-manager>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-
   </ng-template>
 
 

@@ -50,16 +50,12 @@ export class MeteoComponent implements OnInit {
       })
       this.meteoData$.subscribe({
         next: (data) => {
-          console.log(data)
           this.nextTimeTS = data.list[1].dt;
-          console.log(now)
-          console.log(data.list[1].dt)
         }
       })
     }
     this.tempMeteoData$.subscribe({
       next: data => {
-        console.log(data)
         if (data){
           if (data.cod == null || data.cod == '404') {
             this.toastr.error("Invalid zipcode")

@@ -135,7 +135,6 @@ export class CalendarComponent implements OnInit {
           }
         }
       })
-      // console.log(this.taskMapOfMonth)
       this.isReadyToRender = Promise.resolve(true);
       this.sendTasksToDisplay(this.taskMapOfMonth.has(this.selectedDay.getUTCDate()) ? this.taskMapOfMonth.get(this.selectedDay.getUTCDate()) : []);
     }

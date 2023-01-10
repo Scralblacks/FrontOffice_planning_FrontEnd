@@ -33,19 +33,6 @@ export class ShareManagerComponent implements OnInit {
     if (this.localIdPlanning != this.localCurrentUser?.planningId!) this.title = "Look who you’re sharing this schedule with"
   }
 
-  // When the user clicks the action button a.k.a. the logout button in the\
-  // modal, show an alert and followed by the closing of the modal
-  actionFunction() {
-    alert("You have logged out.");
-    this.closeModal();
-  }
-
-  // If the user clicks the cancel button a.k.a. the go back button, then\
-  // just close the modal
-  closeModal() {
-    this.dialogRef.close();
-  }
-
   updateShare(sharedUsersDTO: sharedUsersDTO) {
     const shareDto: shareDTO = {
       userId: sharedUsersDTO.idUser,

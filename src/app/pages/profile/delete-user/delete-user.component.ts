@@ -48,7 +48,6 @@ export class DeleteUserComponent implements OnInit {
       this.userService.deleteUserById(this.localCurrentUserId).subscribe({
         next: bool => {
           if (bool) {
-            console.log(bool)
             this.closeDiag()
             this.authService.logout()
           }

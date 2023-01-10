@@ -22,12 +22,11 @@ import {TaskListComponent} from './pages/planning/task-list/task-list.component'
 import {TaskComponent} from './pages/planning/task-list/task/task.component';
 import {TaskManagerComponent} from './pages/planning/task-manager/task-manager.component';
 import {ProfileComponent} from './pages/profile/profile.component';
-import {ModalComponent} from './layout/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import { ShareManagerComponent } from './pages/planning/share-manager/share-manager.component';
-import { MeteoComponent } from './pages/meteo/meteo.component';
-import { DeleteUserComponent } from './pages/profile/delete-user/delete-user.component';
+import {ShareManagerComponent} from './pages/planning/share-manager/share-manager.component';
+import {MeteoComponent} from './pages/meteo/meteo.component';
+import {DeleteUserComponent} from './pages/profile/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -45,33 +44,33 @@ import { DeleteUserComponent } from './pages/profile/delete-user/delete-user.com
     TaskComponent,
     TaskManagerComponent,
     ProfileComponent,
-    ModalComponent,
     ShareManagerComponent,
     TaskManagerComponent,
     MeteoComponent,
+    DeleteUserComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true,
-            autoDismiss: true,
-            closeButton: true,
-            progressBar: true,
-            progressAnimation: "decreasing",
-        }),
-        MatButtonModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      autoDismiss: true,
+      closeButton: true,
+      progressBar: true,
+      progressAnimation: "decreasing",
+    }),
+  ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent],
+  entryComponents: [],
 })
 export class AppModule {
 }

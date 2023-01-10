@@ -35,13 +35,11 @@ export class CalendarCreatorService {
       }
 
     days.push(firstday);
-    //
 
     let countDaysInMonth = new Date(year, monthIndex + 1, 0).getDate();
     for (let i = 2; i < countDaysInMonth + 1; i++) {
       days.push(this.createDay(i, monthIndex, year));
     }
-
     return days;
   }
 

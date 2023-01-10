@@ -56,8 +56,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.formAddUser.valid) {
-      // if (this.formAddUser.value.password == this.formAddUser.value.confirm) {
-
       const signupRequest: SignupRequest = {
         email: this.formAddUser.value.userEmail,
         username: this.formAddUser.value.userName!,
@@ -75,9 +73,6 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           console.log(err)
-        },
-        complete: () => {
-          console.log('Complete')
         }
       });
     } else {

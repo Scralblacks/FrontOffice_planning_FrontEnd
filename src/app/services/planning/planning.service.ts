@@ -8,26 +8,31 @@ import {setNewShareDTO} from "../../models/setNewShareDTO";
 import {ErrorResponse} from "../../models/errorResponse";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {GetSharedPlanning} from "../../models/GetSharedPlanning";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanningService {
 
-  BASE_URL: string = "http://localhost:8080/api/planning";
+  BASE_URL: string = `${environment.apiUrl}/planning`;
+
+  private currentPlanning = new BehaviorSubject<planningDTO | null>(null);
+
+  get planning() {
+    return this.currentPlanning.asObservable();
+  }
+
+
+
   BASE_URL_SHARE: string = "http://localhost:8080/api/share"
 
   planningStorage!: planningDTO;
 
   changeDateSelected = new BehaviorSubject<any>(null);
-  private currentPlanning = new BehaviorSubject<planningDTO | null>(null);
   private isOwner = new BehaviorSubject<boolean>(true);
 
-  // private currentTasks = new BehaviorSubject<taskDTO[] | null>(null);
 
-  get planning() {
-    return this.currentPlanning.asObservable();
-  }
 
   get newDailyTasks() {
     return this.changeDateSelected.asObservable();
@@ -41,11 +46,9 @@ export class PlanningService {
   }
 
   getOwnerPlanning(): Observable<any> {
-    console.log("Get owners planning...")
     return this.http.get<planningDTO>(this.BASE_URL).pipe(
       map((planning: planningDTO) => {
         this.planningStorage = planning;
-        console.log(this.planningStorage);
         this.currentPlanning.next(this.planningStorage);
         this.isOwner.next(true);
         return planning;
@@ -57,7 +60,6 @@ export class PlanningService {
   }
 
   getSharedPlanning(getPlanningShare: GetSharedPlanning): Observable<any> {
-    console.log("Get shared planning...")
     return this.http.get<planningDTO>(`${this.BASE_URL}/shared?idUser=${getPlanningShare.userId}&idPlanning=${getPlanningShare.planningId}`).pipe(
       map((planning: planningDTO) => {
         this.planningStorage = planning;
@@ -82,12 +84,8 @@ export class PlanningService {
       }
       nextTask = planning.taskList[i]
       nextTaskStart = nextTask.dateTaskStart
-      console.log("TYPE : " + typeof nextTask.dateTaskStart)
       i = i + 1
-      console.log(nextTask)
-      console.log(nextTaskStart)
     } while(nextTaskStart < now)
-    console.log(nextTask)
     return nextTask
   }
 

@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.user$.subscribe({
       next: (user) => {
         if (user) {
@@ -42,8 +41,6 @@ export class HeaderComponent implements OnInit {
           }
           this.userService.getFile(user.photo!).subscribe({
             next: (blobImg: Blob) => {
-              console.log("Safe Url :")
-              console.log(blobImg);
               this.ownerPicture = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
             }
           })
@@ -59,6 +56,4 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout()
   }
-
-
 }

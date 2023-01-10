@@ -5,13 +5,15 @@ import {userDTO} from "../../models/userDTO";
 import {GetSharedUsers} from "../../models/GetSharedUsers";
 import {sharedUsersDTO} from "../../models/sharedUsersDTO";
 import {UpdateUserDTO} from "../../models/updateUserDTO";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  BASE_URL: string = "http://localhost:8080/api/users";
+  BASE_URL_USER: string = `${environment.apiUrl}/users`;
+  BASE_URL_IMAGES: string = `${environment.apiUrl}/images`;
 
   private connectedUser = new BehaviorSubject<userDTO | null>(null);
   private sharedUser = new BehaviorSubject<sharedUsersDTO[] | null>(null);
@@ -28,16 +30,12 @@ export class UserService {
   }
 
   getLoggedUser(): Observable<userDTO | null> {
-    console.log('getLoggedUser...');
-    return this.http.get<userDTO>(`${this.BASE_URL}`).pipe(
+    return this.http.get<userDTO>(`${this.BASE_URL_USER}`).pipe(
       map((user) => {
-        console.log('Map getloggedUser');
-        console.log(user);
         this.connectedUser.next(user);
         return user;
       }),
       catchError((err) => {
-        console.log(err);
         window.sessionStorage.clear();
         return of(null);
       })
@@ -45,11 +43,11 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    return this.http.get(`${this.BASE_URL}/id/${id}`)
+    return this.http.get(`${this.BASE_URL_USER}/id/${id}`)
   }
 
   getSharedUsers(sharedUsers: GetSharedUsers) {
-    return this.http.post<sharedUsersDTO[]>(`${this.BASE_URL}/shared`, sharedUsers).pipe(
+    return this.http.post<sharedUsersDTO[]>(`${this.BASE_URL_USER}/shared`, sharedUsers).pipe(
       map((sharedUsersDto) => {
         this.sharedUser.next(sharedUsersDto);
         return sharedUsersDto;
@@ -58,10 +56,8 @@ export class UserService {
   }
 
   updateUser(updateUserDTO: UpdateUserDTO) {
-    return this.http.put<userDTO>(`${this.BASE_URL}`, updateUserDTO).pipe(
+    return this.http.put<userDTO>(`${this.BASE_URL_USER}`, updateUserDTO).pipe(
       map((returnedUserDto) => {
-        console.log("returned user after update");
-        console.log(returnedUserDto);
         this.connectedUser.next(returnedUserDto);
       })
     )
@@ -72,7 +68,7 @@ export class UserService {
 
     formData.append('file', file);
 
-    return this.http.post(`http://localhost:8080/api/images/upload`, formData, {
+    return this.http.post(`${this.BASE_URL_IMAGES}/upload`, formData, {
       reportProgress: true,
       responseType: 'blob'
     }).pipe(map((fileUploaded) => {
@@ -81,12 +77,12 @@ export class UserService {
   }
 
   getFile(filename: string): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/images/${filename}`, {responseType: 'blob'});
+    return this.http.get(`${this.BASE_URL_IMAGES}/${filename}`, {responseType: 'blob'});
   }
 
-  deleteUserById(id : number | undefined): Observable<any>{
-    if (id != undefined){
-    return this.http.delete(`http://localhost:8080/api/users/${id}`)
+  deleteUserById(id: number | undefined): Observable<any> {
+    if (id != undefined) {
+      return this.http.delete(`${this.BASE_URL_USER}/${id}`)
     } else {
       throw new Error("User not found")
     }

@@ -56,6 +56,27 @@ export class PlanningComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.planning$.pipe(
+      switchMap((planning, index) => {
+        this.currentPlanning = planning;
+        this.currentPlanning?.taskList.forEach((task) => {
+          if (new Date(task.dateTaskStart) > new Date() && (this.nextTask?.dateTaskStart! > task.dateTaskStart || this.nextTask == undefined)) {
+            this.nextTask = task;
+          }
+        })
+
+        const shared: GetSharedUsers = {
+          idPlanning: this.currentPlanning?.idPlanning!,
+          sharedIdList: this.currentPlanning?.shareList.map(value => value.userId)!
+        }
+        if (this.currentPlanning?.idPlanning) {
+          this.userService.getSharedUsers(shared).subscribe();
+        }
+        return new Observable();
+      })
+    ).subscribe();
+
+
     this.innerWidth = window.innerWidth;
 
     this.formAddShare = this.formBuilder.group({
@@ -64,8 +85,6 @@ export class PlanningComponent implements OnInit {
     this.user$.subscribe({
       next: (data) => {
         this.currentUser = data;
-        console.log("Current User :")
-        console.log(this.currentUser);
         if (this.currentUser?.photo == null || this.currentUser?.photo?.length == 0) {
           this.ownerPicture = '/assets/profilePicture/neutral_avatar.png';
         } else {
@@ -75,9 +94,7 @@ export class PlanningComponent implements OnInit {
     });
     this.usersShared$.subscribe({
       next: (data) => {
-        console.log("Cool de nouveau partage !")
         this.currentSharedUsers = data;
-        console.log(this.currentSharedUsers);
         this.isPlanningLoading = false;
         if (this.currentSharedUsers != undefined && this.currentSharedUsers!.length > 0) {
           for (let i = 0; i < Math.max(2, this.currentSharedUsers?.length!); i++) {
@@ -90,41 +107,14 @@ export class PlanningComponent implements OnInit {
         }
       }
     });
-    this.planning$.pipe(
-      switchMap((planning, index) => {
-        console.log("subscribing to new planning lol")
-        this.currentPlanning = planning;
-        this.currentPlanning?.taskList.forEach((task) => {
-          if (new Date(task.dateTaskStart) > new Date() && (this.nextTask?.dateTaskStart! > task.dateTaskStart || this.nextTask == undefined)) {
-            this.nextTask = task;
-          }
-        })
-
-        // this.nextTask = this.currentPlanning?.taskList.find(task => new Date(task.dateTaskStart) > new Date())!;
-        console.log(this.nextTask);
-        console.log(this.currentPlanning);
-        const shared: GetSharedUsers = {
-          idPlanning: this.currentPlanning?.idPlanning!,
-          sharedIdList: this.currentPlanning?.shareList.map(value => value.userId)!
-        }
-        if (this.currentPlanning?.idPlanning) {
-          this.userService.getSharedUsers(shared).subscribe();
-        }
-        return new Observable();
-      })
-    ).subscribe();
   }
 
   getProfilePicture(filename: string, index: number) {
     if (!filename) {
       filename = this.currentUser?.photo!
     }
-    console.log('LE FILENAME');
-    console.log(filename);
     this.userService.getFile(filename).subscribe({
       next: (blobImg: Blob) => {
-        console.log("Safe Url :")
-        console.log(blobImg);
         const safeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
         if (index < 0) {
           this.ownerPicture = safeUrl
@@ -136,7 +126,6 @@ export class PlanningComponent implements OnInit {
   }
 
   onNextPlanning(): void {
-
 
     if (this.currentUser?.sharedPlanningId?.length! == 0) {
       return;

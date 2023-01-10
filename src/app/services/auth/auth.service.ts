@@ -5,13 +5,14 @@ import {AuthStorageService} from "../auth-storage/auth-storage.service";
 import {SignupRequest} from "../../models/signupRequest";
 import {SigninRequest} from "../../models/signinRequest";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  BASE_URL = "http://localhost:8080/api/auth"
+  BASE_URL = `${environment.apiUrl}/auth`;
   private loggedIn = new BehaviorSubject<boolean>(!!this.authStorage.getToken())
 
   get isLoggedIn() {
@@ -26,7 +27,6 @@ export class AuthService {
       .pipe(
         map((jwtResponse: any) => {
           this.authStorage.saveToken(jwtResponse.token);
-          this.authStorage.saveEmail(jwtResponse.email);
           this.loggedIn.next(true);
           return true;
         }),
@@ -40,7 +40,6 @@ export class AuthService {
     return this.http.post<any>(`${this.BASE_URL}/signup`, signupRequest)
       .pipe(
         map((data: any) => {
-          console.log(data);
           return true;
         }),
         catchError((err) => {

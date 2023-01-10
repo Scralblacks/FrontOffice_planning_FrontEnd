@@ -9,10 +9,6 @@
     <form autocomplete="off" class="register__form" [formGroup]="formAddUser" (ngSubmit)="onSubmit()">
       <div>
         <div>
-          <!--      <div>-->
-          <!--        <label for="userName">User's name : </label>-->
-          <!--        <input id="userName" type="text" formControlName="userName">-->
-          <!--      </div>-->
           <app-input formControlName="userName" id="input-username" label="Username" type="text"
                      name="userName"></app-input>
           <app-input formControlName="userEmail" id="input-email" label="Email" type="text"
