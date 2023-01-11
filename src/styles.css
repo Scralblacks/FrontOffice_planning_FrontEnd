@@ -59,7 +59,7 @@ app-profile, app-meteo {
 }
 
 app-meteo {
-  overflow: scroll;
+  overflow: auto;
 }
 
 app-calendar {
