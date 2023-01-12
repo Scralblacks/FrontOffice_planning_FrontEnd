@@ -29,10 +29,11 @@
         </app-input>
         <app-input formControlName="zipcode" id="input-zipcode" label="Zip Code" type="text" name="zipcode">
         </app-input>
+        <div>
+          <app-submit-button [styles]="updateBtnStyle" text="Update"></app-submit-button>
+        </div>
       </form>
-      <div>
-        <app-submit-button [styles]="updateBtnStyle" text="Update"></app-submit-button>
-      </div>
+
       <div class="planning__cards">
         <span>My Agenda</span>
         <div class="planning__card">
