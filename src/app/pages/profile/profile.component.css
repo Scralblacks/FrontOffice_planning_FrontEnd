@@ -22,7 +22,7 @@ main .profile {
 }
 
 main form {
-  padding:0.5em  2.5em ;
+  padding: 0.5em 2.5em;
 }
 
 main form div:nth-child(2) {
@@ -36,7 +36,7 @@ main form i {
 }
 
 app-input {
-  flex:1;
+  flex: 1;
 }
 
 .custom__image-container {
@@ -60,7 +60,7 @@ app-input {
 }
 
 .custom__image-container img {
-  width:72px;
+  width: 72px;
   height: 72px;
   border-radius: 5px;
   object-fit: cover;
@@ -80,7 +80,7 @@ app-input {
   position: absolute;
   transform: scale(6);
   opacity: 0;
-  top:25%
+  top: 25%
 }
 
 .upload .round {
@@ -94,7 +94,7 @@ app-input {
   overflow: hidden;
 }
 
-.deleteBtn{
+.deleteBtn {
   display: flex;
   background: var(--btn-delete-color);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
@@ -105,7 +105,7 @@ app-input {
   right: 3vw;
 }
 
-.planning__cards{
+.planning__cards {
   display: flex;
   flex-direction: column;
   margin-right: 0.5em;
@@ -114,50 +114,60 @@ app-input {
   height: 50px;
 }
 
-.planning__card{
+.planning__card {
   border: solid #919D9E;
   border-radius: 8px;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
+  cursor: pointer;
 }
 
-.shared_planning__card{
+.shared_planning__card {
   border: solid #919D9E;
   border-radius: 8px;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
+  cursor: pointer;
 }
 
-.planning__card textarea{
+.planning__card textarea {
   height: 95%;
   overflow-y: auto;
   justify-content: center;
 }
 
-.next_task_present__upper{
+.next_task_present__upper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.next_task_present__bottom{
+.next_task_present__bottom {
   display: flex;
   flex-direction: column;
 }
 
-.inner__next_task__bottom{
+.inner__next_task__bottom {
   display: flex;
   flex-direction: row;
   height: auto;
   justify-content: space-between;
 }
 
-.planning__cards img{
+.planning__cards img {
   height: 30px;
   width: 30px;
 }
 
-@media screen and (min-height: 650px){
+@media screen and (min-width: 481px) {
+  main {
+    margin: auto;
+    max-width: 400px;
+  }
+
+}
+
+@media screen and (min-height: 650px) {
   .custom__image-container label {
     width: 100px;
     height: 100px;
@@ -180,7 +190,7 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     height: 70px;
   }
 }
@@ -208,12 +218,12 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     height: 80px;
   }
 }
 
-@media screen and (min-height: 700px){
+@media screen and (min-height: 700px) {
   .custom__image-container label {
     width: 100px;
     height: 100px;
@@ -236,12 +246,12 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     height: 130px;
   }
 }
 
-@media screen and (min-height: 725px){
+@media screen and (min-height: 725px) {
   .custom__image-container label {
     width: 100px;
     height: 100px;
@@ -264,12 +274,12 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     height: 145px;
   }
 }
 
-@media screen and (min-height: 800px){
+@media screen and (min-height: 800px) {
   .custom__image-container label {
     width: 100px;
     height: 100px;
@@ -292,18 +302,18 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     overflow-y: hidden;
     height: revert;
   }
 
-  .shared_planning__cards{
+  .shared_planning__cards {
     overflow-y: auto;
     height: 125px;
   }
 }
 
-@media screen and (min-height: 855px){
+@media screen and (min-height: 855px) {
   .custom__image-container label {
     width: 100px;
     height: 100px;
@@ -326,12 +336,12 @@ app-input {
     line-height: 33px;
   }
 
-  .planning__cards{
+  .planning__cards {
     overflow-y: hidden;
     height: revert;
   }
 
-  .shared_planning__cards{
+  .shared_planning__cards {
     overflow-y: auto;
     height: revert;
   }

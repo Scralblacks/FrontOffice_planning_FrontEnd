@@ -267,6 +267,10 @@ main .planning__calendar > app-task-list:nth-child(2) {
     color: var(--main-bg-color);
   }
 
+  main .planning__header .planning__agendaSelector i {
+    color: var(--main-bg-color);
+  }
+
   main > div:nth-child(1) {
     display: flex;
     justify-content: space-evenly;
@@ -284,6 +288,12 @@ main .planning__calendar > app-task-list:nth-child(2) {
     flex-direction: row;
     background: none;
     box-shadow: none;
+  }
+
+  main .planning__calendar  div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 
   main .planning__header .planning__agendaSelector span {

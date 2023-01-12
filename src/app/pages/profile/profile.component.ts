@@ -11,6 +11,7 @@ import {PlanningService} from "../../services/planning/planning.service";
 import {taskDTO} from "../../models/taskDTO";
 import {planningDTO} from "../../models/planningDTO";
 import {planningCardShared} from "../../models/planningCardShared";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -46,7 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private sanitizer: DomSanitizer, private dialog: MatDialog,
-              private planningService: PlanningService) {
+              private planningService: PlanningService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -206,6 +207,15 @@ export class ProfileComponent implements OnInit {
       return safeUrl
     } else {
       return null
+    }
+  }
+
+  redirectToPlanning(id?: number) {
+    if (id) {
+      // this.router.navigate(['/planning'], {queryParams: {id: id}, queryParamsHandling: 'merge'});
+      this.router.navigateByUrl('/planning?id=' + id);
+    } else {
+      this.router.navigate(['/planning']);
     }
   }
 

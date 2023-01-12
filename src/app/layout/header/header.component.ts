@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   @Output("onTriggerSidenav")
   trigger = new EventEmitter<boolean>();
 
-  ownerPicture: SafeUrl = "";
+  ownerPicture: SafeUrl = "/assets/profilePicture/neutral_avatar.png";
 
   activeTab: string = 'planning';
 
@@ -39,11 +39,13 @@ export class HeaderComponent implements OnInit {
           if (user.addressDTO != undefined) {
             this.meteoService.getWeather(user.addressDTO.postalCode);
           }
-          this.userService.getFile(user.photo!).subscribe({
-            next: (blobImg: Blob) => {
-              this.ownerPicture = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
-            }
-          })
+          if (user.photo) {
+            this.userService.getFile(user.photo).subscribe({
+              next: (blobImg: Blob) => {
+                this.ownerPicture = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blobImg));
+              }
+            })
+          }
         }
       }
     })

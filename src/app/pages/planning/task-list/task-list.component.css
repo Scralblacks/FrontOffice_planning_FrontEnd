@@ -35,7 +35,6 @@
 
 .taskList .taskList__default {
   text-align: center;
-  margin: 5em 3em;
   font-style: italic;
 }
 
@@ -77,6 +76,10 @@
 
   .taskList .taskList__header:after {
     right: 0;
+  }
+
+  .taskList__default {
+    margin: 5em 3em;
   }
 }
 

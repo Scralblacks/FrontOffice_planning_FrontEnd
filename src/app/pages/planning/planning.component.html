@@ -75,9 +75,9 @@
   <ng-template #calendar>
     <div class="planning__calendar">
       <div
-        [ngStyle]="{'display' : !(isManagingTask$|async) || ((isManagingTask$|async) && (innerWidth > 769)) ? 'block': 'none'}">
+        [ngStyle]="{'display' : !(isManagingTask$|async) || ((isManagingTask$|async) && (innerWidth > 769)) ? 'flex': 'none'}">
         <app-calendar></app-calendar>
-        <div class="planning__nextTask">
+        <div class="planning__nextTask" *ngIf="nextTask != null; else emptyNextTask">
           <span>Next Task :</span>
           <div style="display: flex;">
             <div class="task__icon">
@@ -97,6 +97,11 @@
             </div>
           </div>
         </div>
+        <ng-template #emptyNextTask>
+          <div class="planning__nextTask">
+            <span>No task planned for this agenda</span>
+          </div>
+        </ng-template>
       </div>
       <app-task-list [ngStyle]="{'display' : !(isManagingTask$|async)  ? 'block': 'none'}"
                      [planningId]="(planning$ | async)?.idPlanning!"

@@ -19,7 +19,7 @@ export class MeteoComponent implements OnInit {
   today!: Date
   meteoData$ = this.meteoService.meteoData
   tempMeteoData$ = this.meteoService.tempMeteoData
-  isTempMeteo! : Observable<boolean | null>
+  isTempMeteo!: Observable<boolean | null>
   zipNotFound$ = new BehaviorSubject<boolean>(false)
   tempZipcode$ = this.meteoService.zipcode
   user$ = this.userService.user
@@ -33,7 +33,7 @@ export class MeteoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    let now: number = Math.round(Date.now()/1000)
+    let now: number = Math.round(Date.now() / 1000)
     this.today = new Date()
     this.tomorrow = this.today.setDate(this.today.getDate() + 1)
     this.afterTomorrow = this.today.setDate(this.today.getDate() + 1)
@@ -55,7 +55,7 @@ export class MeteoComponent implements OnInit {
     }
     this.tempMeteoData$.subscribe({
       next: data => {
-        if (data){
+        if (data) {
           if (data.cod == null || data.cod == '404') {
             this.toastr.error("Invalid zipcode")
             this.isTempMeteo = this.meteoService.notTempMeteo
@@ -67,16 +67,16 @@ export class MeteoComponent implements OnInit {
     })
   }
 
-  submitNewTown(){
+  submitNewTown() {
     const zipcode = this.formChangeTown.value.zipCode
 
-    if (zipcode){
+    if (zipcode) {
       this.meteoService.getTempWeather(zipcode);
       // this.isTempMeteo = this.meteoService.isTempMeteo;
     }
   }
 
-  onClickResetTown(){
+  onClickResetTown() {
     this.isTempMeteo = this.meteoService.notTempMeteo;
   }
 }
