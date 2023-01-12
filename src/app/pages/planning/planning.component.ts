@@ -55,9 +55,21 @@ export class PlanningComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.planning$.pipe(
-      switchMap((planning, index) => {
+    this.innerWidth = window.innerWidth;
+
+    this.formAddShare = this.formBuilder.group({
+      emailShare: new FormControl("", [Validators.required, Validators.email])
+    });
+
+    this.planning$.subscribe({
+      next: (planning) => {
         this.currentPlanning = planning;
+        if (this.currentPlanning?.usersDTO == null) {
+          this.getProfilePicture(this.currentUser?.photo!, -1);
+        } else {
+          this.getProfilePicture(this.currentPlanning?.usersDTO.photo!, -1);
+        }
+
         this.currentPlanning?.taskList.forEach((task) => {
           if (new Date(task.dateTaskStart) > new Date() && (this.nextTask?.dateTaskStart! > task.dateTaskStart || this.nextTask == undefined)) {
             this.nextTask = task;
@@ -71,16 +83,11 @@ export class PlanningComponent implements OnInit {
         if (this.currentPlanning?.idPlanning) {
           this.userService.getSharedUsers(shared).subscribe();
         }
-        return new Observable();
-      })
-    ).subscribe();
+      }
 
 
-    this.innerWidth = window.innerWidth;
+    })
 
-    this.formAddShare = this.formBuilder.group({
-      emailShare: new FormControl("", [Validators.required, Validators.email])
-    });
     this.user$.subscribe({
       next: (data) => {
         this.currentUser = data;
@@ -91,6 +98,8 @@ export class PlanningComponent implements OnInit {
         }
       },
     });
+
+
     this.usersShared$.subscribe({
       next: (data) => {
         this.currentSharedUsers = data;
@@ -109,7 +118,7 @@ export class PlanningComponent implements OnInit {
   }
 
   getProfilePicture(filename: string, index: number) {
-    if (!filename) {
+    if (filename.length == 0) {
       filename = this.currentUser?.photo!
     }
     this.userService.getFile(filename).subscribe({

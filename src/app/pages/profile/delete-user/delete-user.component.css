@@ -1,10 +1,10 @@
-.buttons{
+.buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.modal__yesBtn{
+.modal__yesBtn {
   background: var(--btn-delete-color);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   border-radius: var(--sm-radius);
@@ -20,7 +20,7 @@
   width: 45%;
 }
 
-.modal__noBtn{
+.modal__noBtn {
   background: #228b22;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   border-radius: var(--sm-radius);

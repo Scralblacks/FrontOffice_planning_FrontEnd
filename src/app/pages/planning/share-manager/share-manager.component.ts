@@ -17,7 +17,7 @@ export class ShareManagerComponent implements OnInit {
   localSharedUsers: sharedUsersDTO[] = [];
   localCurrentUser!: userDTO | null;
   localIdPlanning!: number;
-  localSharedPictures! : SafeUrl[];
+  localSharedPictures!: SafeUrl[];
   title: string = "Manage your share users";
 
 

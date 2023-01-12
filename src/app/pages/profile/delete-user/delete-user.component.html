@@ -1,8 +1,11 @@
 <h1 mat-dialog-title>{{title}}</h1>
 
 <div class="buttons">
-  <button type="button" class="modal__noBtn" (click)="no()">NO</button>
-  <button *ngIf="deleteAvailable | async; else deleteNotAvailable" type="button" class="modal__yesBtn" (click)="yes()">YES</button>
+  <button type="button" class="modal__noBtn" (click)="cancelDelete()">NO</button>
+  <button *ngIf="deleteAvailable | async; else deleteNotAvailable" type="button" class="modal__yesBtn"
+          (click)="confirmDelete()">
+    YES
+  </button>
   <ng-template #deleteNotAvailable>
     <button class="modal__yesBtnDisabled">YES</button>
   </ng-template>

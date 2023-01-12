@@ -14,17 +14,19 @@ export class DeleteUserComponent implements OnInit {
   localCurrentUserId!: number;
   title: string = "Are you sure you want to delete your account ?"
   deleteAvailable$ = new BehaviorSubject<boolean>(false);
-  get deleteAvailable(){
+
+  get deleteAvailable() {
     return this.deleteAvailable$.asObservable()
   }
 
   constructor(public dialogRef: MatDialogRef<DeleteUserComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private authService: AuthService) { }
+              @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.userService.user.subscribe({
       next: (userDTO) => {
-        if (userDTO?.idUser){
+        if (userDTO?.idUser) {
           this.localCurrentUserId = userDTO.idUser
           this.deleteAvailable$.next(true)
         }
@@ -32,24 +34,20 @@ export class DeleteUserComponent implements OnInit {
     })
   }
 
-  closeDiag(){
+  cancelDelete() {
     this.dialogRef.close();
   }
 
-  no(){
-    this.closeDiag()
-  }
-
-  yes(){
+  confirmDelete() {
     if (this.localCurrentUserId) {
       this.userService.deleteUserById(this.localCurrentUserId).subscribe({
         next: bool => {
           if (bool) {
-            this.closeDiag()
+            this.cancelDelete()
             this.authService.logout()
           }
         },
-        error : err => {
+        error: err => {
           console.log(err)
         }
       })

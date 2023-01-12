@@ -110,7 +110,7 @@
 
 }
 
-.secondary-data .inner-secondary-data:nth-child(2) img {
+div[class=secondary-data] .inner-secondary-data:nth-child(2) img {
   height: 24px;
   width: 12px;
 
@@ -214,7 +214,7 @@ tr {
 
 @media screen and (min-width: 769px) {
   .meteo {
-    margin-top:2em;
+    margin-top: 2em;
   }
 }
 

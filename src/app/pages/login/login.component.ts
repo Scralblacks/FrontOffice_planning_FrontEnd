@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.loggedIn$.subscribe({
-      next:(isLoggedIn) => {
-        if(isLoggedIn) {
+      next: (isLoggedIn) => {
+        if (isLoggedIn) {
           this.router.navigate(['/planning'])
         }
       }

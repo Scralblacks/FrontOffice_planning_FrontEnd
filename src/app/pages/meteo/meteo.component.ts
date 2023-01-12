@@ -31,12 +31,12 @@ export class MeteoComponent implements OnInit {
   constructor(private meteoService: MeteoService, private userService: UserService, private toastr: ToastrService) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
 
     let now: number = Math.round(Date.now() / 1000)
     this.today = new Date()
-    this.tomorrow = this.today.setDate(this.today.getDate() + 1)
-    this.afterTomorrow = this.today.setDate(this.today.getDate() + 1)
+    this.tomorrow = new Date().setDate(this.today.getDate() + 1)
+    this.afterTomorrow = new Date().setDate(this.today.getDate() + 1)
     this.zipNotFound$.next(false)
     if (now >= this.nextTimeTS) {
       this.user$.subscribe({
@@ -69,10 +69,8 @@ export class MeteoComponent implements OnInit {
 
   submitNewTown() {
     const zipcode = this.formChangeTown.value.zipCode
-
     if (zipcode) {
       this.meteoService.getTempWeather(zipcode);
-      // this.isTempMeteo = this.meteoService.isTempMeteo;
     }
   }
 

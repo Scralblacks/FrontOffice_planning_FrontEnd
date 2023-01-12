@@ -31,12 +31,12 @@ export class CalendarCreatorService {
     //create empty days
     for (let i = 0; i < firstday.weekDayNumber; i++) {
 
-        days.push({
-          weekDayNumber: i,
-          monthIndex: monthIndex,
-          year: year,
-        } as Day);
-      }
+      days.push({
+        weekDayNumber: i,
+        monthIndex: monthIndex,
+        year: year,
+      } as Day);
+    }
 
     days.push(firstday);
 
@@ -51,31 +51,31 @@ export class CalendarCreatorService {
   public getMonthName(monthIndex: number): string {
     switch (monthIndex) {
       case 0 :
-        return "Janvier"
+        return "January"
       case 1:
-        return "Février";
+        return "February";
       case 2:
-        return "Mars";
+        return "March";
       case 3:
-        return "Avril";
+        return "April";
       case 4:
-        return "Mai";
+        return "May";
       case 5:
-        return "Juin";
+        return "June";
       case 6:
-        return "Juillet";
+        return "July";
       case 7:
-        return "Août";
+        return "August";
       case 8:
-        return "Septembre";
+        return "September";
       case 9:
-        return "Octobre";
+        return "October";
       case 10:
-        return "Novembre";
+        return "November";
       case 11:
-        return "Décembre";
+        return "December";
       case 12:
-        return "Janvier";
+        return "January";
       default:
         return "|" + monthIndex;
     }
@@ -106,7 +106,7 @@ export class CalendarCreatorService {
   // Generates a new Day object for each day of a month
   private createDay(dayNumber: number, monthIndex: number, year: number) {
 
-    if (new Date(year, monthIndex, dayNumber).getDay() == 0){
+    if (new Date(year, monthIndex, dayNumber).getDay() == 0) {
       let day: Day = {
         monthIndex: monthIndex,
         month: this.getMonthName(monthIndex),

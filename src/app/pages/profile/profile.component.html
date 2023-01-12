@@ -1,9 +1,9 @@
 <main>
   <div class="profile">
-    <div id="inputGroup" style="width: 100%;">
+    <div id="inputGroup">
 
       <div class="upload"
-           style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-4em; border-radius: 8px">
+           style="text-align: center; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); margin-top:-6em; border-radius: 8px; cursor:pointer;">
         <img
           [src]="this.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'"
           width="112"
@@ -31,40 +31,13 @@
         </app-input>
         <app-submit-button [styles]="updateBtnStyle" text="Update"></app-submit-button>
       </form>
+      <hr/>
       <div class="planning__cards">
-        <span>My Agenda</span>
-        <div class="planning__card" (click)="redirectToPlanning()">
-          <div class="next_task_present__upper" *ngIf="(ownerNextTask | async) != null">
-            <span>Agenda 1</span>
-            <span>{{(this.ownerNextTask | async)?.dateTaskStart | date: 'HH:mm' : '+0200'}} -
-              {{(this.ownerNextTask | async)?.dateTaskEnd | date: 'HH:mm' : '+0200'}} /
-              {{(this.ownerNextTask | async)?.dateTaskStart | date: 'dd-MM-yyyy' : '+0200'}}</span>
-          </div>
-          <div class="next_task_absent__upper" *ngIf="(ownerNextTask | async) == null">
-            <span>Agenda 1</span>
-          </div>
-          <div class="next_task_present__bottom" *ngIf="(ownerNextTask | async) != null">
-            <span>Proch. Tâche :</span>
-            <div class="inner__next_task__bottom">
-              <div>{{(ownerNextTask | async)?.nameTask}}</div>
-              <div *ngIf="(ownerNextTask | async)?.description != ''">
-                <textarea readonly>{{(ownerNextTask | async)?.description}}</textarea>
-              </div>
-              <div *ngIf="(ownerNextTask | async)?.description == ''">
-                <textarea readonly>Pas de description pour cette tâche</textarea>
-              </div>
-              <img [src]="this.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'" alt="user pic">
-            </div>
-          </div>
-          <div class="next_task_absent__bottom inner__next_task__bottom" *ngIf="(ownerNextTask | async) == null">
-            <span>Pas de tâche prochainement</span>
-            <img [src]="this.imageURL ? this.imageURL : '/assets/profilePicture/neutral_avatar.png'" alt="user pic">
-          </div>
-        </div>
-        <div class="shared_planning__cards" *ngIf="(this.cardPlanningSharedList | async) != []">
-          <div>Shared planning</div>
+        <h4>Shared planning</h4>
+        <div class="shared_planning__cards"
+             *ngIf="(this.cardPlanningSharedList | async).length > 0; else emptyPlanningShared">
           <ng-container *ngFor="let cardPlanningShared of cardPlanningSharedList | async;let index = index">
-            <div class="shared_planning__card">
+            <div class="shared_planning__card" (click)="redirectToPlanning(cardPlanningShared.nextTask.idPlanning)">
               <div class="next_task_present__upper" *ngIf="cardPlanningShared.nextTask != null">
                 <span>Agenda {{index + 2}}</span>
                 <span>{{cardPlanningShared.nextTask.dateTaskStart | date: 'HH:mm' : '+0200'}} -
@@ -90,7 +63,8 @@
                     alt="user pic">
                 </div>
               </div>
-              <div class="next_task_absent__bottom inner__next_task__bottom" *ngIf="cardPlanningShared.nextTask == null">
+              <div class="next_task_absent__bottom inner__next_task__bottom"
+                   *ngIf="cardPlanningShared.nextTask == null">
                 <span>Pas de tâche prochainement</span>
                 <img
                   [src]="cardPlanningShared.image ? cardPlanningShared.image : '/assets/profilePicture/neutral_avatar.png'"
@@ -99,9 +73,9 @@
             </div>
           </ng-container>
         </div>
-        <div *ngIf="(this.cardPlanningSharedList | async) == []">
-          Pas de planning partagé actuellement
-        </div>
+        <ng-template #emptyPlanningShared>
+          <span>Currently no planning shared</span>
+        </ng-template>
       </div>
       <button class="deleteBtn" type="button" (click)="openDeleteDiag()">Delete account</button>
     </div>

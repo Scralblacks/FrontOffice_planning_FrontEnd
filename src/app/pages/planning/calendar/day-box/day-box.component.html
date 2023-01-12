@@ -1,4 +1,5 @@
-<div (click)="selectListener()" class="dayBox" [ngClass]="{'selectedDay':isSelectedDay, 'dayBox': day.number,'emptyBox': day.number == undefined }">
+<div (click)="selectListener()" class="dayBox"
+     [ngClass]="{'selectedDay':isSelectedDay, 'dayBox': day.number,'emptyBox': day.number == undefined }">
   <div [ngClass]="{'currentDay': isCurrentDay}">
   <span>
     {{ day.number }}

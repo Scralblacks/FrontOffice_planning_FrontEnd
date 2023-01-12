@@ -72,6 +72,8 @@ export class UserService {
       reportProgress: true,
       responseType: 'blob'
     }).pipe(map((fileUploaded) => {
+      this.connectedUser.value!.photo! = file.name;
+      this.connectedUser.next(this.connectedUser.value);
       return fileUploaded
     }))
   }

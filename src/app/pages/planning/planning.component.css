@@ -247,6 +247,10 @@ main .planning__calendar > app-task-list:nth-child(2) {
   overflow-y: auto
 }
 
+.planning__peopleShare {
+  cursor: pointer;
+}
+
 .planning__nextTask {
   display: none;
 }

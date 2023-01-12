@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user/user.service";
 import {AuthService} from "../../services/auth/auth.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   activeTab: string = 'planning';
 
-  constructor(private http: HttpClient, private meteoService: MeteoService, private userService: UserService, private authService: AuthService, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private meteoService: MeteoService, private userService: UserService, private authService: AuthService, private sanitizer: DomSanitizer, private router: Router) {
   }
 
   user$: Observable<userDTO | null> = this.userService.user
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    const cleanTabName = this.router.url.split('?')[0].substring(1);
+    this.setActivateTab(cleanTabName);
+
+
     this.user$.subscribe({
       next: (user) => {
         if (user) {
